@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="93">
+	<author>Glowins Modschmiede</author>
+	<version>2.9.3.1</version>
+	<contributors>Agrarplay und LU Wohnzimmer, Kynuska, Gonimy-Vetrom, Lactic68, Markus33-ITA, PapaTim68, A-intheCode</contributors >
+
+	<title>
+		<en>Headland Management</en>
+		<de>Vorgewende Management</de>
+		<fr>Gestion Des Fourrières</fr>
+		<cz>Souvraťový Management</cz>
+		<it>Gestione Capezzagna</it>
+    </title>
+    <description>
+		<en>
+<![CDATA[
+Headland management for tractors, field sprayers, mowers and harvesters.
+
+With headland management, functions of vehicles can be combined and activated together at the touch of a button to simplify turning manoeuvres when working in the field. All functions can be activated and deactivated individually for each vehicle via a GUI to achieve ideal adaptation to the work being carried out.
+
+The headland management system must be added once to the respective vehicle in the shop or in the workshop as a configuration before it can be used. The cost for this is 3000,-.
+It can be activated and deactivated in the vehicle with Shift-X. Alternatively, different buttons for activation and deactivation can be configured. The GUI is called up by default with Shift+Ctrl+X.
+
+New: Headland Management can now perform contour guidance, i.e. automatic steering along the field boundary or the worked area.
+Important: When contour guidance is activated, a working speed of 10 km/h should not be exceeded, otherwise the steering may oscillate strongly. In this case, simply reduce the speed briefly.
+
+Included functions:
+- Reduce speed (cruise control) and raise again, reactivate cruise control if previously active
+- Raise lowered implements and lower them again
+- Turn plough, single-stage or two-stage (via centre position)
+- Raise and change ridge markers
+- Control crab steering
+- Disengage and re-engage power take-off(s) and hydraulics
+- Beep when headland management is activated
+- On/Off switch: Headland Management can be switched on and off. This prevents accidental triggering during transfer to the target field and improves road safety.
+- Headland automatic: Activate headland mode automatically when headland is reached. Optional return to field mode after completing the 180° turn.
+- Contour guidance: Automatic control along the field boundary or along the machined area
+
+If VCA Mod (FS22_VehicleControlAddon) is present:
+- Deactivate and reactivate GPS track guidance
+- Disengage and re-engage active differential locks
+- Trigger VCA's turn function, switch turn direction optionally
+
+If Guidance Steering (FS22_guidanceSteering) is present: 
+- Deactivate and reactivate GPS guidance
+
+If SpeedControl (FS22_SpeedControl is present:
+- Speed adjustment also possible via change of cruise control level
+
+If EnhancedVehicle (FS22_EnhancedVehicle) is present:
+- Deactivate and reactivate GPS guidance, optionally with triggering the automatic turn function
+- Release and reset active differential locks
+- Use EV's headland detection if activated
+
+Further ideas or wishes are welcome at https://github.com/jason0611/FS22_HeadlandManagement
+
+ChangeLog:
+V2.1.0.0: 
+- Improved timing of the individual work steps
+- Improved control of potato harvesters and similar vehicles
+- Lifting option added: first front implements, then rear implements
+- Headland automatic control now independent of Guidance Steering
+- Optional automatic return to field mode after turn
+- On/off switch added (lShift+lAlt+X)
+- Option to temporary disable headland automatic by key (no key preassigned, could be set arbitrarily in the key settings)
+- Revised status display in vehicle HUD
+- Vehicle measurement to adapt front/back nodes, if implement is being attached or detached
+- Enable manual override of trigger controlled actions
+- Save and restore configuration locally for type of implement
+- Headland management available in mission vehicles
+
+V2.1.0.1:
+- Local save and restore in connection with Manual Attach now affects the respective player only and not works globally
+- Configuration of cruise control setting in headland-mode corrected
+
+V2.1.0.2:
+- Fix for update 1.4/1.4.1 to prevent lua callstacks
+
+V2.2.0.0:
+- Support for Mod SpeedControl added
+- Support for Mod EnhancedVehicle added
+- Configuration enabled for slurry vehicles
+- Added option to hide keybinding info in F1 menu
+
+V2.2.1.0:
+- Support for Mod extendedCruiseControl added
+- Cruise Control: Inching added. Just choose a negative value to reduce speed in headland by this amount
+
+V2.2.1.1:
+- Fixed: After calling up the GUI, input actions only worked correctly, if the vehicle itself was selected
+
+V2.2.1.2: 
+- Added category FM_VEHICLES to supported vehicle categories
+
+V2.2.2.0:
+- Fixed a bug that prevents the correct timing while turning plows
+
+V2.3.0.0
+- Contour guidance
+
+V2.3.1.0
+- Contour guidance: Parameters optimized
+- Contour guidance: The parameters of the contour guidance can now be changed via the console and are saved in the modSettings directory
+- Vehicle measurement: Determination of vehicle width improved (erroneous measurement due to ridgemarkers eliminated)
+
+V2.3.2.0
+- Contour guidance: Setting of manual working width added
+
+V2.3.3.0
+- Contour guidance: The distance to the edge of the field can now also be freely selected as an option, track guidance further optimised
+- Support for the SDF Pack of the Farming Duds added
+- Incompatibility with FS22_realismAddon_rpmAnimSpeed (Modelleicher) fixed
+
+V2.3.3.1
+- Goeweil-Fix
+
+V2.3.4.0
+- Contour guidance: Guidance along processed area reworked
+- SDF-Pack 2.0 of the Farming Dud's added
+]]>
+		</en>	
+		<de>
+<![CDATA[
+Vorgewende-Management für Schlepper, Feldspritzen, Mäher und Erntemaschinen
+
+Mit dem Vorgewende-Management können Funktionen im Fahrzeug zusammengefasst und gemeinsam per Knopfdruck aktiviert werden, um Wendemanöver bei der Feldarbeit zu vereinfachen. Alle Funktionen sind je Fahrzeug über eine GUI einzeln aktivierbar und deaktivierbar, um eine ideale Anpassung an die durchgeführten Arbeiten zu erreichen.
+
+Das Vorgewende-Management muss vor der Nutzung im Shop oder in der Werkstatt dem jeweiligen Fahrzeug einmalig als Konfiguration hinzugefügt werden. Die Kosten dafür liegen bei 3000,-. 
+Es kann im Fahrzeug mit (links) Shift-X aktiviert und deaktiviert werden. Es lassen sich auch verschiedene Tasten für Aktivierung und Deaktivierung konfigurieren. Die GUI wird standardmäßig mit Shift+Strg+X aufgerufen.
+
+Neu: Das Vorgewende Management kann nun Konturführung, also die automatische Lenkung entlang der Feldgrenze oder des bearbeiteten Bereichs.
+Wichtig: Bei aktivierter Konturführung sollte eine Arbeitsgeschwindigkeit von 10 km/h nicht überschritten werden, sonst kann es bei der Lenkung zu starkem Pendeln kommen. In diesem Fall generell einfach kurz die Geschwindigkeit reduzieren.
+
+Die Parameter der Konturführung können über die Konsole mit dem Befehl "hlmParameter [smoothness] [sharpness]" angepasst werden. Angepasste Werte werden im modSettings-Verzeichnis gespeichert.
+
+Enthaltene Funktionen:
+- Geschwindigkeit (Tempomat) reduzieren und wieder anheben, Tempomat reaktivieren, falls er vorher aktiv war
+- Abgesenkte Geräte ausheben und wieder absenken
+- Pflug drehen, einstufig oder zweistufig (über die Mittelstellung)
+- Spurreisser ausheben und wechseln
+- Seitenwechsel bei aktiviertem Hundegang
+- Zapfwelle(n) und Hydraulik abschalten und wieder anschalten
+- Hinweiston bei aktiviertem Vorgewendemanagement
+- An/Aus-Schalter: Das Vorgewende Management kann an- und abgeschaltet werden. Dadurch wird versehentliches Auslösen beim Transfer zum Einsatzort vermieden und die Verkehrssicherheit verbessert.
+- Vorgewendeautomatik: Automatische Aktivierung des Vorgewendemodus, wenn das Vorgewende erreicht wird. Wahlweise Rückkehr in den Feldmodus nach Abschluss der 180°-Wende.
+- Konturführung: Automatische Steuerung entlang der Feldgrenze oder entlang des bearbeiten Bereiche
+
+Bei vorhandenem VCA Mod (FS22_VehicleControlAddon):
+- GPS Spurführung deaktivieren und reaktivieren
+- Aktive Differentialsperren lösen und wieder setzen
+- Auslösen der Wendefunktion und Wechsel der Wenderichtung (jeweils optional)
+
+Bei vorhandenem Guidance Steering (FS22_guidanceSteering):
+- GPS Spurführung deaktivieren und reaktivieren
+
+Bei vorhandenem SpeedControl (FS22_SpeedControl):
+- Geschwindigkeitsanpassung auch über Wechsel der Tempomatstufe möglich
+
+Bei vorhandenem EnhancedVehicle (FS22_EnhancedVehicle):
+- GPS Spurführung deaktivieren und reaktivieren, wahlweise Auslösen der Wendefunktion
+- Aktive Differentialsperren lösen und wieder setzen
+- Nutzung der Vorgewendeerkennung von EV, wenn sie aktiviert wurde
+
+Weitere Ideen oder Wünsche werden gerne unter https://github.com/jason0611/FS22_HeadlandManagement entgegengenommen
+
+ChangeLog:
+V2.1.0.0: 
+- Verbessertes Timing der einzelnen Arbeitsschritte
+- Verbesserte Steuerung von Kartoffelrodern und ähnlichen Fahrzeugen
+- Aushebe-Option ergänzt: Erst vordere Geräte, dann hintere Geräte
+- Vorgewendeautomatik unabhängig von Guidance Steering
+- Wahlweise automatische Rückkehr in den Feldmodus nach Abschluss einer Wende
+- An/Aus-Schalter ergänzt (lShift+lAlt+X)
+- Option, die Vorgewende Automatik vorübergehend per Tastendruck abzuschalten (keine vordefinierte Taste, kann in den Tasteneinstellungen beliebig gesetzt werden)
+- Überarbeitete Statusanzeige im Fahrzeug HUD
+- Fahrzeugvermessung zur Anpassung der vorderen und hinteren Auslöser, wenn ein Arbeitsgerät an- oder abgehängt wird
+- Manuelles Übersteuern der Automatik möglich
+- Lokale Speicherung und Wiederherstellung der Konfiguration für den jeweiligen Arbeitsgerätetyp
+- Vorgewende Management in Missions-Fahrzeugen verfügbar
+
+V2.1.0.1:
+- Lokale Speicherung und Wiederherstellung in Verbindung mit Manual Attach jetzt nur bei dem jeweiligen Spielern und nicht global
+- Konfiguration der Tempomateinstellung im Vorgewende korrigiert
+
+V2.1.0.2:
+- Fix für Update 1.4/1.4.1 um lua callstacks zu verhindern
+
+V2.2.0.0:
+- Unterstützung für EnhancedVehicle Mod hinzugefügt
+- Unterstützung für SpeedControl Mod hinzugefügt
+- Konfiguration für Güllefässer ergänzt
+- Option ergänzt, um die Tastenbelegungen im F1-Menü auszublenden
+
+V2.2.1.0
+- Unterstützung für extendedCruiseControl hinzugefügt
+- Tempomat: Drückung hinzugefügt. Wähle einfach einen negativen Wert, um die Geschwindigkeit im Vorgewende um diesen Betrag zu reduzieren
+
+V2.2.1.1
+- Behoben: Nach dem Aufrufen der GUI funktionierten belegte Tasten nur dann korrekt, wenn das Fahrzeug selbst ausgewählt war
+
+V2.2.1.2
+- Kategorie FM_VEHICLES zu den unterstützten Fahrzeugkategorien hinzugefügt
+
+V2.2.2.0
+- Ein Fehler wurde behoben, der das korrekte Timing beim Wenden von Pflügen verhindert.
+
+V2.3.0.0
+- Konturführung
+
+V2.3.0.1
+- Konturführung: Parameter optimiert
+- Maximale Lautstärke des Warntons reduziert
+
+V2.3.1.0
+- Konturführung: Parameter optimiert
+- Konturführung: Die Parameter der Konturführung sind nun über die Konsole änderbar und werden im modSettings-Verzeichnis gespeichert
+- Fahrzeugvermessung: Ermittlung der Fahrzeugbreite verbessert (fehlerhafte Messung durch Spurreißer eliminiert)
+
+V2.3.2.0
+- Konturführung: Manuelle Einstellung des Arbeitsabstands ergänzt
+
+V2.3.3.0
+- Konturführung: Der Abstand zum Feldrand kann nun optional auch frei gewählt werden, Spurführung weiter optimiert
+- Unterstützung für das SDF Pack der Farming Duds ergänzt
+- Inkompatibilität mit FS22_realismAddon_rpmAnimSpeed (Modelleicher) behoben
+
+V2.3.3.1
+- Goeweil-Fix
+
+V2.3.4.0
+- Konturführung: Führung entlang des bearbeiteten Bereichs überarbeitet
+- SDF-Pack 2.0 der Farming Dud's ergänzt
+]]>
+		</de>
+		<fr>
+<![CDATA[
+Gestion automatisée des fourrières pour tracteurs, pulvérisateurs, faucheuses et moissonneuses.
+
+Grâce à la programmation des manœuvres en bout de champ, plusieurs fonctions peuvent être combinées et activées ensemble à l'aide d'une seule touche. Cela simplifie grandement les manœuvres en bout de rangs lors de vos travaux dans les champs. Toutes les fonctions peuvent être activées et désactivées individuellement pour chaque véhicule via une interface graphique afin de s'adapter parfaitement au travail effectué.
+
+Avant de pouvoir être utilisé, le système de programmation des manœuvres en bout de champ doit être ajouté une fois au véhicule concerné depuis le magasin ou l'atelier. Il apparaitra en tant qu'une configuration possible. Le coût de cette opération est de 3 000 euros.
+Par défaut, il peut être activé et désactivé dans le véhicule avec la touche SHIFT(gauche) + X. D'autres raccourcis clavier peuvent être choisis pour l'activation et la désactivation. L'interface graphique est appelée par défaut avec Shift+Ctrl+X.
+
+Nouveau : la gestion des manœuvres en bout de champ permet désormais le guidage des contours, c'est-à-dire le guidage automatique le long de la limite du champ ou de la zone travaillée.
+Important : lorsque le guidage des contours est activé, il ne faut pas dépasser une vitesse de travail de 10 km/h, sinon le guidage risque d'osciller fortement. Dans ce cas, il suffit généralement de réduire brièvement la vitesse.
+
+Fonctions incluses :
+- Réduire la vitesse (régulateur de vitesse) et remonter les outils, réactiver le régulateur de vitesse s'il était précédemment actif.
+- Relever les outils et les abaisser à nouveau.
+- Retourner la charrue, en une ou deux étapes (via la position centrale)
+- Relever et changer de côté les traceurs des semoirs
+- Contrôle automatique de la marche en crabe lors des allers-retours
+- Désengager et réengager la ou les prises de force et le système hydraulique
+- Bip sonore lorsque la gestion des fourrières est activée
+- Interrupteur marche/arrêt : la gestion des fourrières peut être activée ou désactivée. Cela permet d'éviter les déclenchements accidentels lors du transfert vers le lieu d'intervention et d'améliorer la sécurité routière.
+- Gestion automatique des fourrières : activation automatique du mode fourrière lorsque la fourrière est atteinte. Retour facultatif au mode champ une fois le demi-tour à 180° terminé.
+- Contour guidance: Automatic control along the field boundary or along the machined area
+
+Si le VCA Mod (FS22_VehicleControlAddon) est présent :
+- Désactiver et réactiver le guidage par traces GPS
+- Désengager et réengager les blocages de différentiel actif
+- Déclenchement de la fonction de retournement
+
+Si la fonction Guidance Steering (FS22_guidanceSteering) est présente : 
+- Désactiver et réactiver le guidage GPS
+- Gestion automatique des fourrières : activation automatique de la gestion des fourrières lorsqu'elles sont atteintes
+
+En présence d'un EnhancedVehicle (FS22_EnhancedVehicle) :
+- Désactiver et réactiver le guidage GPS, déclencher au choix la fonction de demi-tour
+- Débloquer et réactiver les blocages de différentiel actifs
+- Utilisation de la détection de fourrière de EV, si elle a été activée
+
+D'autres idées ou souhaits sont les bienvenus à l'adresse https://github.com/jason0611/FS22_HeadlandManagement, veuillez écrire en allemand ou en anglais
+
+ChangeLog :
+V2.1.0.0 : 
+- Amélioration du timing des différentes étapes de travail
+- Amélioration du contrôle des arracheuses de pommes de terre et des véhicules similaires.
+- Option de relevage ajoutée : d'abord les outils avant, puis les outils arrière
+- Automatisme de fourrière indépendant de Guidance Steering
+- Retour automatique facultatif en mode champ à la fin d'un demi-tour
+- Bouton marche/arrêt ajouté (lShift+lAlt+X)
+- Option pour désactiver temporairement l'automatisme des manœuvres en bout de champ en appuyant sur une touche (pas de touche prédéfinie, peut être définie à volonté dans les paramètres des touches)
+- Affichage d'état révisé sur le HUD du véhicule
+- Mesure du véhicule pour ajuster les déclencheurs avant et arrière lorsqu'un outil de travail est attelé ou dételé.
+- Possibilité d'outrepasser manuellement les automatismes
+- Sauvegarde et restauration locales de la configuration pour chaque type d'outil de travail
+- Gestion des fourrières disponible dans les véhicules de mission
+
+V2.1.0.1 :
+- Sauvegarde et restauration locales en relation avec Manual Attach maintenant seulement pour les joueurs respectifs et pas globalement
+- Correction de la configuration du régulateur de vitesse en bout de champ
+
+V2.1.0.2 :
+- Correction pour la mise à jour 1.4/1.4.1 pour éviter les callstacks lua
+
+V2.2.0.0 :
+- Ajout du support pour EnhancedVehicle Mod
+- Ajout du support pour SpeedControl Mod
+- Configuration activée pour les véhicules à lisier
+- Ajout d'une option permettant de masquer les affectations de touches dans le menu F1
+
+V2.2.1.1
+- Correction d'un problème : Après avoir accédé à l'interface graphique, les touches occupées ne fonctionnaient correctement que si le véhicule lui-même était sélectionné.
+
+V2.2.1.2
+- Ajout de la catégorie FM_VEHICLES aux catégories de véhicules prises en charge
+
+V2.2.2.0
+- Correction d'un bug qui empêche le bon timing lors du retournement des charrues
+
+V2.3.0.0
+- Guide des contours
+
+V2.3.1.0
+- Guidage de contour : paramètres optimisés
+- Guidage du contour : les paramètres du guidage du contour sont maintenant modifiables via la console et sont enregistrés dans le répertoire modSettings
+- Mesure du véhicule : amélioration de la détermination de la largeur du véhicule
+
+V2.3.2.0
+- Guidage du contour : Réglage manuel de la distance de travail ajouté
+
+V2.3.3.0
+- Guidage des contours : la distance par rapport au bord du champ peut désormais être choisie librement en option, le guidage des traces est encore optimisé.
+- Prise en charge du SDF Pack des Farming Duds ajoutée
+- Correction de l'incompatibilité avec FS22_realismAddon_rpmAnimSpeed (Modelleicher)
+
+V2.3.3.1
+- Goeweil-Fix
+
+V2.3.4.0
+- Guidage des contours : Guidage le long de la zone travaillée revu
+- Ajout du pack SDF 2.0 des Farming Dud's
+]]>
+		</fr>
+		<cz>
+<![CDATA[
+Správa souvratí pro traktory, polní postřikovače, sekačky a kombajny.
+
+Díky řízení na souvrati lze funkce vozidel kombinovat a aktivovat společně stisknutím tlačítka pro zjednodušení manévrů při otáčení při práci na poli. Všechny funkce lze aktivovat a deaktivovat individuálně pro každé vozidlo prostřednictvím grafického uživatelského rozhraní, aby bylo dosaženo ideálního přizpůsobení prováděné práci.
+
+Systém souvraťového managementu musí být před použitím jednou přidán do příslušného vozidla v obchodě nebo v dílně jako konfigurace. Cena za to je 3000 €.
+Ve vozidle ji lze aktivovat a deaktivovat pomocí Shift-X. Alternativně lze nakonfigurovat různá tlačítka pro aktivaci a deaktivaci. Nastavení se standardně vyvolává pomocí Shift+Ctrl+X.
+
+Novinka: Správa souvratí může nyní provádět obrysové navádění, tj. automatické řízení podél hranice pole nebo obdělávané plochy.
+Důležité: Při aktivaci obrysového navádění by neměla být překročena pracovní rychlost 10 km/h, jinak může řízení silně kolísat. V takovém případě jednoduše krátce snižte rychlost.
+
+Zahrnuté funkce:
+- Snížení rychlosti (tempomatu) a opakovaná aktivace, pokud byl dříve aktivní
+- Zvednutí nářadí a opětovné spuštění
+- Otočení pluhu, v jednom nebo dvou krocích (přes středovou polohu)
+- Zvednutí a výměna znamenáků
+- Ovládání krabího řízení
+- Odpojení a zpětné zapojení diferenciálu(ů) a hydraulik
+- Možnost zvukové signalizace při aktivním otáčení na souvrati
+- Vypínač: Systém Headland Management lze zapnout a vypnout. Tím se zabrání náhodnému spuštění při přesunu na místo a zvýší se bezpečnost silničního provozu.
+- Headland automatic: Automatická aktivace režimu Headland při dosažení souvratě. Volitelný návrat do polního režimu po dokončení otočky o 180°.
+- Obrysové navádění: Automatické řízení podél hranice pole nebo podél obdělávané plochy.
+
+Pokud je přítomen VCA Mod (FS22_VehicleControlAddon):
+- Deaktivuje a opětovně aktivuje naváděnou trasu GPS
+- Vypne a znovu zapne uzávěrky diferenciálů
+- Spusťí vloženou funkci otáčení VCA
+
+Připraveno a poskytnuto s jednou z následujících aktualizací, když bude k dispozici navádění řízení (FS22_guidanceSteering?):
+- Deaktivuje a znovu aktivuje navádění GPS
+- Souvraťová automatika: Aktivace souvraťového řízení automaticky při dosažení souvrati
+
+Další nápady nebo přání jsou vítány na https://github.com/jason0611/FS22_HeadlandManagement
+
+Seznam změn:
+V2.1.0.0: 
+- Zlepšené načasování jednotlivých pracovních kroků
+- Lepší ovládání sklízečů brambor a podobných vozidel
+- Přidána možnost zvedání: nejprve přední nářadí, pak zadní nářadí
+- Automatické otáčení na souvrati nyní nezávislé na Guidance Steering
+- Volitelný automatický návrat do polního režimu po dokončení tahu
+- Přidán přepínač zapnutí/vypnutí (lShift+lAlt+X)
+- Možnost dočasně vypnout automatické vypínání souvratí stisknutím tlačítka (není předdefinované tlačítko, lze nastavit podle potřeby v nastavení tlačítek).
+- Revidované zobrazení stavu na displeji HUD vozidla
+- Měření vozidla pro nastavení předních a zadních spouštěčů při připojování nebo odpojování nářadí
+- Možnost ručního ovládání automatického systému
+- Místní uložení a obnovení konfigurace pro příslušný typ implementace
+- Správa souvratí dostupná ve vozidlech mise
+
+V2.1.0.1:
+- Místní ukládání a obnovení v souvislosti s ručním připojením nyní pouze pro příslušný přehrávač, nikoli globálně.
+- Konfigurace nastavení tempomatu v korigované poloze na souvrati
+
+V2.1.0.2:
+- Oprava pro aktualizaci 1.4/1.4.1 pro zabránění vzniku callstacků lua
+
+V2.2.0.0:
+- Přidána podpora pro EnhancedVehicle Mod
+- Přidána podpora pro SpeedControl Mod
+- Konfigurace povolená pro vozidla na kejdu
+- Přidána možnost skrýt přiřazení kláves v nabídce F1
+
+V2.2.1.1
+- Opraveno: Po vyvolání grafického uživatelského rozhraní fungovala přiřazená tlačítka správně pouze v případě, že bylo vybráno samotné vozidlo.
+
+V2.2.1.2
+- Kategorie FM_VEHICLES přidána do podporovaných kategorií vozidel
+
+V2.2.2.0
+- Opravena chyba, která brání správnému načasování při otáčení pluhů
+
+V2.3.0.0
+- Vedení obrysů
+
+V2.3.1.0
+- Vedení po obrysech: Optimalizace parametrů
+- Vedení obrysů: Parametry vedení obrysů lze nyní měnit prostřednictvím konzoly a jsou uloženy v adresáři modSettings.
+- Měření vozidla: Zlepšení určení šířky vozidla
+
+V2.3.2.0
+- Vedení obrysů: Přidáno ruční nastavení pracovní šířky
+
+V2.3.3.0
+- Vedení obrysů: Vzdálenost k okraji pole lze nyní také volitelně zvolit, navádění po stopách je dále optimalizováno
+- Přidána podpora pro balíček SDF Farmářské doupě
+- Opravena nekompatibilita s FS22_realismAddon_rpmAnimSpeed (Modelleicher)
+
+V2.3.3.1
+- Goeweil-Fix
+
+V2.3.4.0
+- Vedení obrysu: Upraveno vedení podél obrobené plochy
+- Přidán SDF-Pack 2.0 farmářských Dudů
+]]>
+		</cz>
+		<it>
+<![CDATA[
+Gestione Capezzagna per trattori, atomizzatori, falciatrici e mietitrici.
+
+Con la gestione della capezzagna, le funzioni dei veicoli possono essere combinate e attivate insieme con il semplice tocco di un pulsante per semplificare le manovre di svolta durante il lavoro sul campo. Tutte le funzioni possono essere attivate e disattivate singolarmente per ogni veicolo tramite una GUI per ottenere un adattamento ideale al lavoro svolto.
+
+Il sistema di gestione della capezzagna deve essere aggiunto una volta al rispettivo veicolo in officina o in officina come configurazione prima di poter essere utilizzato. Il costo per questo è 3000,-.
+Può essere attivato e disattivato nel veicolo con Shift-X. In alternativa è possibile configurare diversi pulsanti per l'attivazione e la disattivazione. La GUI viene richiamata di default con Shift+Ctrl+X.
+
+Novità: la Gestione capezzagna può ora eseguire la guida a contorno, cioè la sterzata automatica lungo il confine del campo o l'area lavorata.
+Importante: quando la guida per contorni è attivata, non si deve superare una velocità di lavoro di 10 km/h, altrimenti lo sterzo potrebbe oscillare fortemente. In questo caso, è sufficiente ridurre brevemente la velocità.
+
+Funzioni incluse:
+- Ridurre la velocità (cruise control (regolazione automatica della velocità)) e aumentare nuovamente, riattivare il cruise control (regolazione automatica della velocità) se precedentemente attivo
+- Sollevare gli attrezzi abbassati e riabbassarli
+- Girare l'aratro, monostadio o bistadio (tramite posizione centrale)
+- Solleva e cambia il marcatore
+- Controlla lo sterzo a granchio
+- Disinserire e reinserire la/e presa/e di forza e l'impianto idraulico
+- Segnale acustico quando è attivata la gestione della capezzagna
+- Interruttore On/Off: la gestione del promontorio può essere attivata e disattivata. Ciò impedisce l'attivazione accidentale durante il trasferimento in cantiere e migliora la sicurezza stradale.
+- Automatico a fine campo: attivazione automatica della modalità a fine campo quando si raggiunge il fine campo. Ritorno opzionale alla modalità campo dopo aver completato la svolta di 180°.
+- Guida a contorno: controllo automatico lungo il confine del campo o lungo l'area coltivata.
+
+Se è presente la Mod VCA (FS22_VehicleControlAddon):
+- Disattiva e riattiva la guida della traccia GPS
+- Disinserire e reinserire i bloccaggi differenziali attivi
+- Attiva la funzione di svolta di VCA
+
+Se è presente il sistema di guida (Guidance Steering) (FS22_guidanceSteering):
+- Disattiva e riattiva la guida GPS
+- Capezzagna automatica: attiva automaticamente la gestione della capezzagna quando viene raggiunta la capezzagna
+
+Ulteriori idee o desideri sono i benvenuti su https://github.com/jason0611/FS22_HeadlandManagement
+
+ChangeLog:
+V2.1.0.0: 
+- Miglioramento della tempistica delle singole fasi di lavoro
+- Migliore controllo delle raccoglitrici di patate e veicoli simili
+- Opzione di sollevamento aggiunta: prima gli attrezzi anteriori, poi quelli posteriori
+- Capezzagna automatica indipendente dalla guida di orientamento
+- Ritorno automatico opzionale alla modalità campo dopo il completamento di un turno
+- Aggiunto interruttore On/Off (lShift+lAlt+X)
+- Possibilità di spegnere temporaneamente l'automatismo a fine campo premendo un pulsante (nessun pulsante predefinito, può essere impostato come desiderato nelle impostazioni del pulsante)
+- Visualizzazione rivista dello stato nell'HUD del veicolo
+- Misura del veicolo per regolare i grilletti anteriori e posteriori quando si attacca o si stacca un attrezzo
+- Possibile l'override manuale del sistema automatico
+- Memorizzazione locale e ripristino della configurazione per il rispettivo tipo di attrezzo
+- Gestione dei promontori disponibili nei veicoli di missione
+
+V2.1.0.1:
+- Salvataggio e ripristino locale in connessione con Attacco manuale ora solo per il rispettivo giocatore e non globalmente.
+- Configurazione dell'impostazione del controllo di crociera in capezzagna corretta
+
+V2.1.0.2:
+- Correzione per l'aggiornamento 1.4/1.4.1 per prevenire i calltacks lua
+
+V2.2.0.0:
+- Aggiunto il supporto per EnhancedVehicle Mod
+- Aggiunto il supporto per SpeedControl Mod
+- Configurazione abilitata per i veicoli per liquami
+- Aggiunta l'opzione per nascondere le assegnazioni dei tasti nel menu F1
+
+V2.2.1.1
+- Fissato: Dopo aver richiamato l'interfaccia grafica, i pulsanti assegnati funzionavano correttamente solo se era selezionato il veicolo stesso
+
+V2.2.1.2
+- La categoria FM_VEHICLES è stata aggiunta alle categorie di veicoli supportate
+
+V2.2.2.0
+- È stato risolto un bug che impedisce la corretta temporizzazione durante la rotazione degli aratri
+
+V2.3.0.0
+- Guida ai contorni
+
+V2.3.1.0
+- Guida di contorno: ottimizzazione dei parametri
+- Guida al contorno: i parametri della guida al contorno possono ora essere modificati tramite la console e sono salvati nella directory modSettings
+- Misurazione del veicolo: determinazione della larghezza del veicolo migliorata
+
+V2.3.2.0
+- Guida ai contorni: Aggiunta dell'impostazione della larghezza di lavoro manuale
+
+V2.3.3.0
+- Guida per contorni: La distanza dal bordo del campo può ora essere selezionata liberamente come opzione, la guida dei binari è stata ulteriormente ottimizzata.
+- Aggiunto il supporto per il pacchetto SDF di Farming Duds
+- Incompatibilità con FS22_realismAddon_rpmAnimSpeed (Modelleicher) corretta
+
+V2.3.3.1
+- Correzione di Goeweil
+
+V2.3.4.0
+- Guida ai contorni: revisione della guida lungo l'area lavorata
+- Aggiunta del pacchetto SDF 2.0 dei Dud agricoli
+]]>
+		</it>
+	    
+ 	</description>	
+    <multiplayer supported="true"/>
+	<iconFilename>icon_HeadlandMngt.dds</iconFilename>
+	<extraSourceFiles>
+    	<sourceFile filename="headlandManagementRegister.lua" />
+    </extraSourceFiles>
+	<l10n filenamePrefix="l10n/l10n" />
+	<actions>
+		<action name="HLM_TOGGLESTATE" category="VEHICLE" ignoreComboMask="false" />
+		<action name="HLM_SWITCHOFF" categorie="VEHICLE" ignoreComboMask="false" />
+		<action name="HLM_SWITCHON" categorie="VEHICLE" ignoreComboMask="false" />
+		<action name="HLM_SHOWGUI" categorie="VEHICLE" ignoreComboMask="false" />
+		<action name="HLM_MAINSWITCH" categorie="VEHICLE" ignoreComboMask="false" />
+		<action name="HLM_TOGGLEAUTO" categorie="VEHICLE" ignoreComboMask="false" />
+		<action name="HLM_AUTOON" categorie="VEHICLE" ignoreComboMask="false" />
+		<action name="HLM_AUTOOFF" categorie="VEHICLE" ignoreComboMask="false" />
+	</actions>
+	<inputBinding>	
+		<actionBinding action="HLM_TOGGLESTATE">
+			<binding device="KB_MOUSE_DEFAULT" input="KEY_lshift KEY_x" neutralInput="0" index="1" />
+		</actionBinding>
+		<actionBinding action="HLM_SHOWGUI">
+			<binding device="KB_MOUSE_DEFAULT" input="KEY_lshift KEY_lctrl KEY_x" neutralInput="0" index="1" />
+		</actionBinding>
+		<actionBinding action="HLM_MAINSWITCH">
+			<binding device="KB_MOUSE_DEFAULT" input="KEY_lshift KEY_lalt KEY_x" neutralInput="0" index="1" />
+		</actionBinding>
+	</inputBinding>
+</modDesc>

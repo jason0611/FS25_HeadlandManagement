@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+	<texts>
+		<text name="input_HLM_TOGGLESTATE" text="Режим: Разворотная полоса/Поле"/>
+		<text name="input_HLM_SWITCHON" text="Режим - Разворотная полоса" />
+		<text name="input_HLM_SWITCHOFF" text="Режим - Поле" />
+		<text name="input_HLM_SHOWGUI" text="Разворотная полоса: Настройки" />
+		<text name="input_HLM_MAINSWITCH" text="HLM: Вкл/Выкл"/>
+		<text name="input_HLM_TOGGLEAUTO" text="HLM: Переключение авто. разворотная полоса"/>
+		<text name="input_HLM_AUTOON" text="HLM: Вкл авто. разворотная полоса"/>
+		<text name="input_HLM_AUTOOFF" text="HLM: Выкл авто. разворотная полоса"/>
+		
+		<text name="text_HLM_isActive" text="Режим Разворотной полосы активен"/>
+		<text name="text_HLM_configuration" text="Headlandmanagement"/>
+		<text name="text_HLM_installed" text="Headlandmanagement установлен"/>
+		<text name="text_HLM_notInstalled" text="Headlandmanagement не установлен"/>
+		<text name="text_HLM_installed_short" text="Установлен"/>
+		<text name="text_HLM_notInstalled_short" text="Не установлен"/>
+		<text name="text_HLM_implementTypeLoaded" text="Конфигурация загружена для типа оборудования"/>
+		<text name="text_HLM_implementTypeSaved" text="Конфигурация сохранена для типа оборудования"/>
+
+		<text name="text_HLM_type_Plow" text="Плуг"/>
+		<text name="text_HLM_type_Cultivator" text="Культиватор"/>
+		<text name="text_HLM_type_Roller" text="Каток"/>
+		<text name="text_HLM_type_Sowingmachine" text="Сеялка"/>
+		<text name="text_HLM_type_Mulcher" text="Мульчер"/>
+		<text name="text_HLM_type_Combine" text="Комбайн"/>
+		<text name="text_HLM_type_Foragewagon" text="Фуражный прицеп"/>
+		<text name="text_HLM_type_Baler" text="Пресс-подборщик"/>
+		
+		<text name="hlmgui_title" text="Headlandmanagement: Настройки для "/>
+		<text name="hlmgui_on" text="вкл"/>
+		<text name="hlmgui_off" text="выкл"/>
+		<text name="hlmgui_both" text="переднее и заднее"/>
+		<text name="hlmgui_seq" text="сначала перед, потом зад"/>
+		<text name="hlmgui_front" text="переднее"/>
+		<text name="hlmgui_back" text="заднее"/>
+		<text name="hlmgui_default" text="по умолчанию"/>
+		
+		<text name="hlmgui_speedControl" text="Настройки скорости"/>
+		<text name="hlmgui_speedControlMod" text="Использовать мод Speed Control/Extended Cruise Control"/>
+		<text name="hlmgui_speedSetting" text="Рабочая скорость на разворотной полосе"/>
+		<text name="hlmgui_speedControlModSetting" text="Скорость на разворотной полосе"/>
+	
+		<text name="hlmgui_alarmControl" text="Общие настройки"/>
+		<text name="hlmgui_beep" text="Звуковое оповещение"/>
+		<text name="hlmgui_beepVol" text="Громкость"/>
+		<text name="hlmgui_beepVolTT" text="Громкость звукового оповещения." />
+		<text name="hlmgui_keys" text="Показать назначение клавиш" />
+		
+		<text name="hlmgui_implementControl" text="Управление оборудованием"/>
+		<text name="hlmgui_raise" text="Поднятие оборудования"/>
+		<text name="hlmgui_plow" text="Поворот плуга"/>
+		<text name="hlmgui_plowFull" text="полный поворот"/>
+		<text name="hlmgui_plowCenter" text="поворот в два шага"/>
+		<text name="hlmgui_plowOff" text="не поворачивать"/>
+		<text name="hlmgui_pto" text="Остановка ВОМ- и гидрооборудования"/>
+		<text name="hlmgui_ridgeMarker" text="Смена маркера"/>
+		<text name="hlmgui_emptyBaler" text="Авторазгрузка тюков"/>
+		
+		<text name="hlmgui_contourControl" text="Управление краем поля"/>
+		<text name="hlmgui_contourOnOff" text="Край поля"/>
+		<text name="hlmgui_contourFront" text="Активировать передний датчик"/>
+		<text name="hlmgui_contourWorkedArea" text="Линия ориентации"/>
+		<text name="hlmgui_contourFieldBorder" text="Граница поля"/>
+		<text name="hlmgui_contourWorkArea" text="Обрабатываемая площадь"/>
+		<text name="hlmgui_contourSetting" text="Сторона поля"/>
+		<text name="hlmgui_contour_On1Pass" text="вкл: один проход"/>
+		<text name="hlmgui_contour_OnMPass" text="вкл: каждый проход"/>
+		<text name="hlmgui_contour_nextRight" text="первый справа"/>
+		<text name="hlmgui_contour_nextLeft" text="первый слева"/>
+		<text name="hlmgui_contour_alwaysRight" text="всегда справа"/>
+		<text name="hlmgui_contour_alwaysLeft" text="всегда слева"/>
+		<text name="hlmgui_contourWidthSetting" text="Расстояние до края поля"/>
+		<text name="hlmgui_contour_keepDistance" text="Сохраняйте текущее расстояние"/>
+		<text name="hlmgui_contourWidthChangeSetting" text="Автоувеличение расстояния" />
+		<text name="hlmgui_contourWidthSettingInputTitle" text="Расстояние вручную"/>
+		<text name="hlmgui_contour_manualWidth" text="Ручная настройка"/>
+		
+		<text name="hlmgui_gpsControl" text="GPS управление"/>
+		<text name="hlmgui_gpsSetting" text="Остановить руление GPS"/>
+		<text name="hlmgui_gpsType" text="Использование мода GPS"/>
+		<text name="hlmgui_gps_auto" text="определять автоматически"/>
+		<text name="hlmgui_gps_gs" text="только Guidance Steering"/>
+		<text name="hlmgui_gps_vca" text="только VCA"/>
+		<text name="hlmgui_gps_vcaL" text="только VCA: автоповорот налево"/>
+		<text name="hlmgui_gps_vcaR" text="только VCA: автоповорот направо"/>
+		<text name="hlmgui_gps_ev" text="только Enhanced Vehicle (EV)"/>
+		<text name="hlmgui_gps_ev_auto" text="EV только: автоповорот"/>
+		<text name="hlmgui_gpsAutoTriggerSetting" text="Автоматизация разворотной полосы"/>
+		<text name="hlmgui_gpsAutoTriggerSubTitle" text="Текущие размеры техники: Общая длинна: %2.2f м, Общая ширина: %2.2f м, Радиус поворота: %2.2f м"/>
+		<text name="hlmgui_gpsAutoTriggerOffsetSetting" text="Триггер для автоматизации"/>
+		<text name="hlmgui_gpsAutoTriggerOffsetWidth" text="Ширина разворотной полосы"/>
+		
+		<text name= "hlmgui_vcaDirSwitch" text="VCA: Автоматически переключать направление поворота"/>
+		<text name= "hlmgui_autoResume" text="Режим автоматического поля"/>
+		
+		<text name="hlmgui_vehicleControl" text="Управление трактором"/>
+		<text name="hlmgui_diffLock" text="Разблокировать дифференциалы"/>	
+		<text name="hlmgui_crabSteering" text="Переключить крабовый ход."/>
+		<text name="hlmgui_csDirect" text="прямой"/>
+		<text name="hlmgui_csTwoStep" text="через обычный"/>
+		
+		<text name="hlmgui_debug" text="Настройки отладки"/>
+		<text name="hlmgui_debugTitle" text="Сделать узлы ТС видимыми (глобально)"/>
+		<text name="hlmgui_debugFlagTitle" text="Сделать триггеры видимыми"/>
+		
+		<text name="hlmgui_speedControlTT" text="Настройки скорости круиз-контроля на разворотной полосе могут быть установлены на указанное значение, а позже сброшены."/>
+		<text name="hlmgui_speedControlModTT" text="Если доступен мод SpeedControl его можно использовать для регулировки скорости круиз-контроля."/>
+		<text name="hlmgui_speedSettingTT" text="Желаемые настройки круиз-контроля на разворотной полосе."/>
+		<text name="hlmgui_speedControlModSettingTT" text="Используйте круиз-контроль 1, 2 или 3 на разворотной полосе."/>
+		<text name="hlmgui_alarmTT" text="Когда режим разворотной полосы активируется, издаются регулярные предупреждающие сигналы."/>
+		<text name="hlmgui_inputbindingsTT" text="Соответствующие назначения активных клавиш отображаются в меню F1"/>
+		<text name="hlmgui_raiseTT" text="На разворотной полосе опущенные орудия могут быть подняты, а затем снова опущены. Опционально можно выбрать: для всех, только переднее или только заднее орудие."/>
+		<text name="hlmgui_plowTT" text="После подъёма плуг может быть повёрнут полностью, или сначала только в верхнее положение, а затем до конца при опускании. В последнем случае необходимо больше времени. Поэтому рекомендуется приостановиться в конце разворотной полосы, чтобы повернуть и опустить плуг."/>
+		<text name="hlmgui_ridgeMarkerTT" text="При подъёме оборудования, маркер может быть переключён на противоположную сторону."/>
+		<text name="hlmgui_emptyBalersSettingTT" text="Отключение автоматической разгрузки тюков на разворотной полосе."/>
+		
+		<text name="hlmgui_ptoTT" text="На разворотной полосе, активированное орудие можно отключить, а затем снова включить. Опционально можно выбрать: для всех, только передние или только задние орудие."/>
+
+		<text name="hlmgui_contourOnOffTT" text="Активирует контроль вдоль края поля, либо только на один проход, либо до тех пор, пока он снова не будет выключен. Эта функция активна только в режиме Поля; в режиме Разворотной полосы она находится в режиме ожидания. При активном ведении по контуру рекомендуется не превышать рабочую скорость 10 км/ч."/>
+		<text name="hlmgui_contourSettingTT" text="Определяет, с какой стороны будет проходить край поля. Сторона может по желанию сменятся при каждом переходе в режим разворотной полосы, либо сохраняться неизменной."/>
+		<text name="hlmgui_contourWidthSettingTT" text="Расстояние до края поля может быть либо сохранено, либо зафиксировано."/>
+		<text name="hlmgui_contourWidthChangeSettingTT" text="При желании, расстояние до края поля может быть увеличено на одну ширину транспортного средства каждый раз, когда транспортное средство переключается в режим разворотной полосы."/>
+		
+		<text name="hlmgui_gpsTT" text="GPS отслеживание приостанавливается на разворотной полосе, а затем возобновляется на основной части поля."/>
+		<text name="hlmgui_gpsTypeTT" text="Функция может быть ограничена на Guidance Steering или VCA или автоматически приостановить текущую активную систему."/>
+		<text name="hlmgui_gpsAutoTriggerTT" text="При совместной работе с Guidance Steering, режим разворотной полосы может активироватся автоматически, при её достижении."/>
+		<text name="hlmgui_gpsAutoTriggerOffsetTT" text="По умолчанию Headlandmanagement активируется, когда передняя часть трактора достигает разворотной полосы. Его можно переключить на заднюю часть трактора. ВАЖНО: эта функция может быть переключена только в том случае, если в данный момент Guidance Steering не ведёт по треку!"/>
+		<text name="hlmgui_gpsAutoTriggerOffsetWidthTT" text="Расстояние до края поля, с которого должен быть активирован режим разворотной полосы."/>
+		<text name="hlmgui_diffLockTT" text="На разворотной полосе дифференциалы разблокируются, а затем снова заблокируются."/>
+		<text name="hlmgui_csTT" text="Когда достигнута разворотная полоса, активный крабовый ход может быть включен. Либо на обычный ход, либо сначала в обычный или реверсивный крабовое положении, а затем в конце разворотной полосы полностью в необходимое положение."/>
+		<text name="hlmgui_VCADirSwitchTT" text="Включить или отключить автоматическое отключение направления поворота. Полезно, когда VCA имеет разное количество для пропуска полос влево/вправо."/>
+		<text name="hlmgui_gpsAutoResumeTT" text="Переключается обратно в полевой режим, как только курс изменился на 180°."/>
+		<text name="hlmgui_debugTT" text="Отображает маркер на переднем и заднем узле ТС." />
+		<text name="hlmgui_debugFlagTT" text="Отображает два флага, отмечая триггер назначения (зелёный) и триггер ТС (красный) при настройке 'сначала первый, затем задний' в режиме разворотной полосы." />
+	</texts>
+</l10n>
