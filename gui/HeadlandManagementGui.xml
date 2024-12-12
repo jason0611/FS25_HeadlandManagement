@@ -10,7 +10,8 @@
 		<ThreePartBitmap profile="fs25_dialogBgBottom"/>
 	
 		<GuiElement profile="fs25_dialogContentContainer" id="settingsContainer">
-			<Bitmap profile="fs25_settingsTooltipSeparator" height="580px" position="1220px -110px"/>
+			<!--Bitmap profile="fs25_settingsTooltipSeparator" height="580px" position="1220px -110px"/-->
+			<Bitmap profile="fs25_settingsTooltipSeparator"/>
 			<Bitmap profile="fs25_startClipper" name="topClipper" />
 			<Bitmap profile="fs25_stopClipper" name="bottomClipper" />
 			
@@ -23,33 +24,29 @@
 			<ScrollingLayout profile="fs25_settingsLayout" topClipperElementName="topClipper" bottomClipperElementName="bottomClipper">
 			
 			<!-- AlertMode -->
-				<Text profile="dialogHeaderText"/>
 				<Text profile="fs25_settingsSectionHeader" name="sectionHeader" id="alarmControl"/>
-				<Text profile="dialogHeaderText"/>
 							
 				<GuiElement profile="fs25_multiTextOptionContainer">
-					<Text profile="multiTextOptionSettingsTitle" id="alarmTitle" text="$l10n_hlmgui_beep"/>
-					<MultiTextOption profile="fs25_settingsMultiTextOption" id="alarmSetting">
+					<Text profile="multiTextOptionSettingsTitle" id="alarmTitle"/>
+					<BinaryOption profile="fs25_settingsBinaryOption" id="alarmSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="alarmTT"/>
-					</MultiTextOption>	
+					</BinaryOption>	
 				</GuiElement>
 				<GuiElement profile="fs25_multiTextOptionContainer">
-					<Text profile="multiTextOptionSettingsTitle" id="inputbindingsTitle" text="$l10n_hlmgui_beep"/>
+					<Text profile="multiTextOptionSettingsTitle" id="alarmVolumeTitle"/>
 					<MultiTextOption profile="fs25_settingsMultiTextOption" id="alarmVolumeSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="alarmVolumeTT"/>
 					</MultiTextOption>	
 				</GuiElement>
 				<GuiElement profile="fs25_multiTextOptionContainer">
-					<Text profile="multiTextOptionSettingsTitle" id="alarmVolumeTitle" text="$l10n_hlmgui_beep"/>
-					<MultiTextOption profile="fs25_settingsMultiTextOption" id="inputbindingsSetting">
+					<Text profile="multiTextOptionSettingsTitle" id="inputbindingsTitle"/>
+					<BinaryOption profile="fs25_settingsBinaryOption" id="inputbindingsSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="inputbindingsTT"/>
-					</MultiTextOption>	
+					</BinaryOption>	
 				</GuiElement>
 	
 			<!-- ImplementControl -->
-				<Text profile="dialogHeaderText"/>
 				<Text profile="fs25_settingsSectionHeader" name="sectionHeader" id="implementControl"/>
-				<Text profile="dialogHeaderText"/>
 				
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="raiseTitle" text="$l10n_hlmgui_beep"/>
@@ -71,27 +68,25 @@
 				</GuiElement>
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="ridgeMarkerTitle" text="$l10n_hlmgui_beep"/>
-					<MultiTextOption profile="fs25_settingsMultiTextOption" id="ridgeMarkerSetting">
+					<BinaryOption profile="fs25_settingsBinaryOption" id="ridgeMarkerSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="ridgeMarkerTT"/>
-					</MultiTextOption>	
+					</BinaryOption>	
 				</GuiElement>
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="emptyBalersSettingTitle" text="$l10n_hlmgui_beep"/>
-					<MultiTextOption profile="fs25_settingsMultiTextOption" id="emptyBalersSetting">
+					<BinaryOption profile="fs25_settingsBinaryOption" id="emptyBalersSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="emptyBalersSettingTT"/>
-					</MultiTextOption>	
+					</BinaryOption>	
 				</GuiElement>
 			
 			<!-- Vehicle control -->
-				<Text profile="dialogHeaderText"/>
 				<Text profile="fs25_settingsSectionHeader" name="sectionHeader" id="vehicleControl"/>
-				<Text profile="dialogHeaderText"/>
 	
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="diffControlOnOffTitle" text="$l10n_hlmgui_beep"/>
-					<MultiTextOption profile="fs25_settingsMultiTextOption" id="diffControlOnOffSetting">
+					<BinaryOption profile="fs25_settingsBinaryOption" id="diffControlOnOffSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="diffLockTT"/>
-					</MultiTextOption>	
+					</BinaryOption>	
 				</GuiElement>
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="crabSteeringTitle" text="$l10n_hlmgui_beep"/>
@@ -101,9 +96,7 @@
 				</GuiElement>
 				
 			<!-- Contour Guidance Control -->
-				<Text profile="dialogHeaderText"/>
 				<Text profile="fs25_settingsSectionHeader" id="contourControl"/>
-				<Text profile="dialogHeaderText"/>
 				
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="contourOnOffTitle" text="$l10n_hlmgui_beep"/>
@@ -125,9 +118,9 @@
 				</GuiElement>
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="contourFrontTitle" text="$l10n_hlmgui_beep"/>
-					<MultiTextOption profile="fs25_settingsMultiTextOption" id="contourFrontSetting">
+					<BinaryOption profile="fs25_settingsBinaryOption" id="contourFrontSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="contourFrontTT"/>
-					</MultiTextOption>	
+					</BinaryOption>	
 				</GuiElement>
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="contourWidthSettingTitle" text="$l10n_hlmgui_beep"/>
@@ -135,30 +128,28 @@
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="contourWidthSettingTT"/>
 					</MultiTextOption>	
 				</GuiElement>
-				<GuiElement type="empty" profile="fs25_serverSettingsTextInputWrapper">
+				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="contourWidthSettingInputTitle"/>
-					<TextInput profile="fs25_textInput" id="contourWidthSettingInput" imeKeyboardType="normal">
+					<TextInput profile="fs25_settingsTextInput" id="contourWidthSettingInput" textSize="18px" imeKeyboardType="normal">
 						<Text   profile="fs25_multiTextOptionTooltip" id="contourWidthSettingInputTT"/>
-						<Bitmap profile="fs25_textInputIcon"/>
+						<Bitmap profile="fs25_textInputBg"/>
 					</TextInput>
 				</GuiElement>
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="contourWidthChangeSettingTitle" text="$l10n_hlmgui_beep"/>
-					<MultiTextOption profile="fs25_settingsMultiTextOption" id="contourWidthChangeSetting">
+					<BinaryOption profile="fs25_settingsBinaryOption" id="contourWidthChangeSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="contourWidthChangeSettingTT"/>
-					</MultiTextOption>	
+					</BinaryOption>	
 				</GuiElement>
 			
 			<!-- GPS control -->
-				<Text profile="dialogHeaderText"/>
 				<Text profile="fs25_settingsSectionHeader" id="gpsControl"/>
-				<Text profile="dialogHeaderText"/>
 				
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="gpsOnOffTitle" text="$l10n_hlmgui_beep"/>
-					<MultiTextOption profile="fs25_settingsMultiTextOption" id="gpsOnOffSetting">
+					<BinaryOption profile="fs25_settingsBinaryOption" id="gpsOnOffSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="gpsTT"/>
-					</MultiTextOption>	
+					</BinaryOption>	
 				</GuiElement>
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="gpsSettingTitle" text="$l10n_hlmgui_beep"/>
@@ -174,15 +165,14 @@
 				</GuiElement>
 						
 			<!-- Headland automatic -->
-				<Text profile="dialogHeaderText"/>
-				<Text profile="fs25_settingsSectionHeader" id="gpsAutoTriggerSubTitle" />
-				<Text profile="dialogHeaderText"/>
+				<Text profile="fs25_settingsSectionHeader" id="gpsAutoTrigger"/>
+				<Text profile="fs25_settingsSectionHeader" id="gpsAutoTriggerSubTitle" textSize="15px"/>
 				
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="gpsAutoTriggerTitle" text="$l10n_hlmgui_beep"/>
-					<MultiTextOption profile="fs25_settingsMultiTextOption" id="gpsAutoTriggerSetting">
+					<BinaryOption profile="fs25_settingsBinaryOption" id="gpsAutoTriggerSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="gpsAutoTriggerTT"/>
-					</MultiTextOption>	
+					</BinaryOption>	
 				</GuiElement>
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="gpsAutoTriggerOffsetTitle" text="$l10n_hlmgui_beep"/>
@@ -190,36 +180,34 @@
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="gpsAutoTriggerOffsetTT"/>
 					</MultiTextOption>	
 				</GuiElement>
-				<GuiElement type="empty" profile="fs25_serverSettingsTextInputWrapper">
+				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="gpsAutoTriggerOffsetWidthTitle"/>
-					<TextInput profile="fs25_textInput" id="gpsAutoTriggerOffsetWidthInput" imeKeyboardType="normal">
+					<TextInput profile="fs25_settingsTextInput" id="gpsAutoTriggerOffsetWidthInput" textSize="18px" imeKeyboardType="normal">
 						<Text   profile="fs25_multiTextOptionTooltip" id="gpsAutoTriggerOffsetWidthTT"/>
-						<Bitmap profile="fs25_textInputIcon"/>
+						<Bitmap profile="fs25_textInputBg"/>
 					</TextInput>
-				</GuiElement>
+				</GuiElement>				
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="gpsResumeTitle" text="$l10n_hlmgui_beep"/>
-					<MultiTextOption profile="fs25_settingsMultiTextOption" id="gpsResumeSetting">
+					<BinaryOption profile="fs25_settingsBinaryOption" id="gpsResumeSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="gpsResumeTT"/>
-					</MultiTextOption>	
+					</BinaryOption>	
 				</GuiElement>
 	
 			<!-- SpeedControl -->
-				<Text profile="dialogHeaderText"/>
 				<Text profile="fs25_settingsSectionHeader" id="speedControl"/>
-				<Text profile="dialogHeaderText"/>	
 	
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="speedControlOnOffTitle" text="$l10n_hlmgui_beep"/>
-					<MultiTextOption profile="fs25_settingsMultiTextOption" id="speedControlOnOffSetting">
+					<BinaryOption profile="fs25_settingsBinaryOption" id="speedControlOnOffSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="speedControlTT"/>
-					</MultiTextOption>	
+					</BinaryOption>	
 				</GuiElement>
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="speedControlUseSCModTitle" text="$l10n_hlmgui_beep"/>
-					<MultiTextOption profile="fs25_settingsMultiTextOption" id="speedControlUseSCModSetting">
+					<BinaryOption profile="fs25_settingsBinaryOption" id="speedControlUseSCModSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="speedControlModTT"/>
-					</MultiTextOption>	
+					</BinaryOption>	
 				</GuiElement>
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="speedControlTurnSpeedTitle1" text="$l10n_hlmgui_beep"/>
@@ -235,9 +223,7 @@
 				</GuiElement>
 	
 				<!-- Debug -->
-				<Text profile="dialogHeaderText"/>
 				<Text profile="fs25_settingsSectionHeader" id="debug"/>
-				<Text profile="dialogHeaderText"/>
 				
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="debugTitle" text="$l10n_hlmgui_beep"/>
