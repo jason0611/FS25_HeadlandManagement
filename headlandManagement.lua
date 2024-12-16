@@ -90,8 +90,8 @@ HeadlandManagement.filterList[1] = "E-DriveLaner"
 HeadlandManagement.kbVCA = true
 HeadlandManagement.kbGS = true
 HeadlandManagement.kbSC = true
-HeadlandManagement.kbEV = true
-HeadlandManagement.kbECC = true
+HeadlandManagement.kbEV = false
+HeadlandManagement.kbECC = false
 
 function addHLMconfig(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvironment, isMod, storeItem)
     dbgprint("addHLMconfig : parameters: xmlFile = "..tostring(xmlFile).." / baseXMLName = "..tostring(baseXMLName).." / baseDir = "..tostring(baseDir).." / customEnvironment = "..tostring(customEnvironment).." / isMod = "..tostring(isMod).." / storeItem = "..tostring(storeItem), 2)
