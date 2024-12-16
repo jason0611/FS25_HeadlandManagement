@@ -1316,7 +1316,7 @@ function HeadlandManagement:onPostAttachImplement(implement, jointDescIndex)
 			spec, loaded = loadConfigWithImplement(spec, implementType)
 			dbgprint("onPostAttachImplement : configuration loaded for implement type "..tostring(implementType), 2)
 			if loaded then
-				g_currentMission:addGameNotification(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_configuration"), g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_implementTypeLoaded").." "..g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_type_"..implementType), "", 2500)
+				g_currentMission:addGameNotification(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_configuration"), g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_implementTypeLoaded").." "..g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_type_"..implementType), "")
 			end
 		end
 		self.spec_HeadlandManagement = spec
@@ -1343,7 +1343,7 @@ function HeadlandManagement:onPreDetachImplement(implement)
 			local saved = saveConfigWithImplement(spec, implementType)
 			dbgprint("onPreDetachImplement : configuration saved for implement type "..tostring(implementType), 2)
 			if saved then
-				g_currentMission:addGameNotification(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_configuration"), g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_implementTypeSaved").." "..g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_type_"..implementType), "", 2500)
+				g_currentMission:addGameNotification(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_configuration"), g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_implementTypeSaved").." "..g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_type_"..implementType), "")
 			end
 		end
 		self.spec_HeadlandManagement = spec
@@ -1648,7 +1648,7 @@ function HeadlandManagement:onUpdate(dt)
 		spec.action[HeadlandManagement.WAITTIME2] = spec.useTurnPlow and (spec.useRaiseImplementF or spec.useRaiseImplementB)
 		spec.action[HeadlandManagement.TURNPLOW] = spec.useTurnPlow and (spec.useRaiseImplementF or spec.useRaiseImplementB)
 		spec.action[HeadlandManagement.STOPPTO] = spec.useStopPTOF or spec.useStopPTOB
-		spec.action[HeadlandManagement.STOPGPS] = spec.useGPS and (spec.modGuidanceSteeringFound or spec.modVCAFound or spec.modEVFound)
+		spec.action[HeadlandManagement.STOPGPS] = spec.useGPS --and (spec.modGuidanceSteeringFound or spec.modVCAFound or spec.modEVFound)
 		spec.action[HeadlandManagement.WAITTIME3] = spec.useTurnPlow and (spec.useRaiseImplementF or spec.useRaiseImplementB)
 		
 		spec.actStep = spec.actStep + 1
@@ -2569,7 +2569,19 @@ end
 
 function HeadlandManagement.stopGPS(self, enable)
 	local spec = self.spec_HeadlandManagement
+	local specAI = self.spec_aiAutomaticSteering
 	dbgprint("stopGPS : "..tostring(enable))
+
+-- gpsSettings:
+-- 1 : automatic
+-- 2 : GuidanceSteering
+-- 3 : VCA standard
+-- 4 : VCA automatic turn left
+-- 5 : VCA automatic turn right
+-- 6 : EV standard
+-- 7 : EV turn
+-- 8 : AIAutomaticsteering
+
 
 -- Part 1: Detect used mod
 	if spec.gpsSetting == 1 then
@@ -2597,7 +2609,13 @@ function HeadlandManagement.stopGPS(self, enable)
 		local evStatus = self.vData.is[5]
 		if evStatus then
 			spec.gpsSetting = 6
+			dbgprint("stopGPS : EV is active")
 		end
+	end
+	
+	if spec.gpsSetting == 1 and specAI ~= nil and specAI.steeringEnabled then
+		spec.gpsSetting = 8
+		dbgprint("stopGPS : AI is active")
 	end
 	
 	dbgprint("stopGPS : gpsSetting: "..tostring(spec.gpsSetting))
@@ -2676,7 +2694,7 @@ function HeadlandManagement.stopGPS(self, enable)
 	
 -- Part 4: Enhanced Vehicle
 	dbgprint("spec.gpsSetting: "..tostring(spec.gpsSetting))
-	if spec.modEVFound and spec.gpsSetting >= 6 and enable and not spec.useEVTrigger then
+	if spec.modEVFound and spec.gpsSetting >= 6 and spec.gpsSetting < 8 and enable and not spec.useEVTrigger then
 		spec.evStatus = self.vData.is[5]
 		spec.evTrack = self.vData.is[6]
 		if spec.evStatus then
@@ -2698,6 +2716,32 @@ function HeadlandManagement.stopGPS(self, enable)
 		if spec.wasGPSAutomatic then
 			spec.gpsSetting = 1
 			spec.wasGPSAutomatic = false
+		end
+	end
+	
+-- Part 5: aiAutimaticSteering (Vanilla GPS)
+	if specAI ~= nil and spec.gpsSetting == 8 then
+		if enable then
+			local gpsEnabled = specAI.steeringEnabled
+			if gpsEnabled then
+				spec.gpsSetting = 8
+				spec.AIStatus = true
+				dbgprint("stopGPS : Vanilla-GPS off")
+				specAI.steeringEnabled = false
+			else
+				spec.AIStatus = false
+			end
+		else 
+			local gpsEnabled = spec.AIStatus	
+			if gpsEnabled then
+				spec.gpsSetting = 8
+				dbgprint("stopGPS : Vanilla-GPS on")
+				specAI.steeringEnabled = true
+			end
+			if spec.wasGPSAutomatic then
+				spec.gpsSetting = 1
+				spec.wasGPSAutomatic = false
+			end
 		end
 	end
 end
