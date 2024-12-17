@@ -1,5 +1,5 @@
 --
--- Headland Management for LS 22
+-- Headland Management for LS 25
 --
 -- Jason06 / Glowins Modschmiede
 --
@@ -9,7 +9,7 @@ local HeadlandManagementGui_mt = Class(HeadlandManagementGui, YesNoDialog)
 
 dbgprint("HeadlandManagementGui : initializing")
 
---![[ reference to xml
+--[[ reference to xml
 HeadlandManagementGui.CONTROLS = {
 	"guiTitle",
 	
