@@ -417,10 +417,10 @@ function HeadlandManagement:onLoad(savegame)
 	spec.modEVFound = false
 	spec.useEVTrigger = false
 	
-	spec.modSpeedControlFound = false	-- does mod 'FS22_zzzSpeedControl' exist?
-	spec.useModSpeedControl = false	-- use mod 'FS22_xxxSpeedControl'
+	spec.modSpeedControlFound = false	-- does mod 'FS25_zzzSpeedControl' exist?
+	spec.useModSpeedControl = false	-- use mod 'FS25_xxxSpeedControl'
 	
-	spec.modECCFound = false		-- does mod 'FS22_extendedCruiseControl' exist?
+	spec.modECCFound = false		-- does mod 'FS25_extendedCruiseControl' exist?
 	spec.useModECC = false
 	
 	spec.useDiffLock = true
@@ -643,14 +643,14 @@ function HeadlandManagement:onPostLoad(savegame)
 	dbgprint("onPostLoad : CrabSteering exists: "..tostring(spec.crabSteeringFound), 1)
 	
 	-- Check if Mod SpeedControl exists
-	if FS22_SpeedControl ~= nil and FS22_SpeedControl.SpeedControl ~= nil and FS22_SpeedControl.SpeedControl.onInputAction ~= nil and not HeadlandManagement.kbSC then 
+	if FS25_SpeedControl ~= nil and FS25_SpeedControl.SpeedControl ~= nil and FS25_SpeedControl.SpeedControl.onInputAction ~= nil and not HeadlandManagement.kbSC then 
 		spec.modSpeedControlFound = true 
 		spec.useModSpeedControl = true
 		spec.turnSpeed = 1 --SpeedControl Mode 1
 		spec.normSpeed = 2 --SpeedControl Mode 2
 	end
 	
-	-- Check if Mod FS22_extendedCruiseControl exists
+	-- Check if Mod FS25_extendedCruiseControl exists
 	if self.spec_extendedCruiseControl ~= nil and not HeadlandManagement.kbECC then 
 		spec.modECCFound = true 
 		spec.useModSpeedControl = true
@@ -666,7 +666,7 @@ function HeadlandManagement:onPostLoad(savegame)
 	spec.modVCAFound = self.vcaSetState ~= nil and not HeadlandManagement.kbVCA
 	
 	-- Check if Mod EV exists
-	spec.modEVFound = FS22_EnhancedVehicle ~= nil and FS22_EnhancedVehicle.FS22_EnhancedVehicle ~= nil and FS22_EnhancedVehicle.FS22_EnhancedVehicle.onActionCall ~= nil and not HeadlandManagement.kbEV
+	spec.modEVFound = FS25_EnhancedVehicle ~= nil and FS25_EnhancedVehicle.FS25_EnhancedVehicle ~= nil and FS25_EnhancedVehicle.FS25_EnhancedVehicle.onActionCall ~= nil and not HeadlandManagement.kbEV
 	
 	dbgprint("modEVFound is "..tostring(spec.modEVFound).."("..tostring(modEVFound).."/"..tostring(modEVEnabled)..")")
 
@@ -1940,10 +1940,9 @@ function HeadlandManagement:onDraw(dt)
 			
 		-- gui icon
 		local scale = g_gameSettings.uiScale
-		
-		local x = g_currentMission.hud.speedMeter.x -- - g_currentMission.hud.speedMeter.speedGaugeCenterOffsetX * 0.9
-		local y = g_currentMission.hud.speedMeter.y -- - g_currentMission.hud.speedMeter.speedGaugeCenterOffsetY * 0.92
-		local w = 0.015 * scale
+		local x = g_currentMission.hud.speedMeter.gearIcon.x - 0.016
+		local y = g_currentMission.hud.speedMeter.gearIcon.y + 0.002
+		local w = 0.013 * scale
 		local h = w * g_screenAspectRatio
 		local guiIcon = HeadlandManagement.guiIconOff
 		
@@ -2174,7 +2173,7 @@ function HeadlandManagement.reduceSpeed(self, enable)
 			spec.normSpeed = self.speedControl.currentKey or 2
 			if spec.normSpeed ~= spec.turnSpeed then
 				dbgprint("reduceSpeed : ".."SPEEDCONTROL_SPEED"..tostring(spec.turnSpeed))
-				FS22_SpeedControl.SpeedControl.onInputAction(self, "SPEEDCONTROL_SPEED"..tostring(spec.turnSpeed), true, false, false)
+				FS25_SpeedControl.SpeedControl.onInputAction(self, "SPEEDCONTROL_SPEED"..tostring(spec.turnSpeed), true, false, false)
 				self:setCruiseControlState(spec.cruiseControlState)
 			end
 		elseif spec.modECCFound and spec.useModSpeedControl then
@@ -2182,7 +2181,7 @@ function HeadlandManagement.reduceSpeed(self, enable)
 			spec.normSpeed = self.spec_extendedCruiseControl.activeSpeedGroup or 2
 			if spec.normSpeed ~= spec.turnSpeed then
 				dbgprint("reduceSpeed : ".."ECC_TOGGLE_CRUISECONTROL_"..tostring(spec.turnSpeed))
-				FS22_extendedCruiseControl.ExtendedCruiseControl.actionEventCruiseControlGroup(self, "ECC_TOGGLE_CRUISECONTROL_"..tostring(spec.turnSpeed), true, false, false)
+				FS25_extendedCruiseControl.ExtendedCruiseControl.actionEventCruiseControlGroup(self, "ECC_TOGGLE_CRUISECONTROL_"..tostring(spec.turnSpeed), true, false, false)
 				self:setCruiseControlState(spec.cruiseControlState)
 			end
 		else
@@ -2211,14 +2210,14 @@ function HeadlandManagement.reduceSpeed(self, enable)
 			-- Use Mod Speedontrol
 			if self.speedControl.currentKey ~= spec.normSpeed then
 				dbgprint("reduceSpeed : ".."SPEEDCONTROL_SPEED"..tostring(spec.normSpeed))
-				FS22_SpeedControl.SpeedControl.onInputAction(self, "SPEEDCONTROL_SPEED"..tostring(spec.normSpeed), true, false, false)
+				FS25_SpeedControl.SpeedControl.onInputAction(self, "SPEEDCONTROL_SPEED"..tostring(spec.normSpeed), true, false, false)
 				self:setCruiseControlState(spec.cruiseControlState)
 			end
 		elseif spec.modECCFound and spec.useModSpeedControl then
 			-- Use Mod ExtendedCruiseControl
 			if spec.normSpeed ~= spec.turnSpeed then
 				dbgprint("reduceSpeed : ".."ECC_TOGGLE_CRUISECONTROL_"..tostring(spec.normSpeed))
-				FS22_extendedCruiseControl.ExtendedCruiseControl.actionEventCruiseControlGroup(self, "ECC_TOGGLE_CRUISECONTROL_"..tostring(spec.normSpeed), true, false, false)
+				FS25_extendedCruiseControl.ExtendedCruiseControl.actionEventCruiseControlGroup(self, "ECC_TOGGLE_CRUISECONTROL_"..tostring(spec.normSpeed), true, false, false)
 				self:setCruiseControlState(spec.cruiseControlState)
 			end
 		else
@@ -2433,7 +2432,7 @@ function HeadlandManagement.raiseImplements(self, raise, turnPlow, centerPlow, r
 							if spec.ridgeMarkerState ~= 0 and specRM.numRigdeMarkers ~= 0 then
 								actImplement:setRidgeMarkerState(0)
 							elseif spec.ridgeMarkerState ~= 0 and specRM.numRigdeMarkers == 0 then
-								print("FS22_HeadlandManagement :: Info : Can't set ridgeMarkerState: RidgeMarkers not controllable by script!")
+								print("FS25_HeadlandManagement :: Info : Can't set ridgeMarkerState: RidgeMarkers not controllable by script!")
 							end
 						elseif spec.ridgeMarkerState ~= 0 then
 							for state,_ in pairs(specRM.ridgeMarkers) do
@@ -2447,7 +2446,7 @@ function HeadlandManagement.raiseImplements(self, raise, turnPlow, centerPlow, r
 								actImplement:setRidgeMarkerState(spec.ridgeMarkerState)
 								dbgprint("ridgeMarker: Set to "..tostring(specRM.ridgeMarkerState))
 							elseif spec.ridgeMarkerState ~= 0 and specRM.numRigdeMarkers == 0 then
-								print("FS22_HeadlandManagement :: Info : Can't set ridgeMarkerState: RidgeMarkers not controllable by script!")
+								print("FS25_HeadlandManagement :: Info : Can't set ridgeMarkerState: RidgeMarkers not controllable by script!")
 							end
 						end
 					end
@@ -2700,17 +2699,17 @@ function HeadlandManagement.stopGPS(self, enable)
 		if spec.evStatus then
 			if spec.evTrack and spec.gpsSetting == 7 then
 				dbgprint("stopGPS : EV-GPS turn")
-				FS22_EnhancedVehicle.FS22_EnhancedVehicle.onActionCall(self, "FS22_EnhancedVehicle_SNAP_REVERSE", 1, nil, nil, nil)
+				FS25_EnhancedVehicle.FS25_EnhancedVehicle.onActionCall(self, "FS25_EnhancedVehicle_SNAP_REVERSE", 1, nil, nil, nil)
 			else
 				dbgprint("stopGPS : EV-GPS off")
-				FS22_EnhancedVehicle.FS22_EnhancedVehicle.onActionCall(self, "FS22_EnhancedVehicle_SNAP_ONOFF", 1, nil, nil, nil)
+				FS25_EnhancedVehicle.FS25_EnhancedVehicle.onActionCall(self, "FS25_EnhancedVehicle_SNAP_ONOFF", 1, nil, nil, nil)
 			end
 		end
 	end
 	if spec.modEVFound and spec.gpsSetting == 6 and not enable and not spec.useEVTrigger then
 		if spec.evStatus and not self.vData.is[5] then
 			dbgprint("stopGPS : EV-GPS on")
-			FS22_EnhancedVehicle.FS22_EnhancedVehicle.onActionCall(self, "FS22_EnhancedVehicle_SNAP_ONOFF", 1, nil, nil, nil)
+			FS25_EnhancedVehicle.FS25_EnhancedVehicle.onActionCall(self, "FS25_EnhancedVehicle_SNAP_ONOFF", 1, nil, nil, nil)
 			spec.evStatus = false
 		end	
 		if spec.wasGPSAutomatic then
@@ -2760,20 +2759,20 @@ function HeadlandManagement.disableDiffLock(self, disable, EV)
 			spec.diffStateB = self.vData.want[2] or false
 			if spec.diffStateF then 
 				dbgprint("disableDiffLock : EV DiffLockF off")
-				FS22_EnhancedVehicle.FS22_EnhancedVehicle.onActionCall(self, "FS22_EnhancedVehicle_FD", 1, nil, nil, nil)
+				FS25_EnhancedVehicle.FS25_EnhancedVehicle.onActionCall(self, "FS25_EnhancedVehicle_FD", 1, nil, nil, nil)
 			end
 			if spec.diffStateB then 
 				dbgprint("disableDiffLock : EV DiffLockB off")
-				FS22_EnhancedVehicle.FS22_EnhancedVehicle.onActionCall(self, "FS22_EnhancedVehicle_BD", 1, nil, nil, nil)
+				FS25_EnhancedVehicle.FS25_EnhancedVehicle.onActionCall(self, "FS25_EnhancedVehicle_BD", 1, nil, nil, nil)
 			end
 		else
 			if spec.diffStateF then 
 				dbgprint("disableDiffLock : EV DiffLockF on")
-				if not self.vData.is[1] then FS22_EnhancedVehicle.FS22_EnhancedVehicle.onActionCall(self, "FS22_EnhancedVehicle_FD", 1, nil, nil, nil) end
+				if not self.vData.is[1] then FS25_EnhancedVehicle.FS25_EnhancedVehicle.onActionCall(self, "FS25_EnhancedVehicle_FD", 1, nil, nil, nil) end
 			end
 			if spec.diffStateB then 
 				dbgprint("disableDiffLock : EV DiffLockB on")
-				if not self.vData.is[2] then FS22_EnhancedVehicle.FS22_EnhancedVehicle.onActionCall(self, "FS22_EnhancedVehicle_RD", 1, nil, nil, nil) end
+				if not self.vData.is[2] then FS25_EnhancedVehicle.FS25_EnhancedVehicle.onActionCall(self, "FS25_EnhancedVehicle_RD", 1, nil, nil, nil) end
 			end
 		end
 	else
