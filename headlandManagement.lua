@@ -17,14 +17,11 @@ if HeadlandManagement.MOD_NAME == nil then HeadlandManagement.MOD_NAME = g_curre
 HeadlandManagement.MODSETTINGSDIR = g_currentModSettingsDirectory
 
 source(g_currentModDirectory.."tools/gmsDebug.lua")
-GMSDebug:init(HeadlandManagement.MOD_NAME, true, 2)
+GMSDebug:init(HeadlandManagement.MOD_NAME, true, 1)
 GMSDebug:enableConsoleCommands("hlmDebug")
 
 source(g_currentModDirectory.."gui/HeadlandManagementGui.lua")
 g_gui:loadGui(g_currentModDirectory.."gui/HeadlandManagementGui.xml", "HeadlandManagementGui", HeadlandManagementGui:new())
-
---dbgprint_r(g_gui.guis.HeadlandManagementGui.target, 2, 0)
---dbgprint_r(g_gui.guis.HeadlandManagementGui.target.guiTitle, 2, 0)
 
 HeadlandManagement.REDUCESPEED = 1
 HeadlandManagement.STOPGPS = 2
@@ -106,16 +103,23 @@ function addHLMconfig(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvi
 		or	category == "TRACTORSL"
 		or	category == "HARVESTERS"
 		or	category == "FORAGEHARVESTERS"
-		or	category == "BEETVEHICLES"
-		or	category == "POTATOVEHICLES"
-		or	category == "COTTONVEHICLES"
+		or	category == "BEETHARVESTERS"
+		or	category == "POTATOHARVESTING"
+		or	category == "COTTONHARVESTERS"
 		or	category == "SPRAYERVEHICLES"
-		or  category == "SLURRYVEHICLES"
-		or	category == "SUGARCANEVEHICLES"
-		or	category == "MOWERVEHICLES"
-		or	category == "MISCVEHICLES"
-		or	category == "GRAPEVEHICLES"
-		or 	category == "OLIVEVEHICLES"
+		or  category == "SLURRYTANKS"
+		or	category == "MISCDRIVABLES"
+		or	category == "GRAPEHARVESTERS"
+		or 	category == "OLIVEHARVESTERS"
+		or	category == "SPINACHHARVESTERS"
+		or	category == "GREENBEANHARVESTERS"
+		or	category == "PEAHARVESTERS"
+		or	category == "SUGARCANEHARVESTERS"
+		or	category == "MOWERS"
+		or	category == "VEGETABLEHARVESTERS"
+		or	category == "RICEPLANTERS"
+		or	category == "RICEHARVESTERS"
+		or	category == "COMBINEWINDROWER"
 		
 		-- Ifkos etc.
 		or 	category == "LSFM"
@@ -2572,15 +2576,14 @@ function HeadlandManagement.stopGPS(self, enable)
 	dbgprint("stopGPS : "..tostring(enable))
 
 -- gpsSettings:
--- 1 : automatic
--- 2 : GuidanceSteering
--- 3 : VCA standard
--- 4 : VCA automatic turn left
--- 5 : VCA automatic turn right
--- 6 : EV standard
--- 7 : EV turn
--- 8 : AIAutomaticsteering
-
+-- 1 	: automatic
+-- 2 	: GuidanceSteering
+-- 3 	: VCA standard
+-- 4 	: VCA automatic turn left
+-- 5 	: VCA automatic turn right
+-- 6 	: EV standard
+-- 7 	: EV turn
+-- 0/8 	: AIAutomaticsteering (Vanilla GPS)
 
 -- Part 1: Detect used mod
 	if spec.gpsSetting == 1 then
