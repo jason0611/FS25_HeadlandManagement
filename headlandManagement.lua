@@ -2729,7 +2729,7 @@ function HeadlandManagement.stopGPS(self, enable)
 				spec.gpsSetting = 8
 				spec.AIStatus = true
 				dbgprint("stopGPS : Vanilla-GPS off")
-				specAI.steeringEnabled = false
+				self:setAIAutomaticSteeringEnabled(false)
 			else
 				spec.AIStatus = false
 			end
@@ -2738,7 +2738,7 @@ function HeadlandManagement.stopGPS(self, enable)
 			if gpsEnabled then
 				spec.gpsSetting = 8
 				dbgprint("stopGPS : Vanilla-GPS on")
-				specAI.steeringEnabled = true
+				self:setAIAutomaticSteeringEnabled(true)
 			end
 			if spec.wasGPSAutomatic then
 				spec.gpsSetting = 1
