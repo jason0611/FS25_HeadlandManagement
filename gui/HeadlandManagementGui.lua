@@ -393,8 +393,8 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	self.gpsAutoTriggerSetting.onClickCallback = HeadlandManagementGui.logicalCheck
 	local triggerAnz = 2
 	local triggerTexts = ({
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off"),
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on")
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on"),
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off")
 	})
 	if self.spec.modGuidanceSteeringFound then 
 		triggerAnz = triggerAnz + 1
@@ -407,11 +407,11 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	self.gpsAutoTriggerSetting:setTexts(triggerTexts)
 	self.gpsAutoTriggerSetting:setDisabled(self.spec.useEVTrigger)
 	
-	local triggerSetting = 1
+	local triggerSetting = 2
 	triggerAnz = 2
 	
 	if self.spec.useHLMTriggerF or self.spec.useHLMTriggerB then 
-		triggerSetting = 2
+		triggerSetting = 1
 	end
 	
 	if self.spec.modGuidanceSteeringFound then
@@ -576,9 +576,9 @@ function HeadlandManagementGui:logicalCheck()
 	
 	self.gpsEnableDirSwitchSetting:setDisabled(not useGPS or not self.spec.modVCAFound or gpsSetting < 4 or gpsSetting > 5)
 	
-	self.gpsAutoTriggerOffsetSetting:setDisabled(triggerSetting == 1 or (triggerSetting == 3 and self.gpsEnabled))
+	self.gpsAutoTriggerOffsetSetting:setDisabled(triggerSetting == 2 or (triggerSetting == 3 and self.gpsEnabled))
 	
-	self.gpsAutoTriggerOffsetWidthInput:setDisabled(triggerSetting ~= 2)
+	self.gpsAutoTriggerOffsetWidthInput:setDisabled(triggerSetting ~= 1)
 	
 	--self.gpsResumeSetting:setDisabled(useEVTrigger)
 	
@@ -716,19 +716,19 @@ function HeadlandManagementGui:onClickOk()
 	-- headland automatic
 	local triggerSetting = self.gpsAutoTriggerSetting:getState()
 	local offsetSetting = self.gpsAutoTriggerOffsetSetting:getState()
-	if triggerSetting == 1 then
+	if triggerSetting == 2 then
 		self.spec.useGuidanceSteeringTrigger = false
 		self.spec.useGuidanceSteeringOffset = false
 		self.spec.useHLMTriggerF = false
 		self.spec.useHLMTriggerB = false
 		--self.spec.useEVTrigger = false
-	elseif triggerSetting == 2 and offsetSetting == 1 then
+	elseif triggerSetting == 1 and offsetSetting == 1 then
 		self.spec.useGuidanceSteeringTrigger = false
 		self.spec.useGuidanceSteeringOffset = false
 		self.spec.useHLMTriggerF = true
 		self.spec.useHLMTriggerB = false
 		--self.spec.useEVTrigger = false
-	elseif triggerSetting == 2 and offsetSetting == 2 then
+	elseif triggerSetting == 1 and offsetSetting == 2 then
 		self.spec.useGuidanceSteeringTrigger = false
 		self.spec.useGuidanceSteeringOffset = false
 		self.spec.useHLMTriggerF = false
