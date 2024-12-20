@@ -1944,7 +1944,11 @@ function HeadlandManagement:onDraw(dt)
 			
 		-- gui icon
 		local scale = g_gameSettings.uiScale
-		local x = g_currentMission.hud.speedMeter.gearIcon.x - 0.016
+		local xg = g_currentMission.hud.speedMeter.gearIcon.x
+		local xf = g_currentMission.hud.speedMeter.repairIcon.x
+		local dist = xf - xg
+		
+		local x = xg - dist
 		local y = g_currentMission.hud.speedMeter.gearIcon.y + 0.002
 		local w = 0.013 * scale
 		local h = w * g_screenAspectRatio
