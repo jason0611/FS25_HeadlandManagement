@@ -2225,8 +2225,8 @@ function HeadlandManagement.reduceSpeed(self, enable)
 			-- Use Mod ExtendedCruiseControl
 			if spec.normSpeed ~= spec.turnSpeed then
 				dbgprint("reduceSpeed : ".."ECC_TOGGLE_CRUISECONTROL_"..tostring(spec.normSpeed))
-				FS25_extendedCruiseControl.ExtendedCruiseControl.actionEventCruiseControlGroup(self, "ECC_TOGGLE_CRUISECONTROL_"..tostring(spec.normSpeed), true, false, false)
 				self:setCruiseControlState(spec.cruiseControlState)
+				FS25_extendedCruiseControl.ExtendedCruiseControl.actionEventCruiseControlGroup(self, "ECC_TOGGLE_CRUISECONTROL_"..tostring(spec.normSpeed), true, false, false)
 			end
 		else
 			-- Use Vanilla Speedcontrol
