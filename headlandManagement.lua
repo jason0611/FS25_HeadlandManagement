@@ -155,9 +155,11 @@ function addHLMconfig(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvi
 
 	then
 		local function loadFromSavegameXMLFileHLM(self, xmlFile, key, configurationData)
+			print("HeadlandManagement : loadFromSavegameXMLFileHLM")
 			print_r(self, 0)
 		end
 		local function saveToXMLFileHLM(self, xmlFile, key, isActive)
+			print("HeadlandManagement : saveToXMLFileHLM")
 			print_r(self, 0)
 			xmlFile:setValue(key .. "#name", "HeadlandManagement")
 			xmlFile:setValue(key .. "#id", tostring(self.index))
