@@ -563,7 +563,7 @@ function HeadlandManagementGui:logicalCheck()
 	self.contourWidthChangeSetting:setDisabled(contourOnOffSetting == 1 or widthSetting == 1 or contourWorkedAreaSetting == 2)
 	self.contourWidthChangeSetting:setState(contourWorkedAreaSetting == 2 and 2 or widthChangeSetting)
 
-	local useGPS = self.gpsOnOffSetting:getState() == 1
+	local useGPS = self.gpsOnOffSetting:getState() == 2
 	local triggerSetting = self.gpsAutoTriggerSetting:getState()
 	--local useEVTrigger = (triggerSetting == 3 and not self.spec.modGuidanceSteeringFound) or (triggerSetting == 4 and self.spec.modGuidanceSteeringFound)
 	--self.gpsOnOffSetting:setDisabled(not self.spec.modGuidanceSteeringFound and not self.spec.modVCAFound and not self.spec.modEVFound or useEVTrigger)
