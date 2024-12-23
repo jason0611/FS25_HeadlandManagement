@@ -12,7 +12,6 @@ dbgprint("HeadlandManagementGui : initializing")
 -- constructor
 function HeadlandManagementGui:new()
 	local gui = YesNoDialog:new(nil, HeadlandManagementGui_mt)
-	--gui:register(HeadlandManagementGui.CONTROLS)
 	dbgprint("HeadlandManagementGui created:", 1)
 	dbgprint_r(gui.target, 2, 0)
 	return gui

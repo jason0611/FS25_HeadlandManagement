@@ -14,6 +14,7 @@
 HeadlandManagement = {}
 
 if HeadlandManagement.MOD_NAME == nil then HeadlandManagement.MOD_NAME = g_currentModName end
+if HeadlandManagement.MOD_PATH == nil then HeadlandManagement.MOD_PATH = g_currentModDirectory end
 HeadlandManagement.MODSETTINGSDIR = g_currentModSettingsDirectory
 
 source(g_currentModDirectory.."tools/gmsDebug.lua")

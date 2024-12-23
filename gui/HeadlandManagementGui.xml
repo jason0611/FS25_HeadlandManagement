@@ -182,9 +182,9 @@
 				</GuiElement>
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="gpsAutoTriggerOffsetWidthTitle"/>
-					<TextInput profile="fs25_settingsTextInput" id="gpsAutoTriggerOffsetWidthInput" textSize="18px" imeKeyboardType="normal">
-						<Text   profile="fs25_multiTextOptionTooltip" id="gpsAutoTriggerOffsetWidthTT"/>
-						<Bitmap profile="fs25_textInputBg"/>
+					<TextInput profile="fs25_settingsTextInput" position="-30px +0px" id="gpsAutoTriggerOffsetWidthInput" imeKeyboardType="normal">
+						<Text   profile="fs25_multiTextOptionTooltip" position="670px +0px" id="gpsAutoTriggerOffsetWidthTT"/>
+						<Bitmap profile="fs25_textInputBg" position="-10px +0px"/>
 					</TextInput>
 				</GuiElement>				
 				<GuiElement profile="fs25_multiTextOptionContainer">
