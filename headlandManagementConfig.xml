@@ -1,31 +1,10 @@
 <vehicle>
-  <HeadlandManagement>
-    <HeadlandManagementConfigurations isYesNoOption="true">
-      <HeadlandManagementConfiguration name="$l10n_text_HLM_notInstalled_short" desc="$l10n_text_HLM_notInstalled" price="0"/>
-      <HeadlandManagementConfiguration name="$l10n_text_HLM_installed_short" desc="$l10n_text_HLM_installed" price="30000"/>
-    </HeadlandManagementConfigurations>
-  </HeadlandManagement>
+	<FS25_HeadlandManagement>	
+		<HeadlandManagement>
+			<HeadlandManagementConfigurations isYesNoOption="true">
+				<HeadlandManagementConfiguration name="HLM_not_installed" price="0"/>
+				<HeadlandManagementConfiguration name="HLM_installed" price="3000"/>
+			</HeadlandManagementConfigurations>
+		</HeadlandManagement>
+	</FS25_HeadlandManagement>
 </vehicle>
-
-<!--
-				index = 1,
-        		name = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_notInstalled_short"), 
-        		isDefault = true,  
-        		isSelectable = true, 
-        		price = 0, 
-        		dailyUpkeep = 0, 
-        		loadFromSavegameXMLFile = loadFromSavegameXMLFileHLM, 
-        		saveToXMLFile = saveToXMLFileHLM, 
-        		desc = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_notInstalled")
-        		
-        		
-        		index = 2,
-        		name = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_installed_short"), 
-        		isDefault = false, 
-        		isSelectable = true, 
-        		price = 3000, 
-        		dailyUpkeep = 0, 
-        		loadFromSavegameXMLFile = loadFromSavegameXMLFileHLM, 
-        		saveToXMLFile = saveToXMLFileHLM, 
-        		desc = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_installed")
--->

@@ -158,58 +158,54 @@ function addHLMconfig(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvi
 		local headlandManagementConfigFile = XMLFile.load("headlandManagementConfig", HeadlandManagement.PATH_NAME.."headlandManagementConfig.xml", xmlFile.schema)
 		
 		if headlandManagementConfigFile ~= nil then
-			local 
-
-	
-	
-	
-	
-	
-	
-	
-		local function loadFromSavegameXMLFileHLM(self, xmlFile, key, configurationData)
-			print("HeadlandManagement : loadFromSavegameXMLFileHLM: key = "..tostring(key))
-			xmlFile:getValue(key .. "#name", "HeadlandManagement")
-			xmlFile:getValue(key .. "#id", tostring(self.index))
-			xmlFile:getValue(key .. "#isActive", Utils.getNoNil(isActive, false))
-			print_r(self, 0)
+			local allConfigs = self:getConfigurations()
+			local hlmConfig = allConfigs["HeadlandManagement"]
+			
+			dbgprint("addHLMconfig : loading config from xml", 2)
+			dbgprint_r(hlmConfig, 4, 1)
+			
+			if hlmConfig ~= nil then
+				local configItems = {}
+				local i = 0
+				while true do
+					dbgprint("addHLMconfig : step "..tostring(i+1), 4)
+					local xmlKey = string.format(hlmConfig.configurationKey .."(%d)", i)
+					if not headlandManagementConfigFile:hasProperty(xmlKey) or i > 1 then
+						dbgprint("addHLMconfig : exiting...", 4)
+						break
+					end
+					
+					dbgprint("addHLMconfig : loading item at "..tostring(xmlKey), 4)
+					local configItem = hlmConfig.itemClass.new(hlmConfig.name)
+					configItem:setIndex(#configItems + 1)
+					if configItem:loadFromXML(headlandManagementConfigFile, hlmConfig.configurationsKey, xmlKey, baseDir, customEnvironment) then
+						if i == 0 then
+							configItem.name = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_notInstalled_short")
+							configItem.desc = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_notInstalled")
+						else 
+							configItem.name = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_installed_short")
+							configItem.desc = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_installed")
+						end
+						table.insert(configItems, configItem)
+						dbgprint("addHLMconfig : item added:", 4)
+						dbgprint_r(configItem, 4, 1)
+					end
+					i = i + 1
+				end
+				if #configItems > 0 then
+					defaultConfigurationIds[hlmConfig.name] = ConfigurationUtil.getDefaultConfigIdFromItems(configItems)
+					configurations[hlmConfig.name] = configItems
+					dbgprint("addHLMconfig : configurations", 4)
+					dbgprint_r(configItems, 4, 2)
+				end
+			end
+			
+			headlandManagementConfigFile:delete()
 		end
-		local function saveToXMLFileHLM(self, xmlFile, key, isActive)
-			print("HeadlandManagement : saveToXMLFileHLM: key = "..tostring(key))
-			xmlFile:setValue(key .. "#name", "HeadlandManagement")
-			xmlFile:setValue(key .. "#id", tostring(self.index))
-			xmlFile:setValue(key .. "#isActive", Utils.getNoNil(isActive, false))
-			print_r(self, 0)
-		end
 
-		configurations["HeadlandManagement"] = {
-        	{
-        		index = 1,
-        		name = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_notInstalled_short"), 
-        		isDefault = true,  
-        		isSelectable = true, 
-        		price = 0, 
-        		dailyUpkeep = 0, 
-        		loadFromSavegameXMLFile = loadFromSavegameXMLFileHLM, 
-        		saveToXMLFile = saveToXMLFileHLM, 
-        		desc = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_notInstalled")
-        	},
-        	{
-        		index = 2,
-        		name = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_installed_short"), 
-        		isDefault = false, 
-        		isSelectable = true, 
-        		price = 3000, 
-        		dailyUpkeep = 0, 
-        		loadFromSavegameXMLFile = loadFromSavegameXMLFileHLM, 
-        		saveToXMLFile = saveToXMLFileHLM, 
-        		desc = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_installed")
-        	}
-    	}
     	dbgprint("addHLMconfig : Configuration HeadlandManagement added", 2)
-    	dbgprint_r(configurations["HeadlandManagement"], 2)
+    	dbgprint_r(configurations["HeadlandManagement"], 4)
 	end
-	
     return configurations, defaultConfigurationIds
 end
 
