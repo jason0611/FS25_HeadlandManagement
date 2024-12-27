@@ -763,6 +763,7 @@ function HeadlandManagement:onPostLoad(savegame)
 	self.configurations["HeadlandManagement"] = spec.exists and 2 or 1
 	dbgprint("onPostLoad : HLM exists: "..tostring(spec.exists))
 	dbgprint_r(self.configurations, 2, 0)
+	self:raiseDirtyFlags(spec.dirtyFlag)
 end
 
 function HeadlandManagement:saveToXMLFile(xmlFile, key, usedModNames)
