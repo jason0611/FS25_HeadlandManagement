@@ -14,6 +14,7 @@
 HeadlandManagement = {}
 
 if HeadlandManagement.MOD_NAME == nil then HeadlandManagement.MOD_NAME = g_currentModName end
+if HeadlandManagement.PATH_NAME == nil then HeadlandManagement.PATH_NAME = g_currentModDirectory end
 HeadlandManagement.MODSETTINGSDIR = g_currentModSettingsDirectory
 
 source(g_currentModDirectory.."tools/gmsDebug.lua")
@@ -154,15 +155,31 @@ function addHLMconfig(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvi
 		and xmlFile:hasProperty("vehicle.drivable")
 
 	then
+		local headlandManagementConfigFile = XMLFile.load("headlandManagementConfig", HeadlandManagement.PATH_NAME.."headlandManagementConfig.xml", xmlFile.schema)
+		
+		if headlandManagementConfigFile ~= nil then
+			local 
+
+	
+	
+	
+	
+	
+	
+	
 		local function loadFromSavegameXMLFileHLM(self, xmlFile, key, configurationData)
-			print("HeadlandManagement : loadFromSavegameXMLFileHLM")
+			print("HeadlandManagement : loadFromSavegameXMLFileHLM: key = "..tostring(key))
+			xmlFile:getValue(key .. "#name", "HeadlandManagement")
+			xmlFile:getValue(key .. "#id", tostring(self.index))
+			xmlFile:getValue(key .. "#isActive", Utils.getNoNil(isActive, false))
 			print_r(self, 0)
 		end
 		local function saveToXMLFileHLM(self, xmlFile, key, isActive)
-			print("HeadlandManagement : saveToXMLFileHLM")
+			print("HeadlandManagement : saveToXMLFileHLM: key = "..tostring(key))
 			xmlFile:setValue(key .. "#name", "HeadlandManagement")
 			xmlFile:setValue(key .. "#id", tostring(self.index))
 			xmlFile:setValue(key .. "#isActive", Utils.getNoNil(isActive, false))
+			print_r(self, 0)
 		end
 
 		configurations["HeadlandManagement"] = {
@@ -351,7 +368,7 @@ function HeadlandManagement:onLoad(savegame)
 	local spec = self.spec_HeadlandManagement
 	spec.dirtyFlag = self:getNextDirtyFlag()
 	
-	spec.exists = false				-- Headland Management is configured into vehicle
+	spec.exists = spec.exists or false	-- Is Headland Management configured into vehicle?
 	spec.isOn = false				-- Headland Management is switched on
 	
 	spec.timer = 0					-- Timer for waiting actions
@@ -676,8 +693,9 @@ function HeadlandManagement:onPostLoad(savegame)
 
 	-- HLM configured?
 	print("HLM configured?")
+	dbgprint("onPostLoad : Spec exists (before reload): "..tostring(spec.exists), 2)
 	print_r(self.configurations["HeadlandManagement"], 0)
-	spec.exists = self.configurations["HeadlandManagement"] ~= nil and self.configurations["HeadlandManagement"] > 1
+	--spec.exists = self.configurations["HeadlandManagement"] ~= nil and self.configurations["HeadlandManagement"] > 1
 	
 	if savegame ~= nil then	
 		dbgprint("onPostLoad : loading saved data", 2)
@@ -741,6 +759,8 @@ function HeadlandManagement:onPostLoad(savegame)
 		dbgprint("onPostLoad : Loaded data for "..self:getName(), 1)
 	end
 	
+	spec.exists = self.configurations["HeadlandManagement"] ~= nil and self.configurations["HeadlandManagement"] > 1
+	dbgprint("onPostLoad : Spec exists (after reload): "..tostring(spec.exists), 2)
 	-- enable HLM in mission vehicles
 	spec.exists = spec.exists or (self.configurations["HeadlandManagement"] ~= nil and self.propertyState == Vehicle.PROPERTY_STATE_MISSION)
 	
@@ -761,7 +781,7 @@ function HeadlandManagement:onPostLoad(savegame)
 	
 	-- Set HLM configuration if set by savegame
 	self.configurations["HeadlandManagement"] = spec.exists and 2 or 1
-	dbgprint("onPostLoad : HLM exists: "..tostring(spec.exists))
+	dbgprint("onPostLoad : HLM exists (finally): "..tostring(spec.exists))
 	dbgprint_r(self.configurations, 2, 0)
 	self:raiseDirtyFlags(spec.dirtyFlag)
 end
