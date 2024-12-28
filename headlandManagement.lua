@@ -14,7 +14,7 @@
 HeadlandManagement = {}
 
 if HeadlandManagement.MOD_NAME == nil then HeadlandManagement.MOD_NAME = g_currentModName end
-if HeadlandManagement.PATH_NAME == nil then HeadlandManagement.PATH_NAME = g_currentModDirectory end
+if HeadlandManagement.MOD_PATH == nil then HeadlandManagement.MOD_PATH = g_currentModDirectory end
 HeadlandManagement.MODSETTINGSDIR = g_currentModSettingsDirectory
 
 source(g_currentModDirectory.."tools/gmsDebug.lua")
@@ -156,7 +156,7 @@ function addHLMconfig(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvi
 		and xmlFile:hasProperty("vehicle.drivable")
 
 	then
-		local headlandManagementConfigFile = XMLFile.load("headlandManagementConfig", HeadlandManagement.PATH_NAME.."headlandManagementConfig.xml", xmlFile.schema)
+		local headlandManagementConfigFile = XMLFile.load("headlandManagementConfig", HeadlandManagement.MOD_PATH.."headlandManagementConfig.xml", xmlFile.schema)
 		
 		if headlandManagementConfigFile ~= nil then
 			local allConfigs = self:getConfigurations()

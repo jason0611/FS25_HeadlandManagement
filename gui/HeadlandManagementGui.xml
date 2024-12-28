@@ -223,6 +223,7 @@
 				</GuiElement>
 	
 				<!-- Debug -->
+<!--
 				<Text profile="fs25_settingsSectionHeader" id="debug"/>
 				
 				<GuiElement profile="fs25_multiTextOptionContainer">
@@ -237,9 +238,8 @@
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="debugFlagTT"/>
 					</MultiTextOption>	
 				</GuiElement>
-				
+-->
 				<Text profile="dialogHeaderText"/>
-	<!-- -->
 			</ScrollingLayout>
 			
 			<!-- footer -->

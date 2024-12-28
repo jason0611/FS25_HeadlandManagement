@@ -480,6 +480,7 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	--self.crabSteeringSetting:setVisible(self.spec.crabSteeringFound)
 	
 	-- Debug
+	--[[
 	self.debug:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_debug"))
 	self.debugTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_debugTitle"))
 	self.debugSetting:setTexts({
@@ -496,6 +497,7 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	self.debugFlagSetting.onClickCallback = HeadlandManagementGui.logicalCheck
 	self.debugFlagSetting:setState(self.spec.debugFlag and 1 or 2)
 	self.debugFlagSetting:setDisabled(raiseState ~= 2)
+	--]]
 	
 	-- Set ToolTip-Texts
 	self.alarmTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_alarmTT"))
@@ -511,7 +513,7 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	self.contourOnOffTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_contourOnOffTT"))
 	self.contourSettingTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_contourSettingTT"))
 	self.contourWidthSettingTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_contourWidthSettingTT"))
-	--self.contourWidthSettingInputTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_contourWidthSettingInputTT"))
+	self.contourWidthSettingInputTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_contourWidthSettingInputTT"))
 	self.contourWidthChangeSettingTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_contourWidthChangeSettingTT"))
 	self.gpsTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gpsTT"))
 	self.gpsTypeTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gpsTypeTT"))
@@ -524,6 +526,7 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	self.speedControlModSettingTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_speedControlModSettingTT"))
 	self.gpsDirSwitchTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_VCADirSwitchTT"))
 	self.gpsResumeTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gpsAutoResumeTT"))
+--[[	
 	self.debugTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_debugTT"))
 	self.debugFlagTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_debugFlagTT"))
 --]]
@@ -562,7 +565,7 @@ function HeadlandManagementGui:logicalCheck()
 	self.contourWidthChangeSetting:setDisabled(contourOnOffSetting == 1 or widthSetting == 1 or contourWorkedAreaSetting == 2)
 	self.contourWidthChangeSetting:setState(contourWorkedAreaSetting == 2 and 2 or widthChangeSetting)
 
-	local useGPS = self.gpsOnOffSetting:getState() == 2
+	local useGPS = self.gpsOnOffSetting:getState() == 1
 	local triggerSetting = self.gpsAutoTriggerSetting:getState()
 	--local useEVTrigger = (triggerSetting == 3 and not self.spec.modGuidanceSteeringFound) or (triggerSetting == 4 and self.spec.modGuidanceSteeringFound)
 	--self.gpsOnOffSetting:setDisabled(not self.spec.modGuidanceSteeringFound and not self.spec.modVCAFound and not self.spec.modEVFound or useEVTrigger)
@@ -581,7 +584,7 @@ function HeadlandManagementGui:logicalCheck()
 	
 	--self.gpsResumeSetting:setDisabled(useEVTrigger)
 	
-	self.debugFlagSetting:setDisabled(self.raiseSetting:getState() ~= 2)
+	--self.debugFlagSetting:setDisabled(self.raiseSetting:getState() ~= 2)
 end
 
 -- get width input
@@ -765,9 +768,10 @@ function HeadlandManagementGui:onClickOk()
 	-- showKeys
 	local showKeys = self.inputbindingsSetting:getState() == 1
 	-- debug
+--[[	
 	local debug = self.debugSetting:getState() == 1
 	self.spec.debugFlag = self.debugFlagSetting:getState() == 1
-
+--]]
 	dbgprint("gpsSetting (GUI): "..tostring(self.spec.gpsSetting), 3)
 	self:close()
 	self.callbackFunc(self.target, self.spec, debug, showKeys)
