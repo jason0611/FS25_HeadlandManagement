@@ -14,7 +14,7 @@
 HeadlandManagement = {}
 
 if HeadlandManagement.MOD_NAME == nil then HeadlandManagement.MOD_NAME = g_currentModName end
-if HeadlandManagement.MOD_PATH == nil then HeadlandManagement.MOD_PATH = g_currentModDirectory end
+if HeadlandManagement.PATH_NAME == nil then HeadlandManagement.PATH_NAME = g_currentModDirectory end
 HeadlandManagement.MODSETTINGSDIR = g_currentModSettingsDirectory
 
 source(g_currentModDirectory.."tools/gmsDebug.lua")
@@ -91,6 +91,7 @@ HeadlandManagement.kbSC = true
 HeadlandManagement.kbEV = false
 HeadlandManagement.kbECC = false
 
+--create configuration
 function addHLMconfig(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvironment, isMod, storeItem)
     dbgprint("addHLMconfig : parameters: xmlFile = "..tostring(xmlFile).." / baseXMLName = "..tostring(baseXMLName).." / baseDir = "..tostring(baseDir).." / customEnvironment = "..tostring(customEnvironment).." / isMod = "..tostring(isMod).." / storeItem = "..tostring(storeItem), 2)
     
@@ -155,44 +156,57 @@ function addHLMconfig(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvi
 		and xmlFile:hasProperty("vehicle.drivable")
 
 	then
-		local function loadFromSavegameXMLFileHLM(self, xmlFile, key, configurationData)
-			print_r(self, 0)
-		end
-		local function saveToXMLFileHLM(self, xmlFile, key, isActive)
-			print_r(self, 0)
-			xmlFile:setValue(key .. "#name", "HeadlandManagement")
-			xmlFile:setValue(key .. "#id", tostring(self.index))
-			xmlFile:setValue(key .. "#isActive", Utils.getNoNil(isActive, false))
+		local headlandManagementConfigFile = XMLFile.load("headlandManagementConfig", HeadlandManagement.PATH_NAME.."headlandManagementConfig.xml", xmlFile.schema)
+		
+		if headlandManagementConfigFile ~= nil then
+			local allConfigs = self:getConfigurations()
+			local hlmConfig = allConfigs["HeadlandManagement"]
+			
+			dbgprint("addHLMconfig : loading config from xml", 2)
+			dbgprint_r(hlmConfig, 4, 1)
+			
+			if hlmConfig ~= nil then
+				local configItems = {}
+				local i = 0
+				while true do
+					dbgprint("addHLMconfig : step "..tostring(i+1), 4)
+					local xmlKey = string.format(hlmConfig.configurationKey .."(%d)", i)
+					if not headlandManagementConfigFile:hasProperty(xmlKey) or i > 1 then
+						dbgprint("addHLMconfig : exiting...", 4)
+						break
+					end
+					
+					dbgprint("addHLMconfig : loading item at "..tostring(xmlKey), 4)
+					local configItem = hlmConfig.itemClass.new(hlmConfig.name)
+					configItem:setIndex(#configItems + 1)
+					if configItem:loadFromXML(headlandManagementConfigFile, hlmConfig.configurationsKey, xmlKey, baseDir, customEnvironment) then
+						if i == 0 then
+							configItem.name = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_notInstalled_short")
+							configItem.desc = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_notInstalled")
+						else 
+							configItem.name = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_installed_short")
+							configItem.desc = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_installed")
+						end
+						table.insert(configItems, configItem)
+						dbgprint("addHLMconfig : item added:", 4)
+						dbgprint_r(configItem, 4, 1)
+					end
+					i = i + 1
+				end
+				if #configItems > 0 then
+					defaultConfigurationIds[hlmConfig.name] = ConfigurationUtil.getDefaultConfigIdFromItems(configItems)
+					configurations[hlmConfig.name] = configItems
+					dbgprint("addHLMconfig : configurations", 4)
+					dbgprint_r(configItems, 4, 2)
+				end
+			end
+			
+			headlandManagementConfigFile:delete()
 		end
 
-		configurations["HeadlandManagement"] = {
-        	{
-        		index = 1,
-        		name = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_notInstalled_short"), 
-        		isDefault = true,  
-        		isSelectable = true, 
-        		price = 0, 
-        		dailyUpkeep = 0, 
-        		loadFromSavegameXMLFile = loadFromSavegameXMLFileHLM, 
-        		saveToXMLFile = saveToXMLFileHLM, 
-        		desc = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_notInstalled")
-        	},
-        	{
-        		index = 2,
-        		name = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_installed_short"), 
-        		isDefault = false, 
-        		isSelectable = true, 
-        		price = 3000, 
-        		dailyUpkeep = 0, 
-        		loadFromSavegameXMLFile = loadFromSavegameXMLFileHLM, 
-        		saveToXMLFile = saveToXMLFileHLM, 
-        		desc = g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_installed")
-        	}
-    	}
     	dbgprint("addHLMconfig : Configuration HeadlandManagement added", 2)
     	dbgprint_r(configurations["HeadlandManagement"], 4)
 	end
-	
     return configurations, defaultConfigurationIds
 end
 
@@ -208,8 +222,7 @@ function HeadlandManagement.initSpecialization()
 	local key = HeadlandManagement.MOD_NAME..".HeadlandManagement"
 
 	-- add configuration
-	if g_vehicleConfigurationManager.configurations["HeadlandManagement"] == nil then
-		--local vehicleConfigurationHLM = VehicleConfigurationItem.new(VehicleConfigurationItem)			
+	if g_vehicleConfigurationManager.configurations["HeadlandManagement"] == nil then		
 		g_vehicleConfigurationManager:addConfigurationType("HeadlandManagement", g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_configuration"), key, VehicleConfigurationItem)
 	end
 	ConfigurationUtil.getConfigurationsFromXML = Utils.overwrittenFunction(ConfigurationUtil.getConfigurationsFromXML, addHLMconfig)
@@ -352,7 +365,7 @@ function HeadlandManagement:onLoad(savegame)
 	local spec = self.spec_HeadlandManagement
 	spec.dirtyFlag = self:getNextDirtyFlag()
 	
-	spec.exists = false				-- Headland Management is configured into vehicle
+	spec.exists = spec.exists or false	-- Is Headland Management configured into vehicle?
 	spec.isOn = false				-- Headland Management is switched on
 	
 	spec.timer = 0					-- Timer for waiting actions
@@ -676,7 +689,10 @@ function HeadlandManagement:onPostLoad(savegame)
 	dbgprint("modEVFound is "..tostring(spec.modEVFound).."("..tostring(modEVFound).."/"..tostring(modEVEnabled)..")")
 
 	-- HLM configured?
-	spec.exists = self.configurations["HeadlandManagement"] ~= nil and self.configurations["HeadlandManagement"] > 1
+	print("HLM configured?")
+	dbgprint("onPostLoad : Spec exists (before reload): "..tostring(spec.exists), 2)
+	print_r(self.configurations["HeadlandManagement"], 0)
+	--spec.exists = self.configurations["HeadlandManagement"] ~= nil and self.configurations["HeadlandManagement"] > 1
 	
 	if savegame ~= nil then	
 		dbgprint("onPostLoad : loading saved data", 2)
@@ -740,6 +756,8 @@ function HeadlandManagement:onPostLoad(savegame)
 		dbgprint("onPostLoad : Loaded data for "..self:getName(), 1)
 	end
 	
+	spec.exists = self.configurations["HeadlandManagement"] ~= nil and self.configurations["HeadlandManagement"] > 1
+	dbgprint("onPostLoad : Spec exists (after reload): "..tostring(spec.exists), 2)
 	-- enable HLM in mission vehicles
 	spec.exists = spec.exists or (self.configurations["HeadlandManagement"] ~= nil and self.propertyState == Vehicle.PROPERTY_STATE_MISSION)
 	
@@ -760,8 +778,9 @@ function HeadlandManagement:onPostLoad(savegame)
 	
 	-- Set HLM configuration if set by savegame
 	self.configurations["HeadlandManagement"] = spec.exists and 2 or 1
-	dbgprint("onPostLoad : HLM exists: "..tostring(spec.exists))
-	dbgprint_r(self.configurations, 4, 2)
+	dbgprint("onPostLoad : HLM exists (finally): "..tostring(spec.exists))
+	dbgprint_r(self.configurations, 2, 0)
+	self:raiseDirtyFlags(spec.dirtyFlag)
 end
 
 function HeadlandManagement:saveToXMLFile(xmlFile, key, usedModNames)
