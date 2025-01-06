@@ -612,7 +612,7 @@ local function vehicleMeasurement(self, excludedImplement)
 	else
 		vehicleLength = lengthBackup
 	end
-	vehicleWidth = math.max(vehicleWidthWA ~= 0 and vehicleWidthWA or vehicleWidthShop, vehicleLengthAI)
+	vehicleWidth = math.max(vehicleWidthWA ~= 0 and vehicleWidthWA or vehicleWidthShop, vehicleWidthAI)
 	
 	local rwx, rwy, rwz, vz
 	if frontNode ~= nil then
