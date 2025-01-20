@@ -72,12 +72,14 @@
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="ridgeMarkerTT"/>
 					</BinaryOption>	
 				</GuiElement>
+			<!--
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="emptyBalersSettingTitle" text="$l10n_hlmgui_beep"/>
 					<BinaryOption profile="fs25_settingsBinaryOption" id="emptyBalersSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="emptyBalersSettingTT"/>
 					</BinaryOption>	
 				</GuiElement>
+			-->
 			
 			<!-- Vehicle control -->
 				<Text profile="fs25_settingsSectionHeader" name="sectionHeader" id="vehicleControl"/>

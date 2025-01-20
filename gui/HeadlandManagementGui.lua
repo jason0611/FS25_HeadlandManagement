@@ -161,6 +161,7 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	self.ridgeMarkerSetting:setState(self.spec.useRidgeMarker and 1 or 2)
 	self.ridgeMarkerSetting:setDisabled(raiseState == 5)
 	
+--[[
 	self.emptyBalersSettingTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_emptyBaler"))
 	self.emptyBalersSetting:setTexts({
 		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on"),
@@ -168,7 +169,8 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	})
 	self.emptyBalersSetting:setState(self.spec.stopEmptyBaler and 1 or 2)
 	self.emptyBalersSetting:setDisabled(true)
-	
+--]]
+
 	-- Contour Guidance control
 	self.contourControl:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_contourControl"))
 	
