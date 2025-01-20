@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="94">
 	<author>Glowins Modschmiede</author>
-	<version>2.9.8.2</version>
+	<version>3.R.C.0</version>
 	<contributors>Agrarplay und LU Wohnzimmer, Kynuska, Gonimy-Vetrom, Lactic68, Markus33-ITA, PapaTim68, A-intheCode</contributors >
 
 	<title>
@@ -193,7 +193,7 @@ Ulteriori idee o richieste sono benvenute all'indirizzo https://github.com/jason
 	    
  	</description>	
     <multiplayer supported="true"/>
-	<iconFilename>icon_HeadlandMngt.dds</iconFilename>
+	<iconFilename>icon_HeadlandManagement.dds</iconFilename>
 	<extraSourceFiles>
     	<sourceFile filename="headlandManagementRegister.lua" />
     </extraSourceFiles>
