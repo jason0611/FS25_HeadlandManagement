@@ -509,7 +509,7 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	self.plowTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_plowTT"))
 	self.ptoTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_ptoTT"))
 	self.ridgeMarkerTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_ridgeMarkerTT"))
-	self.emptyBalersSettingTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_emptyBalersSettingTT"))
+	--self.emptyBalersSettingTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_emptyBalersSettingTT"))
 	self.diffLockTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_diffLockTT"))
 	self.csTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_csTT"))
 	self.contourOnOffTT:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_contourOnOffTT"))
@@ -638,7 +638,7 @@ function HeadlandManagementGui:onClickOk()
 	-- ridgemarker
 	self.spec.useRidgeMarker = self.ridgeMarkerSetting:getState() == 1
 	-- stop emptying balers
-	self.spec.stopEmptyBaler = self.emptyBalersSetting:getState() == 1
+	--self.spec.stopEmptyBaler = self.emptyBalersSetting:getState() == 1
 	-- crab steering
 	self.spec.csState = self.crabSteeringSetting:getState()
 	self.spec.useCrabSteering = (self.spec.csState ~= 3)
