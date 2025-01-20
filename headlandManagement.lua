@@ -492,6 +492,10 @@ local function vehicleMeasurement(self, excludedImplement)
 	local frontExists, backExists
 	local lengthBackup, tmpLen = 0, 0
 
+	local vehicleWidthShop = 0
+	local vehicleWidthWA = 0
+	local vehicleWidthAI = self.spec_aiAutomaticSteering ~= nil and self:getAttacherToolWorkingWidth() or 0
+
 	local allImplements = self:getRootVehicle():getChildVehicles()
 	dbgprint("vehicleMeasurement : #allImplements = "..tostring(#allImplements), 2)
 
@@ -502,8 +506,6 @@ local function vehicleMeasurement(self, excludedImplement)
 		if excludedImplement.getChildVehicles ~= nil then excludedChilds = excludedImplement:getChildVehicles() end
 	end
 	
-	local vehicleWidthShop = 0
-	local vehicleWidthWA = 0
 	for _,implement in pairs(allImplements) do
 		if implement ~= nil then 
 			
@@ -610,7 +612,7 @@ local function vehicleMeasurement(self, excludedImplement)
 	else
 		vehicleLength = lengthBackup
 	end
-	vehicleWidth = vehicleWidthWA ~= 0 and vehicleWidthWA or vehicleWidthShop
+	vehicleWidth = math.max(vehicleWidthWA ~= 0 and vehicleWidthWA or vehicleWidthShop, vehicleWidthAI)
 	
 	local rwx, rwy, rwz, vz
 	if frontNode ~= nil then
