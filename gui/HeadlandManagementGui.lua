@@ -7,8 +7,6 @@
 HeadlandManagementGui = {}
 local HeadlandManagementGui_mt = Class(HeadlandManagementGui, YesNoDialog)
 
-dbgprint("HeadlandManagementGui : initializing")
-
 -- constructor
 function HeadlandManagementGui:new()
 	local gui = YesNoDialog:new(nil, HeadlandManagementGui_mt)
@@ -37,10 +35,10 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	self.alarmTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_beep"))
 	self.alarmSetting.onClickCallback = HeadlandManagementGui.logicalCheck
 	self.alarmSetting:setTexts({
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on"),
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off")
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off"),
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on")
 	})
-	self.alarmSetting:setState(self.spec.beep and 1 or 2)
+	self.alarmSetting:setState(self.spec.beep and 2 or 1)
 
 	self.alarmVolumeTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_beepVol"))
 	local values={}
@@ -51,30 +49,32 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	
 	self.inputbindingsTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_keys"))
 	self.inputbindingsSetting:setTexts({
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on"),
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off")
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off"),
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on")
 	})
-	self.inputbindingsSetting:setState(showKeys and 1 or 2)
+	self.inputbindingsSetting:setState(showKeys and 2 or 1)
 
 	-- SpeedControl
 	self.speedControl:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_speedControl"))
 	self.speedControlOnOffTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_speedControl"))
 	self.speedControlOnOffSetting.onClickCallback = HeadlandManagementGui.logicalCheck
 	self.speedControlOnOffSetting:setTexts({
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on"),
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off")
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off"),
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on")
 	})
-	self.speedControlOnOffSetting:setState(self.spec.useSpeedControl and 1 or 2)
+	self.speedControlOnOffSetting:setState(self.spec.useSpeedControl and 2 or 1)
 	
 	self.speedControlUseSCModTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_speedControlMod"))
 	self.speedControlUseSCModSetting.onClickCallback = HeadlandManagementGui.logicalCheck
 	self.speedControlUseSCModSetting:setTexts({
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on"),
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off")
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off"),
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on")
 	})
-	self.speedControlUseSCModSetting:setState((self.spec.useModSpeedControl and (self.spec.modSpeedControlFound or self.spec.modECCFound)) and 1 or 2)
+	self.speedControlUseSCModSetting:setState((self.spec.useModSpeedControl and (self.spec.modSpeedControlFound or self.spec.modECCFound)) and 2 or 1)
 	self.speedControlUseSCModSetting:setDisabled(not self.spec.useSpeedControl or (not self.spec.modSpeedControlFound and not self.spec.modECCFound))
-	--self.speedControlUseSCModSetting:setVisible(self.spec.modSpeedControlFound or self.spec.modECCFound)
+	self.speedControlUseSCModTitle:setVisible(self.spec.modSpeedControlFound or self.spec.modECCFound)
+	self.speedControlUseSCModSetting:setVisible(self.spec.modSpeedControlFound or self.spec.modECCFound)
+	self.speedControlModTT:setVisible(self.spec.modSpeedControlFound or self.spec.modECCFound)
 	
 	self.speedControlTurnSpeedTitle1:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_speedSetting"))
 	local speedTable = {} --create speedTable with -10..-1,1..40
@@ -104,7 +104,9 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	self.speedControlTurnSpeedSetting2:setTexts({"1","2","3"})
 	self.speedControlTurnSpeedSetting2:setState(self.spec.useModSpeedControl and self.spec.turnSpeed or 1)
 	self.speedControlTurnSpeedSetting2:setDisabled(disableSpeedcontrolMod) -- or (not self.spec.modSpeedControlFound and not self.spec.modECCFound))
-	--self.speedControlTurnSpeedSetting2:setVisible(self.spec.modSpeedControlFound or self.spec.modECCFound)
+	self.speedControlTurnSpeedTitle2:setVisible(self.spec.modSpeedControlFound or self.spec.modECCFound)
+	self.speedControlTurnSpeedSetting2:setVisible(self.spec.modSpeedControlFound or self.spec.modECCFound)
+	self.speedControlModSettingTT:setVisible(self.spec.modSpeedControlFound or self.spec.modECCFound)
 	
 	-- Implement control
 	self.implementControl:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_implementControl"))
@@ -155,10 +157,10 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	self.ridgeMarkerTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_ridgeMarker"))
 	self.ridgeMarkerSetting.onClickCallback = HeadlandManagementGui.logicalCheck
 	self.ridgeMarkerSetting:setTexts({
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on"),
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off")
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off"),
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on")
 	})
-	self.ridgeMarkerSetting:setState(self.spec.useRidgeMarker and 1 or 2)
+	self.ridgeMarkerSetting:setState(self.spec.useRidgeMarker and raiseState ~= 5 and 2 or 1)
 	self.ridgeMarkerSetting:setDisabled(raiseState == 5)
 	
 --[[
@@ -193,11 +195,11 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	self.contourFrontTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_contourFront"))
 	self.contourFrontSetting.onClickCallback = HeadlandManagementGui.logicalCheck
 	self.contourFrontSetting:setTexts({
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on"),
 		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off"),
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on"),
 	})
 	self.contourFrontSetting:setDisabled(contourOnOffSetting == 1 or self.spec.contourWorkedArea)
-	self.contourFrontSetting:setState((self.spec.contourFrontActive or self.spec.contourWorkedArea) and 1 or 2)
+	self.contourFrontSetting:setState((contourOnOffSetting ~= 1 and (self.spec.contourFrontActive or self.spec.contourWorkedArea)) and 2 or 1)
 	
 	self.contourWorkedAreaTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_contourWorkedArea"))
 	self.contourWorkedAreaSetting.onClickCallback = HeadlandManagementGui.logicalCheck
@@ -251,21 +253,22 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	self.contourWidthChangeSettingTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_contourWidthChangeSetting"))
 	self.contourWidthChangeSettingTitle.onClickCallback = HeadlandManagementGui.logicalCheck
 	self.contourWidthChangeSetting:setTexts({
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on"),
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off")
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off"),
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on")
 	})
-	self.contourWidthChangeSetting:setDisabled(contourOnOffSetting == 1 or widthMode == 1 or self.spec.contourWorkedArea)
-	self.contourWidthChangeSetting:setState(self.spec.contourWidthAdaption and not self.spec.contourWorkedArea and 1 or 2)
+	local contourWidthChangeDisabled = contourOnOffSetting == 1 or widthMode == 1 or self.spec.contourWorkedArea
+	self.contourWidthChangeSetting:setDisabled(contourWidthChangeDisabled)
+	self.contourWidthChangeSetting:setState(not contourWidthChangeDisabled and self.spec.contourWidthAdaption and not self.spec.contourWorkedArea and 2 or 1)
 		
 	-- GPS control
 	self.gpsControl:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gpsControl"))
 	self.gpsOnOffTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gpsSetting"))
 	self.gpsOnOffSetting.onClickCallback = HeadlandManagementGui.logicalCheck
 	self.gpsOnOffSetting:setTexts({
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on"),
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off")
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off"),
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on")
 	})
-	self.gpsOnOffSetting:setState(self.spec.useGPS and 1 or 2)
+	self.gpsOnOffSetting:setState(self.spec.useGPS and 2 or 1)
 		
 	self.gpsSettingTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gpsType"))
 	self.gpsSetting.onClickCallback = HeadlandManagementGui.logicalCheck
@@ -380,12 +383,15 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	-- VCA direction switching
 	self.gpsDisableDirSwitchTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_vcaDirSwitch"))
 	self.gpsEnableDirSwitchSetting:setTexts({
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on"),
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off")
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off"),
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on")
 	})
-	self.gpsEnableDirSwitchSetting:setState(self.spec.vcaDirSwitch and 1 or 2)
-	self.gpsEnableDirSwitchSetting:setDisabled(not self.spec.modVCAFound or lastGPSSetting < 4 or lastGPSSetting >= 6)
-	--self.gpsEnableDirSwitchSetting:setVisible(self.spec.modVCAFound)
+	local disableDirSwitchSetting = not self.spec.modVCAFound or lastGPSSetting < 4 or lastGPSSetting >= 6
+	self.gpsEnableDirSwitchSetting:setState(not disableDirSwitchSetting and self.spec.vcaDirSwitch and 2 or 1)
+	self.gpsEnableDirSwitchSetting:setDisabled(disableDirSwitchSetting)
+	self.gpsDisableDirSwitchTitle:setVisible(self.spec.modVCAFound)
+	self.gpsEnableDirSwitchSetting:setVisible(self.spec.modVCAFound)
+	self.gpsDirSwitchTT:setVisible(self.spec.modVCAFound)
 	
 	-- Headland automatic
 	self.gpsAutoTrigger:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gpsAutoTriggerSetting"))
@@ -447,11 +453,12 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	
 	self.gpsResumeTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_autoResume"))
 	self.gpsResumeSetting:setTexts({
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on"),
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off")
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off"),
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on")
 	})
-	self.gpsResumeSetting:setState(self.spec.autoResume and 1 or 2)
-	self.gpsResumeSetting:setDisabled((not self.spec.modGuidanceSteeringFound and triggerSetting == 3) or triggerSetting == 4 or self.spec.useEVTrigger)
+	local resumeSettingDisabled = (not self.spec.modGuidanceSteeringFound and triggerSetting == 3) or triggerSetting == 4 or self.spec.useEVTrigger
+	self.gpsResumeSetting:setState(not resumeSettingDisabled and self.spec.autoResume and 2 or 1)
+	self.gpsResumeSetting:setDisabled(resumeSettingDisabled)
 	
 	-- Vehicle control
 	self.vehicleControl:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_vehicleControl"))
@@ -459,11 +466,12 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	-- Diff control
 	self.diffControlOnOffTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_diffLock"))
 	self.diffControlOnOffSetting:setTexts({
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on"),
-		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off")
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off"),
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on")
 	})
-	self.diffControlOnOffSetting:setState(self.spec.useDiffLock and 1 or 2)
-	self.diffControlOnOffSetting:setDisabled(not self.spec.modVCAFound and not self.spec.modEVFound)
+	local diffControlOnOffSettingDisabled = not self.spec.modVCAFound and not self.spec.modEVFound
+	self.diffControlOnOffSetting:setState(not diffControlOnOffSettingDisabled and self.spec.useDiffLock and 2 or 1)
+	self.diffControlOnOffSetting:setDisabled(diffControlOnOffSettingDisabled)
 	--self.diffControlOnOffSetting:setVisible(self.spec.modVCAFound or self.spec.modEVFound)
 	
 	-- CrabSteering control
@@ -539,19 +547,22 @@ end
 function HeadlandManagementGui:logicalCheck()
 	dbgprint("HeadlandManagementGui: logicalCheck", 3)
 	
-	local useBeep = self.alarmSetting:getState() == 1
+	local useBeep = self.alarmSetting:getState() == 2
 	self.alarmVolumeSetting:setDisabled(not useBeep)
 	
-	local useSpeedControl = self.speedControlOnOffSetting:getState() == 1
+	local useSpeedControl = self.speedControlOnOffSetting:getState() == 2
 	self.speedControlUseSCModSetting:setDisabled(not useSpeedControl or (not self.spec.modSpeedControlFound and not self.spec.modECCFound)) 
 	
-	local useModSpeedControl = self.speedControlUseSCModSetting:getState() == 1
+	local useModSpeedControl = self.speedControlUseSCModSetting:getState() == 2
 	self.speedControlTurnSpeedSetting1:setDisabled(useModSpeedControl or not useSpeedControl)
 	self.speedControlTurnSpeedSetting2:setDisabled(not useModSpeedControl or (not self.spec.modSpeedControlFound and not self.spec.modECCFound) or not useSpeedControl)
 	
 	local useRaiseImplement = self.raiseSetting:getState() ~= 5	
 	self.turnPlowSetting:setDisabled(not useRaiseImplement)
 	self.ridgeMarkerSetting:setDisabled(not useRaiseImplement)
+	if not useRaiseImplement then
+		self.ridgeMarkerSetting:setState(1)
+	end
 	
 	local contourOnOffSetting = self.contourOnOffSetting:getState()
 	local contourFrontSetting = self.contourFrontSetting:getState()
@@ -567,7 +578,7 @@ function HeadlandManagementGui:logicalCheck()
 	self.contourWidthChangeSetting:setDisabled(contourOnOffSetting == 1 or widthSetting == 1 or contourWorkedAreaSetting == 2)
 	self.contourWidthChangeSetting:setState(contourWorkedAreaSetting == 2 and 2 or widthChangeSetting)
 
-	local useGPS = self.gpsOnOffSetting:getState() == 1
+	local useGPS = self.gpsOnOffSetting:getState() == 2
 	local triggerSetting = self.gpsAutoTriggerSetting:getState()
 	--local useEVTrigger = (triggerSetting == 3 and not self.spec.modGuidanceSteeringFound) or (triggerSetting == 4 and self.spec.modGuidanceSteeringFound)
 	--self.gpsOnOffSetting:setDisabled(not self.spec.modGuidanceSteeringFound and not self.spec.modVCAFound and not self.spec.modEVFound or useEVTrigger)
@@ -609,8 +620,8 @@ function HeadlandManagementGui:onClickOk()
 	dbgprint("onClickOk", 3)
 	
 	-- speed control
-	self.spec.useSpeedControl = self.speedControlOnOffSetting:getState() == 1
-	self.spec.useModSpeedControl = self.speedControlUseSCModSetting:getState() == 1
+	self.spec.useSpeedControl = self.speedControlOnOffSetting:getState() == 2
+	self.spec.useModSpeedControl = self.speedControlUseSCModSetting:getState() == 2
 	if self.spec.useModSpeedControl then
 		self.spec.turnSpeed = self.speedControlTurnSpeedSetting2:getState()
 	else 
@@ -636,7 +647,7 @@ function HeadlandManagementGui:onClickOk()
 	self.spec.useTurnPlow = (plowState < 3)
 	self.spec.useCenterPlow = (plowState == 2)
 	-- ridgemarker
-	self.spec.useRidgeMarker = self.ridgeMarkerSetting:getState() == 1
+	self.spec.useRidgeMarker = self.ridgeMarkerSetting:getState() == 2
 	-- stop emptying balers
 	--self.spec.stopEmptyBaler = self.emptyBalersSetting:getState() == 1
 	-- crab steering
@@ -662,7 +673,7 @@ function HeadlandManagementGui:onClickOk()
 		self.spec.contour = 1
 	end
 	
-	self.spec.contourFrontActive = self.contourFrontSetting:getState() == 1
+	self.spec.contourFrontActive = self.contourFrontSetting:getState() == 2
 	self.spec.contourWorkedArea = self.contourWorkedAreaSetting:getState() == 2
 	
 	local widthMode = self.contourWidthSetting:getState()
@@ -704,7 +715,7 @@ function HeadlandManagementGui:onClickOk()
 	end		
 	self.spec.contourWidthAdaption = self.contourWidthChangeSetting:getState() == 1
 	-- gps
-	self.spec.useGPS = self.gpsOnOffSetting:getState() == 1
+	self.spec.useGPS = self.gpsOnOffSetting:getState() == 2
 	local gpsSetting = self.gpsSetting:getState()
 	-- 1: auto-mode, 2: gs-mode, 3: vca-mode, 4: vca-turn-left, 5: vca-turn-right, 6: ev-mode, 7: ev-mode with auto-turn
 	self.spec.gpsSetting = 1
@@ -757,18 +768,18 @@ function HeadlandManagementGui:onClickOk()
 		self.spec.useHLMTriggerB = false
 		--self.spec.useEVTrigger = false
 	end
-	-- VCA dir siwtch
-	self.spec.vcaDirSwitch = self.gpsEnableDirSwitchSetting:getState() == 1
+	-- VCA dir switch
+	self.spec.vcaDirSwitch = self.gpsEnableDirSwitchSetting:getState() == 2
 	-- Autoresume
-	self.spec.autoResume = self.gpsResumeSetting:getState() == 1
+	self.spec.autoResume = self.gpsResumeSetting:getState() == 2
 	self.spec.autoResumeOnTrigger = self.spec.autoResume and (self.spec.useHLMTriggerF or self.spec.useHLMTriggerB)
 	-- diffs
-	self.spec.useDiffLock = self.diffControlOnOffSetting:getState() == 1
+	self.spec.useDiffLock = self.diffControlOnOffSetting:getState() == 2
 	-- beep
-	self.spec.beep = self.alarmSetting:getState() == 1
+	self.spec.beep = self.alarmSetting:getState() == 2
 	self.spec.beepVol = self.alarmVolumeSetting:getState()
 	-- showKeys
-	local showKeys = self.inputbindingsSetting:getState() == 1
+	local showKeys = self.inputbindingsSetting:getState() == 2
 	-- debug
 --[[	
 	local debug = self.debugSetting:getState() == 1
