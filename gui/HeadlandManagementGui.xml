@@ -132,11 +132,11 @@
 				</GuiElement>
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="contourWidthSettingInputTitle"/>
-					<TextInput profile="fs25_settingsTextInput" id="contourWidthSettingInput" textSize="18px" imeKeyboardType="normal">
-						<Text   profile="fs25_multiTextOptionTooltip" id="contourWidthSettingInputTT"/>
-						<Bitmap profile="fs25_textInputBg"/>
+					<TextInput profile="fs25_settingsTextInput" position="-30px +0px" id="contourWidthSettingInput" textSize="18px" imeKeyboardType="normal">
+						<Text   profile="fs25_multiTextOptionTooltip" position="670px +0px" id="contourWidthSettingInputTT"/>
+						<Bitmap profile="fs25_textInputBg" position="-10px +0px"/>
 					</TextInput>
-				</GuiElement>
+				</GuiElement>	
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="contourWidthChangeSettingTitle" text="$l10n_hlmgui_beep"/>
 					<BinaryOption profile="fs25_settingsBinaryOption" id="contourWidthChangeSetting">
