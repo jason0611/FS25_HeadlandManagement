@@ -121,7 +121,8 @@
 			<text name="hlmgui_contourSettingTT" text="Determina da quale lato deve essere seguito il bordo del campo. In questo caso, la pagina può essere cambiata ad ogni passaggio alla modalità a fine campo, oppure viene mantenuta."/>
 			<text name="hlmgui_contourWidthSettingTT" text="La distanza dal bordo campo può essere mantenuta o fissata."/>
 			<text name="hlmgui_contourWidthChangeSettingTT" text="Se lo si desidera, la distanza dal bordo del campo può essere ampliata di una larghezza di veicolo ogni volta che il veicolo passa alla modalità capezzagna."/>
-
+			<text name="hlmgui_contourWidthSettingInputTT" text="Distanza dal bordo del campo"/>
+			
 			<text name="hlmgui_ridgeMarkerTT" text="Quando lo sollevi, il marker può essere spostato sul lato opposto."/>
 			
 			<text name="hlmgui_emptyBalersSettingTT" text="Interrompe lo scarico automatico a fine campo durante la pressatura."/>

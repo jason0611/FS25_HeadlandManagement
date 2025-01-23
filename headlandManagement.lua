@@ -109,6 +109,7 @@ function addHLMconfig(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvi
 		or	category == "POTATOHARVESTING"
 		or	category == "COTTONHARVESTERS"
 		or	category == "SPRAYERVEHICLES"
+		or	category == "SPRAYERS"
 		or  category == "SLURRYTANKS"
 		or	category == "MISCDRIVABLES"
 		or	category == "GRAPEHARVESTERS"

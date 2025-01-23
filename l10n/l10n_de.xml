@@ -123,6 +123,7 @@
 		<text name="hlmgui_contourSettingTT" text="Legt fest, auf welcher Seite dem Feldrand gefolgt werden soll. Hierbei kann wahlweise mit jedem Wechsel in den Vorgewendemodus die Seite umgeschaltet werden, oder sie wird beibehalten."/>
 		<text name="hlmgui_contourWidthSettingTT" text="Der Abstand zum Feldrand kann entweder beibehalten werden, oder er wird fest eingestellt."/>
 		<text name="hlmgui_contourWidthChangeSettingTT" text="Auf Wunsch kann der Abstand zum Feldrand bei jedem Wechsel in den Vorgewendemodus um eine Fahrzeugbreite verbreitert werden."/>
+		<text name="hlmgui_contourWidthSettingInputTT" text="Abstand zum Feldrand"/>
 		
 		<text name="hlmgui_gpsTT" text="Im Vorgewende wird die GPS-Spurführung pausiert und anschließend fortgesetzt."/>
 		<text name="hlmgui_gpsTypeTT" text="Die Funktion kann auf Guidance Steering oder VCA eingeschränkt werden, oder automatisch das jeweils gerade aktive System pausieren."/>
