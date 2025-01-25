@@ -172,9 +172,9 @@
 				
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="gpsAutoTriggerTitle" text="$l10n_hlmgui_beep"/>
-					<BinaryOption profile="fs25_settingsBinaryOption" id="gpsAutoTriggerSetting">
+					<MultiTextOption profile="fs25_settingsMultiTextOption" id="gpsAutoTriggerSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="gpsAutoTriggerTT"/>
-					</BinaryOption>	
+					</MultiTextOption>	
 				</GuiElement>
 				<GuiElement profile="fs25_multiTextOptionContainer">
 					<Text profile="multiTextOptionSettingsTitle" id="gpsAutoTriggerOffsetTitle" text="$l10n_hlmgui_beep"/>
