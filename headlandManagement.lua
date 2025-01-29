@@ -1406,7 +1406,7 @@ end
 local function isOnField(node, x, z, onUnWorkedField, workedArea)
 	--local nx, _, nz = getWorldTranslation(node)
 	if (x == nil) or (z == nil) then 
-		print("warning: coordinates had to be calculated!")
+		dbgprint("isOnField: coordinates had to be calculated!", 1)
 		x, _, z = getWorldTranslation(node) end
 	local onField, _, terrain = FSDensityMapUtil.getFieldDataAtWorldPosition(x, 0, z)
 	if onUnWorkedField then
