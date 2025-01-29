@@ -692,9 +692,7 @@ function HeadlandManagement:onPostLoad(savegame)
 	dbgprint("modEVFound is "..tostring(spec.modEVFound).."("..tostring(modEVFound).."/"..tostring(modEVEnabled)..")")
 
 	-- HLM configured?
-	print("HLM configured?")
 	dbgprint("onPostLoad : Spec exists (before reload): "..tostring(spec.exists), 2)
-	print_r(self.configurations["HeadlandManagement"], 0)
 	--spec.exists = self.configurations["HeadlandManagement"] ~= nil and self.configurations["HeadlandManagement"] > 1
 	
 	if savegame ~= nil then	
