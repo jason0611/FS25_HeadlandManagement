@@ -2133,12 +2133,13 @@ function HeadlandManagement.waitOnTrigger(self, automatic)
 			spec.triggerPos.x, spec.triggerPos.y, spec.triggerPos.z = getWorldTranslation(spec.triggerNode)
 		end
 		
-		local triggerFlag = DebugFlag.new(1,0,0)
-		local measureFlag = DebugFlag.new(0,1,0)
+		local triggerFlag 
+		local measureFlag
 		
 		local tx, _, tz = worldToLocal(self.rootNode, spec.triggerPos.x, 0, spec.triggerPos.z)
 		
 		if spec.debugFlag then
+			triggerFlag = DebugFlag.new(1,0,0)
 			triggerFlag:create(spec.triggerPos.x, spec.triggerPos.y, spec.triggerPos.z, tx * 0.3, tz * 0.3)
 			triggerFlag:draw()
 		end
@@ -2147,6 +2148,7 @@ function HeadlandManagement.waitOnTrigger(self, automatic)
 		local mx, _, mz = worldToLocal(self.rootNode, wx, 0, wz)
 		
 		if spec.debugFlag then
+			measureFlag = DebugFlag.new(0,1,0)
 			measureFlag:create(wx, wy, wz, mx * 0.3, mz * 0.3)
 			measureFlag:draw()
 		end
