@@ -225,22 +225,22 @@
 				</GuiElement>
 	
 				<!-- Debug -->
-<!--
+
 				<Text profile="fs25_settingsSectionHeader" id="debug"/>
 				
 				<GuiElement profile="fs25_multiTextOptionContainer">
-					<Text profile="multiTextOptionSettingsTitle" id="debugTitle" text="$l10n_hlmgui_beep"/>
+					<Text profile="multiTextOptionSettingsTitle" id="debugTitle" text="$hlmgui_debugTitle"/>
 					<MultiTextOption profile="fs25_settingsMultiTextOption" id="debugSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="debugTT"/>
 					</MultiTextOption>	
 				</GuiElement>
 				<GuiElement profile="fs25_multiTextOptionContainer">
-					<Text profile="multiTextOptionSettingsTitle" id="debugFlagTitle" text="$l10n_hlmgui_beep"/>
+					<Text profile="multiTextOptionSettingsTitle" id="debugFlagTitle" text="$hlmgui_debugFlagTitle"/>
 					<MultiTextOption profile="fs25_settingsMultiTextOption" id="debugFlagSetting">
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="debugFlagTT"/>
 					</MultiTextOption>	
 				</GuiElement>
--->
+
 				<Text profile="dialogHeaderText"/>
 			</ScrollingLayout>
 			

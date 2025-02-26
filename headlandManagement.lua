@@ -436,10 +436,10 @@ function HeadlandManagement:onLoad(savegame)
 	spec.modEVFound = false
 	spec.useEVTrigger = false
 	
-	spec.modSpeedControlFound = false	-- does mod 'FS25_zzzSpeedControl' exist?
-	spec.useModSpeedControl = false	-- use mod 'FS25_xxxSpeedControl'
+	spec.modSpeedControlFound = false			-- does mod 'FS25_zzzSpeedControl' exist?
+	spec.useModSpeedControl = false				-- use mod 'FS25_xxxSpeedControl'
 	
-	spec.modECCFound = false		-- does mod 'FS25_extendedCruiseControl' exist?
+	spec.modECCFound = false					-- does mod 'FS25_extendedCruiseControl' exist?
 	spec.useModECC = false
 	
 	spec.useDiffLock = true
@@ -465,7 +465,7 @@ function HeadlandManagement:onLoad(savegame)
 	spec.contourShowLines = true
 	spec.workedArea = -1
 	
-	spec.debugFlag = false			-- shows green flag for triggerNode and red flag for vehicle's measure node
+	spec.debugFlag = false						-- shows green flag for triggerNode and red flag for vehicle's measure node
 	
 	HeadlandManagement:loadContourSettings()
 end
@@ -752,9 +752,9 @@ function HeadlandManagement:onPostLoad(savegame)
 				spec.contourWidth = spec.contourWidthManualInput * spec.contourTrack
 			end
 			
-			dbgprint("onPostLoad : Loaded whole data set using key "..key, 1)
+			dbgprint("onPostLoad : Loaded whole data set for "..self:getName().." using key "..key, 1)
 		end
-		dbgprint("onPostLoad : Loaded data for "..self:getName(), 1)
+		dbgprint("onPostLoad : Loaded short data for "..self:getName().." using key "..key, 1)
 	end
 	
 	spec.exists = self.configurations["HeadlandManagement"] ~= nil and self.configurations["HeadlandManagement"] > 1
@@ -2082,8 +2082,8 @@ function HeadlandManagement:onDraw(dt)
 		
 		-- debug: show frontnode and backnode
 		if HeadlandManagement.debug then
-			ShowNodeF = DebugCube.new()
-			ShowNodeB = DebugCube.new()
+			ShowNodeF = DebugBox.new()
+			ShowNodeB = DebugBox.new()
 			if spec.frontNode ~= nil then 
 				ShowNodeF:createWithNode(spec.frontNode, 0.3, 0.3, 0.3) 
 				ShowNodeF:draw()
@@ -2139,18 +2139,20 @@ function HeadlandManagement.waitOnTrigger(self, automatic)
 		local tx, _, tz = worldToLocal(self.rootNode, spec.triggerPos.x, 0, spec.triggerPos.z)
 		
 		if spec.debugFlag then
-			triggerFlag = DebugFlag.new(1,0,0)
-			triggerFlag:create(spec.triggerPos.x, spec.triggerPos.y, spec.triggerPos.z, tx * 0.3, tz * 0.3)
-			triggerFlag:draw()
+			triggerFlag = DebugFlag.new()
+			triggerFlag:setColorRGBA(1,0,0,1)
+			triggerFlag:create(spec.triggerPos.x, spec.triggerPos.y, spec.triggerPos.z, tx * 0.3, tz * 0.3):setText("Trigger")
+			g_debugManager:addElement(triggerFlag, "HLM_T", nil, 1)
 		end
 	
 		local  wx, wy, wz = getWorldTranslation(spec.measureNode)
 		local mx, _, mz = worldToLocal(self.rootNode, wx, 0, wz)
 		
 		if spec.debugFlag then
-			measureFlag = DebugFlag.new(0,1,0)
-			measureFlag:create(wx, wy, wz, mx * 0.3, mz * 0.3)
-			measureFlag:draw()
+			measureFlag = DebugFlag.new()
+			measureFlag:setColorRGBA(0,1,0,1)
+			measureFlag:create(wx, wy, wz, mx * 0.3, mz * 0.3):setText("Vehicle")
+			g_debugManager:addElement(measureFlag, "HLM_M", nil, 1)
 		end
 		
 		local dist = math.abs(tz - mz)
