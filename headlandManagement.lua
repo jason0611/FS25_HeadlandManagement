@@ -103,6 +103,7 @@ function addHLMconfig(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvi
 		(	category == "TRACTORSS" 
 		or	category == "TRACTORSM"
 		or	category == "TRACTORSL"
+		or	category == "NEXAT"
 		or	category == "HARVESTERS"
 		or	category == "FORAGEHARVESTERS"
 		or	category == "BEETHARVESTERS"
