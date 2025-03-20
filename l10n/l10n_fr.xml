@@ -125,7 +125,8 @@
 		<text name="hlmgui_contourSettingTT" text="Détermine de quel côté le bord du champ doit être suivi. Il est possible de changer de page ou de la conserver à chaque passage en mode de tournière"/>.
 		<text name="hlmgui_contourWidthSettingTT" text="La distance par rapport au bord du champ peut soit être conservée, soit être fixe."/>
 		<text name="hlmgui_contourWidthChangeSettingTT" text="Si vous le souhaitez, la distance par rapport au bord du champ peut être élargie d'une largeur de véhicule à chaque passage en mode bout de champ."/>
-
+		<text name="hlmgui_contourWidthSettingInputTT" text="Distance par rapport au bord"/>
+		
 		<text name="hlmgui_gpsTT" text="Dans les fourrières, le guidage GPS est mis en pause, puis repris."/>
 		<text name="hlmgui_gpsTypeTT" text="La fonction peut être limitée à Guidance Steering ou VCA, ou mettre automatiquement en pause le système actuellement actif."/>
 		<text name="hlmgui_gpsAutoTriggerTT" text="En combinaison avec Guidance Steering, la gestion des fourrières peut être activée automatiquement lorsque la fourrière est atteinte."/>

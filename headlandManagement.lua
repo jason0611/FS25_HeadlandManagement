@@ -18,7 +18,7 @@ if HeadlandManagement.MOD_PATH == nil then HeadlandManagement.MOD_PATH = g_curre
 HeadlandManagement.MODSETTINGSDIR = g_currentModSettingsDirectory
 
 source(g_currentModDirectory.."tools/gmsDebug.lua")
-GMSDebug:init(HeadlandManagement.MOD_NAME, true, 1)
+GMSDebug:init(HeadlandManagement.MOD_NAME, true, 2)
 GMSDebug:enableConsoleCommands("hlmDebug")
 
 source(g_currentModDirectory.."gui/HeadlandManagementGui.lua")
@@ -91,8 +91,27 @@ HeadlandManagement.kbSC = true
 HeadlandManagement.kbEV = false
 HeadlandManagement.kbECC = false
 
+-- Overwritten functions
+
+-- fix event-calls to have always the same seqence
+function HeadlandManagement.raiseConfigurationItemEvent(object, superfunc, eventName)
+	local configNameSorted = {}
+    for configName, configId in pairs(object.configurations) do
+		table.insert(configNameSorted, configName)
+	end
+	table.sort(configNameSorted)
+	for index, configName in ipairs(configNameSorted) do
+		local configId = object.configurations[configName]
+        local configItem = ConfigurationUtil.getConfigItemByConfigId(object.configFileName, configName, configId)
+        if configItem ~= nil and configItem[eventName] ~= nil then
+            configItem[eventName](configItem, object, configId)
+        end
+    end
+end
+ConfigurationUtil.raiseConfigurationItemEvent = Utils.overwrittenFunction(ConfigurationUtil.raiseConfigurationItemEvent, HeadlandManagement.raiseConfigurationItemEvent)
+
 --create configuration
-function addHLMconfig(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvironment, isMod, storeItem)
+function HeadlandManagement.getConfigurationsFromXML(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvironment, isMod, storeItem)
     dbgprint("addHLMconfig : parameters: xmlFile = "..tostring(xmlFile).." / baseXMLName = "..tostring(baseXMLName).." / baseDir = "..tostring(baseDir).." / customEnvironment = "..tostring(customEnvironment).." / isMod = "..tostring(isMod).." / storeItem = "..tostring(storeItem), 2)
     
     local configurations, defaultConfigurationIds = superfunc(self, xmlFile, baseXMLName, baseDir, customEnvironment, isMod, storeItem)
@@ -103,12 +122,14 @@ function addHLMconfig(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvi
 		(	category == "TRACTORSS" 
 		or	category == "TRACTORSM"
 		or	category == "TRACTORSL"
+		or	category == "NEXAT"
 		or	category == "HARVESTERS"
 		or	category == "FORAGEHARVESTERS"
 		or	category == "BEETHARVESTERS"
 		or	category == "POTATOHARVESTING"
 		or	category == "COTTONHARVESTERS"
 		or	category == "SPRAYERVEHICLES"
+		or	category == "SPRAYERS"
 		or  category == "SLURRYTANKS"
 		or	category == "MISCDRIVABLES"
 		or	category == "GRAPEHARVESTERS"
@@ -160,7 +181,7 @@ function addHLMconfig(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvi
 		
 		if headlandManagementConfigFile ~= nil then
 			local allConfigs = self:getConfigurations()
-			local hlmConfig = allConfigs["HeadlandManagement"]
+			local hlmConfig = allConfigs["headlandManagement"]
 			
 			dbgprint("addHLMconfig : loading config from xml", 2)
 			dbgprint_r(hlmConfig, 4, 1)
@@ -205,10 +226,12 @@ function addHLMconfig(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvi
 		end
 
     	dbgprint("addHLMconfig : Configuration HeadlandManagement added", 2)
-    	dbgprint_r(configurations["HeadlandManagement"], 4)
+    	dbgprint_r(configurations["headlandManagement"], 4)
 	end
     return configurations, defaultConfigurationIds
 end
+ConfigurationUtil.getConfigurationsFromXML = Utils.overwrittenFunction(ConfigurationUtil.getConfigurationsFromXML, HeadlandManagement.getConfigurationsFromXML)
+
 
 -- Standards / Basics
 
@@ -218,20 +241,12 @@ end
 
 function HeadlandManagement.initSpecialization()
 	dbgprint("initSpecialization : start", 2)
-	
-	local key = HeadlandManagement.MOD_NAME..".HeadlandManagement"
 
-	-- add configuration
-	if g_vehicleConfigurationManager.configurations["HeadlandManagement"] == nil then		
-		g_vehicleConfigurationManager:addConfigurationType("HeadlandManagement", g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("text_HLM_configuration"), key, VehicleConfigurationItem)
-	end
-	ConfigurationUtil.getConfigurationsFromXML = Utils.overwrittenFunction(ConfigurationUtil.getConfigurationsFromXML, addHLMconfig)
-	dbgprint("initSpecialization : Configuration initialized", 1)
-	
     local schemaSavegame = Vehicle.xmlSchemaSavegame
 	dbgprint("initSpecialization : starting xmlSchemaSavegame registration process", 1)
 	
 	-- register schema
+	local key = HeadlandManagement.MOD_NAME..".HeadlandManagement"
 	schemaSavegame:register(XMLValueType.BOOL, "vehicles.vehicle(?)."..key..".configured", "HLM configured", false)
 	schemaSavegame:register(XMLValueType.BOOL, "vehicles.vehicle(?)."..key..".isOn", "HLM is turned on", false)
 
@@ -435,10 +450,10 @@ function HeadlandManagement:onLoad(savegame)
 	spec.modEVFound = false
 	spec.useEVTrigger = false
 	
-	spec.modSpeedControlFound = false	-- does mod 'FS25_zzzSpeedControl' exist?
-	spec.useModSpeedControl = false	-- use mod 'FS25_xxxSpeedControl'
+	spec.modSpeedControlFound = false			-- does mod 'FS25_zzzSpeedControl' exist?
+	spec.useModSpeedControl = false				-- use mod 'FS25_xxxSpeedControl'
 	
-	spec.modECCFound = false		-- does mod 'FS25_extendedCruiseControl' exist?
+	spec.modECCFound = false					-- does mod 'FS25_extendedCruiseControl' exist?
 	spec.useModECC = false
 	
 	spec.useDiffLock = true
@@ -464,7 +479,7 @@ function HeadlandManagement:onLoad(savegame)
 	spec.contourShowLines = true
 	spec.workedArea = -1
 	
-	spec.debugFlag = false			-- shows green flag for triggerNode and red flag for vehicle's measure node
+	spec.debugFlag = false						-- shows green flag for triggerNode and red flag for vehicle's measure node
 	
 	HeadlandManagement:loadContourSettings()
 end
@@ -691,10 +706,8 @@ function HeadlandManagement:onPostLoad(savegame)
 	dbgprint("modEVFound is "..tostring(spec.modEVFound).."("..tostring(modEVFound).."/"..tostring(modEVEnabled)..")")
 
 	-- HLM configured?
-	print("HLM configured?")
 	dbgprint("onPostLoad : Spec exists (before reload): "..tostring(spec.exists), 2)
-	print_r(self.configurations["HeadlandManagement"], 0)
-	--spec.exists = self.configurations["HeadlandManagement"] ~= nil and self.configurations["HeadlandManagement"] > 1
+	--spec.exists = self.configurations["headlandManagement"] ~= nil and self.configurations["headlandManagement"] > 1
 	
 	if savegame ~= nil then	
 		dbgprint("onPostLoad : loading saved data", 2)
@@ -753,15 +766,15 @@ function HeadlandManagement:onPostLoad(savegame)
 				spec.contourWidth = spec.contourWidthManualInput * spec.contourTrack
 			end
 			
-			dbgprint("onPostLoad : Loaded whole data set using key "..key, 1)
+			dbgprint("onPostLoad : Loaded whole data set for "..self:getName().." using key "..key, 1)
 		end
-		dbgprint("onPostLoad : Loaded data for "..self:getName(), 1)
+		dbgprint("onPostLoad : Loaded short data for "..self:getName().." using key "..key, 1)
 	end
 	
-	spec.exists = self.configurations["HeadlandManagement"] ~= nil and self.configurations["HeadlandManagement"] > 1
+	spec.exists = self.configurations["headlandManagement"] ~= nil and self.configurations["headlandManagement"] > 1
 	dbgprint("onPostLoad : Spec exists (after reload): "..tostring(spec.exists), 2)
 	-- enable HLM in mission vehicles
-	spec.exists = spec.exists or (self.configurations["HeadlandManagement"] ~= nil and self.propertyState == Vehicle.PROPERTY_STATE_MISSION)
+	spec.exists = spec.exists or (self.configurations["headlandManagement"] ~= nil and self.propertyState == Vehicle.PROPERTY_STATE_MISSION)
 	
 	if spec.gpsSetting == 2 and not spec.modGuidanceSteeringFound then spec.gpsSetting = 1 end
 	if spec.gpsSetting > 2 and spec.gpsSetting < 6 and not spec.modVCAFound then spec.gpsSetting = 1 end
@@ -779,10 +792,9 @@ function HeadlandManagement:onPostLoad(savegame)
 	end
 	
 	-- Set HLM configuration if set by savegame
-	self.configurations["HeadlandManagement"] = spec.exists and 2 or 1
+	--self.configurations["headlandManagement"] = spec.exists and 2 or 1
 	dbgprint("onPostLoad : HLM exists (finally): "..tostring(spec.exists))
 	dbgprint_r(self.configurations, 2, 0)
-	self:raiseDirtyFlags(spec.dirtyFlag)
 end
 
 function HeadlandManagement:saveToXMLFile(xmlFile, key, usedModNames)
@@ -795,7 +807,7 @@ function HeadlandManagement:saveToXMLFile(xmlFile, key, usedModNames)
 	end
 	
 	local spec = self.spec_HeadlandManagement
-	spec.exists = self.configurations["HeadlandManagement"] == 2
+	spec.exists = self.configurations["headlandManagement"] == 2
 	dbgprint("saveToXMLFile : key: "..tostring(key), 2)
 		
 	xmlFile:setValue(key..".configured", spec.exists)
@@ -1405,7 +1417,7 @@ end
 local function isOnField(node, x, z, onUnWorkedField, workedArea)
 	--local nx, _, nz = getWorldTranslation(node)
 	if (x == nil) or (z == nil) then 
-		print("warning: coordinates had to be calculated!")
+		dbgprint("isOnField: coordinates had to be calculated!", 1)
 		x, _, z = getWorldTranslation(node) end
 	local onField, _, terrain = FSDensityMapUtil.getFieldDataAtWorldPosition(x, 0, z)
 	if onUnWorkedField then
@@ -2083,8 +2095,8 @@ function HeadlandManagement:onDraw(dt)
 		
 		-- debug: show frontnode and backnode
 		if HeadlandManagement.debug then
-			ShowNodeF = DebugCube.new()
-			ShowNodeB = DebugCube.new()
+			ShowNodeF = DebugBox.new()
+			ShowNodeB = DebugBox.new()
 			if spec.frontNode ~= nil then 
 				ShowNodeF:createWithNode(spec.frontNode, 0.3, 0.3, 0.3) 
 				ShowNodeF:draw()
@@ -2134,22 +2146,26 @@ function HeadlandManagement.waitOnTrigger(self, automatic)
 			spec.triggerPos.x, spec.triggerPos.y, spec.triggerPos.z = getWorldTranslation(spec.triggerNode)
 		end
 		
-		local triggerFlag = DebugFlag.new(1,0,0)
-		local measureFlag = DebugFlag.new(0,1,0)
+		local triggerFlag 
+		local measureFlag
 		
 		local tx, _, tz = worldToLocal(self.rootNode, spec.triggerPos.x, 0, spec.triggerPos.z)
 		
 		if spec.debugFlag then
-			triggerFlag:create(spec.triggerPos.x, spec.triggerPos.y, spec.triggerPos.z, tx * 0.3, tz * 0.3)
-			triggerFlag:draw()
+			triggerFlag = DebugFlag.new()
+			triggerFlag:setColorRGBA(1,0,0,1)
+			triggerFlag:create(spec.triggerPos.x, spec.triggerPos.y, spec.triggerPos.z, tx * 0.3, tz * 0.3):setText("Trigger")
+			g_debugManager:addElement(triggerFlag, "HLM_T", nil, 1)
 		end
 	
 		local  wx, wy, wz = getWorldTranslation(spec.measureNode)
 		local mx, _, mz = worldToLocal(self.rootNode, wx, 0, wz)
 		
 		if spec.debugFlag then
-			measureFlag:create(wx, wy, wz, mx * 0.3, mz * 0.3)
-			measureFlag:draw()
+			measureFlag = DebugFlag.new()
+			measureFlag:setColorRGBA(0,1,0,1)
+			measureFlag:create(wx, wy, wz, mx * 0.3, mz * 0.3):setText("Vehicle")
+			g_debugManager:addElement(measureFlag, "HLM_M", nil, 1)
 		end
 		
 		local dist = math.abs(tz - mz)

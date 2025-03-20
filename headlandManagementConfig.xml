@@ -1,10 +1,8 @@
 <vehicle>
-	<FS25_HeadlandManagement>	
-		<HeadlandManagement>
-			<HeadlandManagementConfigurations isYesNoOption="true">
-				<HeadlandManagementConfiguration name="HLM_not_installed" price="0"/>
-				<HeadlandManagementConfiguration name="HLM_installed" price="3000"/>
-			</HeadlandManagementConfigurations>
-		</HeadlandManagement>
-	</FS25_HeadlandManagement>
+	<HeadlandManagement>
+		<HeadlandManagementConfigurations isYesNoOption="true">
+			<HeadlandManagementConfiguration name="HLM_not_installed" price="0"/>
+			<HeadlandManagementConfiguration name="HLM_installed" price="3000"/>
+		</HeadlandManagementConfigurations>
+	</HeadlandManagement>
 </vehicle>

@@ -121,6 +121,7 @@
 		<text name="hlmgui_contourSettingTT" text="Určuje, na které straně se má sledovat okraj pole. Zde se může stránka volitelně přepínat při každé změně režimu na souostroví, nebo se zachová."/>
 		<text name="hlmgui_contourWidthSettingTT" text="Vzdálenost od okraje pole může být buď zachována, nebo stanovena."/>
 		<text name="hlmgui_contourWidthChangeSettingTT" text="Pokud je to žádoucí, může se vzdálenost k okraji pole rozšířit o jednu šířku vozidla pokaždé, když vozidlo přepne do režimu souvratě."/>
+		<text name="hlmgui_contourWidthSettingInputTT" text="Standardně se správa souvrati aktivuje"/>
 		
 		<text name="hlmgui_ridgeMarkerTT" text="Při zvedání lze značkovač přepnout na opačnou stranu."/>
 		

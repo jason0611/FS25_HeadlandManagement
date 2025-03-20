@@ -120,7 +120,8 @@
 		<text name="hlmgui_contourSettingTT" text="Determines on which side the field border is to be followed. Here, the page can optionally be switched with each change to the headland mode, or it is retained."/>
 		<text name="hlmgui_contourWidthSettingTT" text="The distance to the field edge can either be maintained or it can be fixed."/>
 		<text name="hlmgui_contourWidthChangeSettingTT" text="If desired, the distance to the edge of the field can be widened by one vehicle width each time you switch to headland mode."/>
-
+		<text name="hlmgui_contourWidthSettingInputTT" text="Distance to the field edge"/>
+		
 		<text name="hlmgui_ridgeMarkerTT" text="While lifting, the ridgemarker can be switched to the opposite side."/>
 		
 		<text name="hlmgui_emptyBalersSettingTT" text="Stops automatic unloading of balers in the headland "/>
