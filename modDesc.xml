@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="94">
+<modDesc descVersion="96">
 	<author>Glowins Modschmiede</author>
-	<version>3.0.0.2</version>
-	<contributors>Agrarplay und LU Wohnzimmer, Kynuska, Gonimy-Vetrom, Lactic68, Markus33-ITA, PapaTim68, A-intheCode</contributors >
+	<version>3.0.0.0</version>
+	<contributors>Agrarplay und LU Wohnzimmer</contributors >
 
 	<title>
 		<en>Headland Management</en>
@@ -17,7 +17,7 @@ Headland management for tractors, field sprayers, mowers and harvesters
 Description:
 Headland management allows functions to be combined in the vehicle and activated together at the touch of a button to simplify turning manoeuvres during field work. All functions can be activated and deactivated individually for each vehicle via a GUI in order to achieve ideal adaptation to the work being carried out.
 
-Headland management must be added to the respective vehicle as a one-off configuration in the shop or in the workshop before use. The cost for this is 3000,-. 
+Headland management must be added to the respective vehicle as a one-off configuration in the shop or in the workshop before use. The cost for this is 3000$. 
 It can be activated and deactivated in the vehicle. Various buttons can also be configured for activation and deactivation.
 
 Functions included:
@@ -62,7 +62,7 @@ Vorgewende-Management für Schlepper, Feldspritzen, Mäher und Erntemaschinen
 Beschreibung:
 Mit dem Vorgewende-Management können Funktionen im Fahrzeug zusammengefasst und gemeinsam per Knopfdruck aktiviert werden, um Wendemanöver bei der Feldarbeit zu vereinfachen. Alle Funktionen sind je Fahrzeug über eine GUI einzeln aktivierbar und deaktivierbar, um eine ideale Anpassung an die durchgeführten Arbeiten zu erreichen.
 
-Das Vorgewende-Management muss vor der Nutzung im Shop oder in der Werkstatt dem jeweiligen Fahrzeug einmalig als Konfiguration hinzugefügt werden. Die Kosten dafür liegen bei 3000,-. 
+Das Vorgewende-Management muss vor der Nutzung im Shop oder in der Werkstatt dem jeweiligen Fahrzeug einmalig als Konfiguration hinzugefügt werden. Die Kosten dafür liegen bei 3000€. 
 Es kann im Fahrzeug mit aktiviert und deaktiviert werden. Es lassen sich auch verschiedene Tasten für Aktivierung und Deaktivierung konfigurieren.
 
 Enthaltene Funktionen:
@@ -110,7 +110,7 @@ Gestion des fourrières pour les tracteurs, les pulvérisateurs, les faucheuses 
 Description :
 La gestion des fourrières permet de regrouper des fonctions dans le véhicule et de les activer ensemble en appuyant sur un bouton, afin de simplifier les manœuvres de demi-tour lors du travail dans les champs. Toutes les fonctions peuvent être activées et désactivées individuellement par véhicule via une GUI afin d'obtenir une adaptation idéale aux travaux effectués.
 
-La gestion des manœuvres en bout de champ doit être ajoutée une seule fois à la configuration de chaque véhicule avant d'être utilisée dans la boutique ou à l'atelier. Le coût de cette opération est de 3000,-. 
+La gestion des manœuvres en bout de champ doit être ajoutée une seule fois à la configuration de chaque véhicule avant d'être utilisée dans la boutique ou à l'atelier. Le coût de cette opération est de 3000€. 
 Il peut être activé et désactivé dans le véhicule. Il est également possible de configurer différents boutons pour l'activation et la désactivation.
 
 Fonctions incluses :

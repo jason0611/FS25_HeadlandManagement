@@ -85,7 +85,7 @@ HeadlandManagement.filterList = {}
 HeadlandManagement.filterList[1] = "E-DriveLaner"
 
 -- Killbits for supported published mods
-HeadlandManagement.kbVCA = true
+HeadlandManagement.kbVCA = false
 HeadlandManagement.kbGS = true
 HeadlandManagement.kbSC = true
 HeadlandManagement.kbEV = false
@@ -99,7 +99,10 @@ function HeadlandManagement.raiseConfigurationItemEvent(object, superfunc, event
     for configName, configId in pairs(object.configurations) do
 		table.insert(configNameSorted, configName)
 	end
-	table.sort(configNameSorted)
+	local function sort(a, b)
+		return a>b
+	end
+	table.sort(configNameSorted, sort)
 	for index, configName in ipairs(configNameSorted) do
 		local configId = object.configurations[configName]
         local configItem = ConfigurationUtil.getConfigItemByConfigId(object.configFileName, configName, configId)
