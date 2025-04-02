@@ -2,11 +2,6 @@
 THIS IS WORK IN PROGRESS AND NOT INTENDED FOR PLAYING AT THIS STATE OF WORK!
 
 TODO:
-- Configuration has to be reworked
-- Settings page has to be adapted to new interface
-- Functions have to be checked
-- New ingame gps has to be integrated
-
 Headland management for tractors, field sprayers, mowers and harvesters.
 
 *Attention: The GitHub version is a developer version! It can and will contain bugs, produce debug information (on-screen or logged) and in the worst case, even if unlikely, destroy a savegame.*
