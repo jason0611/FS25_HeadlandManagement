@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="96">
+<modDesc descVersion="99">
 	<author>Glowins Modschmiede</author>
 	<version>3.0.0.1</version>
 	<contributors>Agrarplay und LU Wohnzimmer, Funjetor</contributors >
@@ -51,6 +51,9 @@ Other prepared key combinations (not pre-assigned)
 - Activation of the field mode
 - Activation of the headland mode
 
+Change Log V3.0.0.1:
+- Fixed a bug in the handling of actionEvents, which caused keyboard input to be partially ignored
+
 GitHub link: https://github.com/jason0611/FS25_HeadlandManagement
 Further ideas or requests are welcome there
 ]]>
@@ -99,6 +102,9 @@ Weitere vorbereitete Tastenkombinationen (nicht vorbelegt)
 - Aktivierung des Feldmodus
 - Aktivierung des Vorgewendemodus
 
+Change Log V3.0.0.1:
+- Fehler im Umgang mit actionEvents behoben, wodurch Tastatureingaben teilweise ignoriert wurden
+
 GitHub-Link: https://github.com/jason0611/FS25_HeadlandManagement
 Weitere Ideen oder Wünsche werden dort gerne entgegengenommen
 ]]>
@@ -143,6 +149,9 @@ Autres combinaisons de touches préparées (non prédéfinies)
 - Réactivation de l'automatisme des fourrières
 - Activation du mode champ
 - Activation du mode fourrière
+
+Change Log V3.0.0.1:
+- Correction d'un bug dans la gestion des actionEvents, qui faisait que les saisies clavier étaient partiellement ignorées.
 
 Lien GitHub : https://github.com/jason0611/FS25_HeadlandManagement
 D'autres idées ou souhaits y sont les bienvenus, veuillez écrire en allemand ou en anglais
