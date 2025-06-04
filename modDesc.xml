@@ -53,6 +53,7 @@ Other prepared key combinations (not pre-assigned)
 
 Change Log V3.0.0.1:
 - Fixed a bug in the handling of actionEvents, which caused keyboard input to be partially ignored
+- Availability in mission vehicles restored
 
 GitHub link: https://github.com/jason0611/FS25_HeadlandManagement
 Further ideas or requests are welcome there
@@ -104,6 +105,7 @@ Weitere vorbereitete Tastenkombinationen (nicht vorbelegt)
 
 Change Log V3.0.0.1:
 - Fehler im Umgang mit actionEvents behoben, wodurch Tastatureingaben teilweise ignoriert wurden
+- Verfügbarkeit in Missionsfahrzeugen wiederhergestellt
 
 GitHub-Link: https://github.com/jason0611/FS25_HeadlandManagement
 Weitere Ideen oder Wünsche werden dort gerne entgegengenommen
@@ -152,6 +154,7 @@ Autres combinaisons de touches préparées (non prédéfinies)
 
 Change Log V3.0.0.1:
 - Correction d'un bug dans la gestion des actionEvents, qui faisait que les saisies clavier étaient partiellement ignorées.
+- Disponibilité rétablie dans les véhicules de mission
 
 Lien GitHub : https://github.com/jason0611/FS25_HeadlandManagement
 D'autres idées ou souhaits y sont les bienvenus, veuillez écrire en allemand ou en anglais
