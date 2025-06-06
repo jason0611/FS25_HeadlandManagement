@@ -795,7 +795,7 @@ function HeadlandManagement:onPostLoad(savegame)
 	end
 	
 	-- Set HLM configuration if set by savegame
-	--self.configurations["headlandManagement"] = spec.exists and 2 or 1
+	self.configurations["headlandManagement"] = spec.exists and 2 or 1
 	dbgprint("onPostLoad : HLM exists (finally): "..tostring(spec.exists))
 	dbgprint_r(self.configurations, 2, 0)
 end
