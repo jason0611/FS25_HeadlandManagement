@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="99">
 	<author>Glowins Modschmiede</author>
-	<version>3.0.0.1</version>
+	<version>3.0.0.2</version>
 	<contributors>Agrarplay und LU Wohnzimmer, Funjetor</contributors >
 
 	<title>
@@ -55,6 +55,9 @@ Change Log V3.0.0.1:
 - Fixed a bug in the handling of actionEvents, which caused keyboard input to be partially ignored
 - Availability in mission vehicles restored
 
+Change Log V3.0.0.2:
+- Availability in mission vehicles after loading the game
+
 GitHub link: https://github.com/jason0611/FS25_HeadlandManagement
 Further ideas or requests are welcome there
 ]]>
@@ -107,6 +110,9 @@ Change Log V3.0.0.1:
 - Fehler im Umgang mit actionEvents behoben, wodurch Tastatureingaben teilweise ignoriert wurden
 - Verfügbarkeit in Missionsfahrzeugen wiederhergestellt
 
+Change Log V3.0.0.2:
+- Verfügbarkeit in Missionsfahrzeugen auch bei geladenem Spielstand
+
 GitHub-Link: https://github.com/jason0611/FS25_HeadlandManagement
 Weitere Ideen oder Wünsche werden dort gerne entgegengenommen
 ]]>
@@ -155,6 +161,9 @@ Autres combinaisons de touches préparées (non prédéfinies)
 Change Log V3.0.0.1:
 - Correction d'un bug dans la gestion des actionEvents, qui faisait que les saisies clavier étaient partiellement ignorées.
 - Disponibilité rétablie dans les véhicules de mission
+
+Change Log V3.0.0.2:
+- Disponibilité dans les véhicules de mission même lorsque la sauvegarde du jeu est chargée
 
 Lien GitHub : https://github.com/jason0611/FS25_HeadlandManagement
 D'autres idées ou souhaits y sont les bienvenus, veuillez écrire en allemand ou en anglais

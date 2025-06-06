@@ -810,7 +810,7 @@ function HeadlandManagement:saveToXMLFile(xmlFile, key, usedModNames)
 	end
 	
 	local spec = self.spec_HeadlandManagement
-	spec.exists = self.configurations["headlandManagement"] == 2
+	spec.exists = self.configurations["headlandManagement"] ~= nil and (self.configurations["headlandManagement"] > 1 or self.propertyState == VehiclePropertyState.MISSION)
 	dbgprint("saveToXMLFile : key: "..tostring(key), 2)
 		
 	xmlFile:setValue(key..".configured", spec.exists)
