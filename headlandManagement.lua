@@ -771,13 +771,14 @@ function HeadlandManagement:onPostLoad(savegame)
 			
 			dbgprint("onPostLoad : Loaded whole data set for "..self:getName().." using key "..key, 1)
 		end
+		self.configurations["headlandManagement"] = spec.exists and 2 or 1
 		dbgprint("onPostLoad : Loaded short data for "..self:getName().." using key "..key, 1)
 	end
 	
-	spec.exists = self.configurations["headlandManagement"] ~= nil and self.configurations["headlandManagement"] > 1
+	spec.exists = self.configurations["headlandManagement"] ~= nil and (self.configurations["headlandManagement"] > 1 or self.propertyState == VehiclePropertyState.MISSION)
 	dbgprint("onPostLoad : Spec exists (after reload): "..tostring(spec.exists), 2)
 	-- enable HLM in mission vehicles
-	spec.exists = spec.exists or (self.configurations["headlandManagement"] ~= nil and self.propertyState == VehiclePropertyState.MISSION)
+	--spec.exists = spec.exists or (self.configurations["headlandManagement"] ~= nil and self.propertyState == VehiclePropertyState.MISSION)
 	
 	if spec.gpsSetting == 2 and not spec.modGuidanceSteeringFound then spec.gpsSetting = 1 end
 	if spec.gpsSetting > 2 and spec.gpsSetting < 6 and not spec.modVCAFound then spec.gpsSetting = 1 end
