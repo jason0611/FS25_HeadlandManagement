@@ -18,7 +18,7 @@ if HeadlandManagement.MOD_PATH == nil then HeadlandManagement.MOD_PATH = g_curre
 HeadlandManagement.MODSETTINGSDIR = g_currentModSettingsDirectory
 
 source(g_currentModDirectory.."tools/gmsDebug.lua")
-GMSDebug:init(HeadlandManagement.MOD_NAME, false)
+GMSDebug:init(HeadlandManagement.MOD_NAME, true, 1)
 GMSDebug:enableConsoleCommands("hlmDebug")
 
 source(g_currentModDirectory.."gui/HeadlandManagementGui.lua")
@@ -771,13 +771,14 @@ function HeadlandManagement:onPostLoad(savegame)
 			
 			dbgprint("onPostLoad : Loaded whole data set for "..self:getName().." using key "..key, 1)
 		end
+		self.configurations["headlandManagement"] = spec.exists and 2 or 1
 		dbgprint("onPostLoad : Loaded short data for "..self:getName().." using key "..key, 1)
 	end
 	
-	spec.exists = self.configurations["headlandManagement"] ~= nil and self.configurations["headlandManagement"] > 1
+	spec.exists = self.configurations["headlandManagement"] ~= nil and (self.configurations["headlandManagement"] > 1 or self.propertyState == VehiclePropertyState.MISSION)
 	dbgprint("onPostLoad : Spec exists (after reload): "..tostring(spec.exists), 2)
 	-- enable HLM in mission vehicles
-	spec.exists = spec.exists or (self.configurations["headlandManagement"] ~= nil and self.propertyState == VehiclePropertyState.MISSION)
+	--spec.exists = spec.exists or (self.configurations["headlandManagement"] ~= nil and self.propertyState == VehiclePropertyState.MISSION)
 	
 	if spec.gpsSetting == 2 and not spec.modGuidanceSteeringFound then spec.gpsSetting = 1 end
 	if spec.gpsSetting > 2 and spec.gpsSetting < 6 and not spec.modVCAFound then spec.gpsSetting = 1 end
@@ -795,7 +796,7 @@ function HeadlandManagement:onPostLoad(savegame)
 	end
 	
 	-- Set HLM configuration if set by savegame
-	--self.configurations["headlandManagement"] = spec.exists and 2 or 1
+	self.configurations["headlandManagement"] = spec.exists and 2 or 1
 	dbgprint("onPostLoad : HLM exists (finally): "..tostring(spec.exists))
 	dbgprint_r(self.configurations, 2, 0)
 end
@@ -810,7 +811,7 @@ function HeadlandManagement:saveToXMLFile(xmlFile, key, usedModNames)
 	end
 	
 	local spec = self.spec_HeadlandManagement
-	spec.exists = self.configurations["headlandManagement"] == 2
+	spec.exists = self.configurations["headlandManagement"] ~= nil and (self.configurations["headlandManagement"] > 1 or self.propertyState == VehiclePropertyState.MISSION)
 	dbgprint("saveToXMLFile : key: "..tostring(key), 2)
 		
 	xmlFile:setValue(key..".configured", spec.exists)
