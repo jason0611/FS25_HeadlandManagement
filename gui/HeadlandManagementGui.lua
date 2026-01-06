@@ -281,7 +281,8 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	self.gpsVariant = 0
 	
 	if self.spec.modGuidanceSteeringFound and self.spec.modVCAFound and not self.spec.modEVFound then -- 1 1 0
-		if gpsSetting > 6 then gpsSetting = 1 end
+		if gpsSetting > 5 and gpsSetting < 8 then gpsSetting = 1 end
+		if gpsSetting == 8 then gpsSetting = 6 end
 		self.gpsSetting:setTexts({
 			g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gps_auto"),
 			g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gps_gs"),
@@ -293,7 +294,8 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 		self.gpsVariant = 6
 	end
 	if self.spec.modGuidanceSteeringFound and not self.spec.modVCAFound and not self.spec.modEVFound then -- 1 0 0
-		if gpsSetting > 3 then gpsSetting = 1 end
+		if gpsSetting > 2 and gpsSetting < 8 then gpsSetting = 1 end
+		if gpsSetting == 8 then gpsSetting = 3 end
 		self.gpsSetting:setTexts({
 			g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gps_auto"),
 			g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gps_gs"),
@@ -302,7 +304,9 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 		self.gpsVariant = 4
 	end
 	if not self.spec.modGuidanceSteeringFound and self.spec.modVCAFound and not self.spec.modEVFound then -- 0 1 0
-		if gpsSetting > 5 then gpsSetting = 1 end
+		if gpsSetting == 2 or gpsSetting == 6 or gpsSetting == 7 then gpsSetting = 1 end
+		if gpsSetting > 2 and gpsSetting < 6 then gpsSetting = gpsSetting - 1 end
+		if gpsSetting == 8 then gpsSetting = 5 end
 		self.gpsSetting:setTexts({
 			g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gps_auto"),
 			g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gps_vca"),
@@ -313,8 +317,9 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 		self.gpsVariant = 2
 	end
 	if not self.spec.modGuidanceSteeringFound and not self.spec.modVCAFound and not self.spec.modEVFound then -- 0 0 0
-		if gpsSetting > 2 then gpsSetting = 1 end
-		elf.gpsSetting:setTexts({
+		if gpsSetting < 8 then gpsSetting = 1 end
+		if gpsSetting == 8 then gpsSetting = 2 end
+		self.gpsSetting:setTexts({
 			g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gps_auto"),
 			g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gps_vanilla")
 		})
@@ -334,7 +339,8 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 		self.gpsVariant = 7
 	end
 	if self.spec.modGuidanceSteeringFound and not self.spec.modVCAFound and self.spec.modEVFound then -- 1 0 1
-		if gpsSetting > 5 then gpsSetting = 1 end
+		if gpsSetting > 2 and gpsSetting < 6 then gpsSetting = 1 end
+		if gpsSetting >= 6 then gpsSetting = gpsSetting - 3 end
 		self.gpsSetting:setTexts({
 			g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gps_auto"),
 			g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gps_gs"),
@@ -345,7 +351,7 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 		self.gpsVariant = 5
 	end
 	if not self.spec.modGuidanceSteeringFound and self.spec.modVCAFound and self.spec.modEVFound then -- 0 1 1
-		if gpsSetting > 7 then gpsSetting = 1 end
+		if gpsSetting > 1 then gpsSetting = gpsSetting - 1 end
 		self.gpsSetting:setTexts({
 			g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gps_auto"),
 			g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gps_vca"),
@@ -358,7 +364,8 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 		self.gpsVariant = 3
 	end
 	if not self.spec.modGuidanceSteeringFound and not self.spec.modVCAFound and self.spec.modEVFound then -- 0 0 1
-		if gpsSetting > 4 then gpsSetting = 1 end
+		if gpsSetting > 1 and gpsSetting < 6 then gpsSetting = 1 end
+		if gpsSetting >= 6 then gpsSetting = gpsSetting - 4 end
 		self.gpsSetting:setTexts({
 			g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gps_auto"),
 			g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gps_ev"),
