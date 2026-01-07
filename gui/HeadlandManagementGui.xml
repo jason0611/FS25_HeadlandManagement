@@ -165,6 +165,12 @@
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="gpsDirSwitchTT"/>
 					</MultiTextOption>	
 				</GuiElement>
+				<GuiElement profile="fs25_multiTextOptionContainer">
+					<Text profile="multiTextOptionSettingsTitle" id="gpsAlwaysOnTitle" text="$l10n_hlmgui_beep"/>
+					<BinaryOption profile="fs25_settingsBinaryOption" id="gpsAlwaysOn">
+						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="gpsAlwaysOnTT"/>
+					</BinaryOption>	
+				</GuiElement>
 						
 			<!-- Headland automatic -->
 				<Text profile="fs25_settingsSectionHeader" id="gpsAutoTrigger"/>

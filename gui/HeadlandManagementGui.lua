@@ -398,6 +398,17 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	self.gpsEnableDirSwitchSetting:setVisible(self.spec.modVCAFound)
 	self.gpsDirSwitchTT:setVisible(self.spec.modVCAFound)
 	
+	-- GPS always on
+	self.gpsAlwaysOnTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gpsAlwaysOn"))
+	self.gpsAlwaysOn:setTexts({
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_off"),
+		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_on")
+	})
+	local disableGpsAlwaysOn = lastGPSSetting == 1 or (lastGPSSetting > 3 and lastGPSSetting < 6)
+	self.gpsAlwaysOn:setDisabled(disableGpsAlwaysOn)
+	self.gpsAlwaysOn:setState(not disableGpsAlwaysOn and self.spec.gpsAlwaysOn and 2 or 1)
+	self.gpsAlwaysOn.onClickCallback = HeadlandManagementGui.logicalCheck
+	
 	-- Headland automatic
 	self.gpsAutoTrigger:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gpsAutoTriggerSetting"))
 	self.gpsAutoTriggerSubTitle:setText(string.format(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gpsAutoTriggerSubTitle"),self.spec.vehicleLength,self.spec.vehicleWidth,self.spec.maxTurningRadius))
@@ -587,6 +598,13 @@ function HeadlandManagementGui:logicalCheck()
 	if not self.spec.modGuidanceSteeringFound and gpsSetting > 1 then
 		gpsSetting = gpsSetting + 1
 	end
+	if not self.spec.modVCAFound and gpsSetting > 2 then
+		gpsSetting = gpsSetting + 3
+	end
+	if not self.spec.modEVFound and gpsSetting > 5 then
+		gpsSetting = gpsSetting + 2
+	end
+	
 	self.gpsSetting:setDisabled(not useGPS or not self.showGPS)
 	
 	self.gpsEnableDirSwitchSetting:setDisabled(not useGPS or not self.spec.modVCAFound or gpsSetting < 4 or gpsSetting > 5)
@@ -594,6 +612,12 @@ function HeadlandManagementGui:logicalCheck()
 	self.gpsAutoTriggerOffsetSetting:setDisabled(triggerSetting == 1 or (triggerSetting == 3 and self.gpsEnabled))
 	
 	self.gpsAutoTriggerOffsetWidthInput:setDisabled(triggerSetting ~= 2)
+
+	local gpsOnOffDisabled = not useGPS or gpsSetting == 1 or (gpsSetting > 3 and gpsSetting < 6)
+	self.gpsAlwaysOn:setDisabled(gpsOnOffDisabled)
+	local gpsAlwaysOnState = self.gpsAlwaysOn:getState()
+	self.gpsAlwaysOn:setState(gpsOnOffDisabled and 1 or gpsAlwaysOnState)
+
 	
 	--self.gpsResumeSetting:setDisabled(useEVTrigger)
 	
@@ -771,6 +795,8 @@ function HeadlandManagementGui:onClickOk()
 	if self.gpsVariant == 0 and gpsSetting > 1 then 
 		self.spec.gpsSetting = 8 
 	end
+	
+	self.spec.gpsAlwaysOn = self.gpsAlwaysOn:getState() == 2
 	
 	-- headland automatic
 	local triggerSetting = self.gpsAutoTriggerSetting:getState()
