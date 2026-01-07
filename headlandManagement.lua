@@ -689,6 +689,9 @@ function HeadlandManagement:onPostLoad(savegame)
 		spec.normSpeed = 2 --SpeedControl Mode 2
 	end
 	
+	-- Chexk if vanilla GPS is available
+	spec.vanillaGPSEnabled = self.spec_aiAutomaticSteering ~= nil
+	
 	-- Check if Mod FS25_extendedCruiseControl exists
 	if self.spec_extendedCruiseControl ~= nil and not HeadlandManagement.kbECC then 
 		spec.modECCFound = true 
