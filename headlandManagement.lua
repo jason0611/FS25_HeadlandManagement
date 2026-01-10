@@ -786,7 +786,7 @@ function HeadlandManagement:onPostLoad(savegame)
 	
 	if spec.gpsSetting == 2 and not spec.modGuidanceSteeringFound then spec.gpsSetting = 1 end
 	if spec.gpsSetting > 2 and spec.gpsSetting < 6 and not spec.modVCAFound then spec.gpsSetting = 1 end
-	if spec.gpsSetting > 5 and not spec.modEVFound then spec.gpsSetting = 1 end
+	if spec.gpsSetting > 5 and spec.gpsSetting < 8 and not spec.modEVFound then spec.gpsSetting = 1 end
 	
 	spec.autoResumeOnTrigger = spec.autoResume and (spec.useHLMTriggerF or spec.useHLMTriggerB)
 	
