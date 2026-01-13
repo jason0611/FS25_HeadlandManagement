@@ -277,6 +277,7 @@ function HeadlandManagement.initSpecialization()
 
 	schemaSavegame:register(XMLValueType.BOOL, "vehicles.vehicle(?)."..key..".useGPS", "Change GPS", true)
 	schemaSavegame:register(XMLValueType.INT,  "vehicles.vehicle(?)."..key..".gpsSetting", "GPS-Mode", 1)
+	schemaSavegame:register(XMLValueType.BOOL, "vehicles.vehicle(?)."..key..".gpsAlwaysOn", "Activate GPS always in field mode", false)
 	schemaSavegame:register(XMLValueType.BOOL, "vehicles.vehicle(?)."..key..".vcaDirSwitch", "Switch vca-turn", true)
 	schemaSavegame:register(XMLValueType.BOOL, "vehicles.vehicle(?)."..key..".autoResume", "Auto resume field mode after turn", false)
 
@@ -744,6 +745,7 @@ function HeadlandManagement:onPostLoad(savegame)
 			
 			spec.useGPS = xmlFile:getValue(key..".useGPS", spec.useGPS)
 			spec.gpsSetting = xmlFile:getValue(key..".gpsSetting", spec.gpsSetting)
+			spec.gpsAlwaysOn = xmlFile:getValue(key..".gpsAlwaysOn", spec.gpsAlwaysOn)
 			spec.useGuidanceSteeringTrigger = xmlFile:getValue(key..".useGuidanceSteeringTrigger", spec.useGuidanceSteeringTrigger)
 			spec.useGuidanceSteeringOffset = xmlFile:getValue(key..".useGuidanceSteeringOffset", spec.useGuidanceSteeringOffset)
 			
@@ -842,6 +844,7 @@ function HeadlandManagement:saveToXMLFile(xmlFile, key, usedModNames)
 		
 		xmlFile:setValue(key..".useGPS", spec.useGPS)
 		xmlFile:setValue(key..".gpsSetting", spec.gpsSetting)
+		xmlFile:setValue(key..".gpsAlwaysOn", spec.gpsAlwaysOn)
 		xmlFile:setValue(key..".useGuidanceSteeringTrigger", spec.useGuidanceSteeringTrigger)
 		xmlFile:setValue(key..".useGuidanceSteeringOffset", spec.useGuidanceSteeringOffset)
 		
