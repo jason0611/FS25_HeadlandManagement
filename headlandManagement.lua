@@ -277,6 +277,7 @@ function HeadlandManagement.initSpecialization()
 
 	schemaSavegame:register(XMLValueType.BOOL, "vehicles.vehicle(?)."..key..".useGPS", "Change GPS", true)
 	schemaSavegame:register(XMLValueType.INT,  "vehicles.vehicle(?)."..key..".gpsSetting", "GPS-Mode", 1)
+	schemaSavegame:register(XMLValueType.BOOL, "vehicles.vehicle(?)."..key..".gpsAlwaysOn", "Activate GPS always in field mode", false)
 	schemaSavegame:register(XMLValueType.BOOL, "vehicles.vehicle(?)."..key..".vcaDirSwitch", "Switch vca-turn", true)
 	schemaSavegame:register(XMLValueType.BOOL, "vehicles.vehicle(?)."..key..".autoResume", "Auto resume field mode after turn", false)
 
@@ -434,7 +435,8 @@ function HeadlandManagement:onLoad(savegame)
 	spec.useCrabSteeringTwoStep = true -- change crab steering to AI driver position in headland mode
 	
 	spec.useGPS = true				-- control gps in headland mode
-	spec.gpsSetting = 1 			-- 1: auto-mode, 2: gs-mode, 3: vca-mode, 4: vca-turn-left, 5: vca-turn-right, 6: ev-mode
+	spec.gpsSetting = 1 			-- 1: auto-mode, 2: gs-mode, 3: vca-mode, 4: vca-turn-left, 5: vca-turn-right, 6: ev-mode, 7: ev-mode with auto-turn, 8: vanilla
+	spec.gpsAlwaysOn = false		-- activate GPS in field mode even if it was off before
 	spec.wasGPSAutomatic = false	-- was headland automatic active on field?
 	
 	spec.modGuidanceSteeringFound = false
@@ -688,6 +690,9 @@ function HeadlandManagement:onPostLoad(savegame)
 		spec.normSpeed = 2 --SpeedControl Mode 2
 	end
 	
+	-- Chexk if vanilla GPS is available
+	spec.vanillaGPSEnabled = self.spec_aiAutomaticSteering ~= nil
+	
 	-- Check if Mod FS25_extendedCruiseControl exists
 	if self.spec_extendedCruiseControl ~= nil and not HeadlandManagement.kbECC then 
 		spec.modECCFound = true 
@@ -740,6 +745,7 @@ function HeadlandManagement:onPostLoad(savegame)
 			
 			spec.useGPS = xmlFile:getValue(key..".useGPS", spec.useGPS)
 			spec.gpsSetting = xmlFile:getValue(key..".gpsSetting", spec.gpsSetting)
+			spec.gpsAlwaysOn = xmlFile:getValue(key..".gpsAlwaysOn", spec.gpsAlwaysOn)
 			spec.useGuidanceSteeringTrigger = xmlFile:getValue(key..".useGuidanceSteeringTrigger", spec.useGuidanceSteeringTrigger)
 			spec.useGuidanceSteeringOffset = xmlFile:getValue(key..".useGuidanceSteeringOffset", spec.useGuidanceSteeringOffset)
 			
@@ -782,7 +788,7 @@ function HeadlandManagement:onPostLoad(savegame)
 	
 	if spec.gpsSetting == 2 and not spec.modGuidanceSteeringFound then spec.gpsSetting = 1 end
 	if spec.gpsSetting > 2 and spec.gpsSetting < 6 and not spec.modVCAFound then spec.gpsSetting = 1 end
-	if spec.gpsSetting > 5 and not spec.modEVFound then spec.gpsSetting = 1 end
+	if spec.gpsSetting > 5 and spec.gpsSetting < 8 and not spec.modEVFound then spec.gpsSetting = 1 end
 	
 	spec.autoResumeOnTrigger = spec.autoResume and (spec.useHLMTriggerF or spec.useHLMTriggerB)
 	
@@ -838,6 +844,7 @@ function HeadlandManagement:saveToXMLFile(xmlFile, key, usedModNames)
 		
 		xmlFile:setValue(key..".useGPS", spec.useGPS)
 		xmlFile:setValue(key..".gpsSetting", spec.gpsSetting)
+		xmlFile:setValue(key..".gpsAlwaysOn", spec.gpsAlwaysOn)
 		xmlFile:setValue(key..".useGuidanceSteeringTrigger", spec.useGuidanceSteeringTrigger)
 		xmlFile:setValue(key..".useGuidanceSteeringOffset", spec.useGuidanceSteeringOffset)
 		
@@ -891,6 +898,7 @@ function HeadlandManagement:onReadStream(streamId, connection)
 		spec.useRidgeMarker = streamReadBool(streamId)
 		spec.useGPS = streamReadBool(streamId)
 		spec.gpsSetting = streamReadInt8(streamId)
+		spec.gpsAlwaysOn = streamReadBool(streamId)
 		spec.useGuidanceSteeringTrigger = streamReadBool(streamId)
 		spec.useGuidanceSteeringOffset = streamReadBool(streamId)
 		spec.useEVTrigger = streamReadBool(streamId)
@@ -939,6 +947,7 @@ function HeadlandManagement:onWriteStream(streamId, connection)
 		streamWriteBool(streamId, spec.useRidgeMarker)
 		streamWriteBool(streamId, spec.useGPS)
 		streamWriteInt8(streamId, spec.gpsSetting)
+		streamWriteBool(streamId, spec.gpsAlwaysOn)
 		streamWriteBool(streamId, spec.useGuidanceSteeringTrigger)
 		streamWriteBool(streamId, spec.useGuidanceSteeringOffset)
 		streamWriteBool(streamId, spec.useEVTrigger)
@@ -989,6 +998,7 @@ function HeadlandManagement:onReadUpdateStream(streamId, timestamp, connection)
 				spec.useRidgeMarker = streamReadBool(streamId)
 				spec.useGPS = streamReadBool(streamId)
 				spec.gpsSetting = streamReadInt8(streamId)
+				spec.gpsAlwaysOn = streamReadBool(streamId)
 				spec.useGuidanceSteeringTrigger = streamReadBool(streamId)
 				spec.useGuidanceSteeringOffset = streamReadBool(streamId)
 				spec.useEVTrigger = streamReadBool(streamId)
@@ -1043,6 +1053,7 @@ function HeadlandManagement:onWriteUpdateStream(streamId, connection, dirtyMask)
 				streamWriteBool(streamId, spec.useRidgeMarker)
 				streamWriteBool(streamId, spec.useGPS)
 				streamWriteInt8(streamId, spec.gpsSetting)
+				streamWriteBool(streamId, spec.gpsAlwaysOn)
 				streamWriteBool(streamId, spec.useGuidanceSteeringTrigger)
 				streamWriteBool(streamId, spec.useGuidanceSteeringOffset)
 				streamWriteBool(streamId, spec.useEVTrigger)
@@ -2666,6 +2677,8 @@ function HeadlandManagement.stopGPS(self, enable)
 		dbgprint("stopGPS : AI is active")
 	end
 	
+	if spec.gpsSetting == 1 then spec.gpsAlwaysOn = false end
+	
 	dbgprint("stopGPS : gpsSetting: "..tostring(spec.gpsSetting))
 
 -- Part 2: Guidance Steering	
@@ -2673,7 +2686,7 @@ function HeadlandManagement.stopGPS(self, enable)
 		local gsSpec = self.spec_globalPositioningSystem
 		if enable then
 			dbgprint("stopGPS : Guidance Steering off")
-			local gpsEnabled = (gsSpec.lastInputValues ~= nil and gsSpec.lastInputValues.guidanceSteeringIsActive)
+			local gpsEnabled = gsSpec.lastInputValues ~= nil and gsSpec.lastInputValues.guidanceSteeringIsActive
 			if gpsEnabled then
 				spec.gpsSetting = 2
 				spec.GSStatus = true
@@ -2683,7 +2696,7 @@ function HeadlandManagement.stopGPS(self, enable)
 				spec.GSStatus = false
 			end
 		else
-			local gpsEnabled = spec.GSStatus	
+			local gpsEnabled = spec.GSStatus or spec.gpsAlwaysOn
 			if gpsEnabled then
 				dbgprint("stopGPS : Guidance Steering on")
 				spec.gpsSetting = 2
@@ -2722,7 +2735,7 @@ function HeadlandManagement.stopGPS(self, enable)
 			end
 		end 
 	end
-	if spec.modVCAFound and spec.vcaStatus and (spec.gpsSetting == 1 or spec.gpsSetting == 3) and not enable then
+	if spec.modVCAFound and (spec.vcaStatus or spec.gpsAlwaysOn) and (spec.gpsSetting == 1 or spec.gpsSetting == 3) and not enable then
 		dbgprint("stopGPS : VCA-GPS on")
 		self:vcaSetState( "snapIsOn", true )
 		self:vcaSetState( "snapDirection", 0 )
@@ -2756,7 +2769,7 @@ function HeadlandManagement.stopGPS(self, enable)
 		end
 	end
 	if spec.modEVFound and spec.gpsSetting == 6 and not enable and not spec.useEVTrigger then
-		if spec.evStatus and not self.vData.is[5] then
+		if (spec.evStatus or spec.gpsAlwaysOn) and not self.vData.is[5] then
 			dbgprint("stopGPS : EV-GPS on")
 			FS25_EnhancedVehicle.FS25_EnhancedVehicle.onActionCall(self, "FS25_EnhancedVehicle_SNAP_ONOFF", 1, nil, nil, nil)
 			spec.evStatus = false
@@ -2780,7 +2793,7 @@ function HeadlandManagement.stopGPS(self, enable)
 				spec.AIStatus = false
 			end
 		else 
-			local gpsEnabled = spec.AIStatus	
+			local gpsEnabled = spec.AIStatus or spec.gpsAlwaysOn
 			if gpsEnabled then
 				spec.gpsSetting = 8
 				dbgprint("stopGPS : Vanilla-GPS on")

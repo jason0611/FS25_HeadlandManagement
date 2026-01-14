@@ -79,6 +79,7 @@
 		
 		<text name="hlmgui_gpsControl" text="GPS-Einstellungen"/>
 		<text name="hlmgui_gpsSetting" text="GPS Spurführung pausieren"/>
+		<text name="hlmgui_gpsAlwaysOn" text="Im Feldmodus immer aktivieren"/>
 		<text name="hlmgui_gpsType" text="Genutzte GPS-Variante"/>
 		<text name="hlmgui_gps_auto" text="automatisch"/>
 		<text name="hlmgui_gps_gs" text="nur Guidance Steering"/>

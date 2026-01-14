@@ -80,6 +80,7 @@
 		
 			<text name="hlmgui_gpsControl" text="Impostazioni GPS"/>
 			<text name="hlmgui_gpsSetting" text="Metti in pausa il GPS"/>
+			<text name="hlmgui_gpsAlwaysOn" text="Attivare sempre in modalità campo"/>
 			<text name="hlmgui_gpsType" text="Usa GPS-Mod"/>
 			<text name="hlmgui_gps_auto" text="Rileva automaticamente"/>
 			<text name="hlmgui_gps_gs" text="Solo Guidance Steering"/>

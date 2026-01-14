@@ -79,6 +79,7 @@
 		
 		<text name="hlmgui_gpsControl" text="Paramètres GPS"/>
 		<text name="hlmgui_gpsSetting" text="Pause du guidage GPS"/>
+		<text name="hlmgui_gpsAlwaysOn" text="Toujours activer en mode terrain"/>
 		<text name="hlmgui_gpsType" text="Variante GPS utilisée"/>
 		<text name="hlmgui_gps_auto" text="automatique"/>
 		<text name="hlmgui_gps_gs" text="Guidance Steering seulement"/>

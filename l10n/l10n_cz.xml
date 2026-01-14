@@ -80,6 +80,7 @@
 		
 		<text name="hlmgui_gpsControl" text="kontrola GPS"/>
 		<text name="hlmgui_gpsSetting" text="nastav řízení GPS"/>
+		<text name="hlmgui_gpsAlwaysOn" text="Vždy aktivovat v terénním režimu"/>
 		<text name="hlmgui_gpsType" text="Použij GPS-Mod"/>
 		<text name="hlmgui_gps_auto" text="detekovat automaticky"/>
 		<text name="hlmgui_gps_gs" text="pouze navádění řízení"/>
