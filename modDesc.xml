@@ -61,6 +61,10 @@ Change Log V3.0.0.2:
 Change Log V3.0.0.2:
 - Logical error fixed in gps configuration
 
+Change Log V3.0.1.0:
+- Logic error in GPS configuration corrected
+- GPS can now be activated in field mode at any time
+
 GitHub link: https://github.com/jason0611/FS25_HeadlandManagement
 Further ideas or requests are welcome there
 ]]>
@@ -116,8 +120,9 @@ Change Log V3.0.0.1:
 Change Log V3.0.0.2:
 - Verfügbarkeit in Missionsfahrzeugen auch bei geladenem Spielstand
 
-Change Log V3.0.0.3:
+Change Log V3.0.1.0:
 - Logikfehler in der GPS-Konfiguration korrigiert
+- GPS kann wahlweise immer im Feldmodus aktiviert werden
 
 GitHub-Link: https://github.com/jason0611/FS25_HeadlandManagement
 Weitere Ideen oder Wünsche werden dort gerne entgegengenommen
@@ -171,8 +176,9 @@ Change Log V3.0.0.1:
 Change Log V3.0.0.2:
 - Disponibilité dans les véhicules de mission même lorsque la sauvegarde du jeu est chargée
 
-Change Log V3.0.0.3:
-- Erreur logique corrigée dans la configuration GPS
+Change Log V3.0.1.0:
+- Correction d'une erreur logique dans la configuration GPS
+- Le GPS peut être activé à tout moment en mode champ
 
 Lien GitHub : https://github.com/jason0611/FS25_HeadlandManagement
 D'autres idées ou souhaits y sont les bienvenus, veuillez écrire en allemand ou en anglais
