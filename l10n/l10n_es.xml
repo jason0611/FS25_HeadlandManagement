@@ -2,149 +2,142 @@
 <l10n>
 
 <translationContributors>Funjetor</translationContributors>
-	
-
 	<texts>
     	<text name="input_HLM_TOGGLESTATE" text="Modo cabecera / Modo campo"/>	
-<text name="input_HLM_SWITCHON" text="Modo cabecera" />
-<text name="input_HLM_SWITCHOFF" text="Modo campo" />	
-<text name="input_HLM_SHOWGUI" text="Cabecera: Configuración" />
-<text name="input_HLM_MAINSWITCH" text="HLM: Encender/apagar"/>
-<text name="input_HLM_TOGGLEAUTO" text="HLM: Alternar cabecera automática"/>
-<text name="input_HLM_AUTOON" text="HLM: Activar cabecera automática"/>
-<text name="input_HLM_AUTOOFF" text="HLM: Desactivar cabecera automática"/>
+		<text name="input_HLM_SWITCHON" text="Modo cabecera" />
+		<text name="input_HLM_SWITCHOFF" text="Modo campo" />	
+		<text name="input_HLM_SHOWGUI" text="Cabecera: Configuración" />
+		<text name="input_HLM_MAINSWITCH" text="HLM: Encender/apagar"/>
+		<text name="input_HLM_TOGGLEAUTO" text="HLM: Alternar cabecera automática"/>
+		<text name="input_HLM_AUTOON" text="HLM: Activar cabecera automática"/>
+		<text name="input_HLM_AUTOOFF" text="HLM: Desactivar cabecera automática"/>
 		
 		<text name="text_HLM_isActive" text="Modo cabecera activo"/>
-<text name="text_HLM_configuration" text="Gestión de cabecera"/>
-<text name="text_HLM_installed" text="Gestión de cabecera instalada"/>
-<text name="text_HLM_notInstalled" text="Gestión de cabecera no instalada"/>
-<text name="text_HLM_installed_short" text="Instalado"/>
-<text name="text_HLM_notInstalled_short" text="No instalado"/>
-<text name="text_HLM_implementTypeLoaded" text="Configuración cargada para el tipo de implemento"/>
-<text name="text_HLM_implementTypeSaved" text="Configuración guardada para el tipo de implemento"/>
+		<text name="text_HLM_configuration" text="Gestión de cabecera"/>
+		<text name="text_HLM_installed" text="Gestión de cabecera instalada"/>
+		<text name="text_HLM_notInstalled" text="Gestión de cabecera no instalada"/>
+		<text name="text_HLM_installed_short" text="Instalado"/>
+		<text name="text_HLM_notInstalled_short" text="No instalado"/>
+		<text name="text_HLM_implementTypeLoaded" text="Configuración cargada para el tipo de implemento"/>
+		<text name="text_HLM_implementTypeSaved" text="Configuración guardada para el tipo de implemento"/>
 
 		<text name="text_HLM_type_Plow" text="Arado"/>
-<text name="text_HLM_type_Cultivator" text="Cultivador"/>
-<text name="text_HLM_type_Roller" text="Rodillo"/>
-<text name="text_HLM_type_Sowingmachine" text="Sembradora"/>
-<text name="text_HLM_type_Mulcher" text="Trituradora"/>
-<text name="text_HLM_type_Combine" text="Cosechadora"/>
-<text name="text_HLM_type_Foragewagon" text="Remolque forrajero"/>
-<text name="text_HLM_type_Baler" text="Empacadora"/>
+		<text name="text_HLM_type_Cultivator" text="Cultivador"/>
+		<text name="text_HLM_type_Roller" text="Rodillo"/>
+		<text name="text_HLM_type_Sowingmachine" text="Sembradora"/>
+		<text name="text_HLM_type_Mulcher" text="Trituradora"/>
+		<text name="text_HLM_type_Combine" text="Cosechadora"/>
+		<text name="text_HLM_type_Foragewagon" text="Remolque forrajero"/>
+		<text name="text_HLM_type_Baler" text="Empacadora"/>
 		
 		<text name="hlmgui_title" text="Gestión de cabecera (HLM): Configuración para "/>
-<text name="hlmgui_on" text="encendido"/>
-<text name="hlmgui_off" text="apagado"/>
-<text name="hlmgui_both" text="delante y detrás"/>
-<text name="hlmgui_seq" text="primero delante, después detrás"/>
-<text name="hlmgui_front" text="delante"/>
-<text name="hlmgui_back" text="detrás"/>
-<text name="hlmgui_default" text="predeterminado"/>
+		<text name="hlmgui_on" text="encendido"/>
+		<text name="hlmgui_off" text="apagado"/>
+		<text name="hlmgui_both" text="delante y detrás"/>
+		<text name="hlmgui_seq" text="primero delante, después detrás"/>
+		<text name="hlmgui_front" text="delante"/>
+		<text name="hlmgui_back" text="detrás"/>
+		<text name="hlmgui_default" text="predeterminado"/>
 		
 		<text name="hlmgui_speedControl" text="Configuración de control de velocidad"/>
-<text name="hlmgui_speedControlMod" text="Usar mod Control de Velocidad/Cruise Control Extendido"/>
-<text name="hlmgui_speedSetting" text="Velocidad de trabajo en cabeceras"/>
-<text name="hlmgui_speedControlModSetting" text="Nivel de control de velocidad en cabeceras"/>
-
-<text name="hlmgui_alarmControl" text="Configuración general"/>
-<text name="hlmgui_beep" text="Alerta sonora mientras está activo"/>
-<text name="hlmgui_beepVol" text="Volumen"/>
-<text name="hlmgui_beepVolTT" text="Volumen de la alerta sonora"/>
-<text name="hlmgui_keys" text="Mostrar asignación de teclas"/>
+		<text name="hlmgui_speedControlMod" text="Usar mod Control de Velocidad/Cruise Control Extendido"/>
+		<text name="hlmgui_speedSetting" text="Velocidad de trabajo en cabeceras"/>
+		<text name="hlmgui_speedControlModSetting" text="Nivel de control de velocidad en cabeceras"/>
+		
+		<text name="hlmgui_alarmControl" text="Configuración general"/>
+		<text name="hlmgui_beep" text="Alerta sonora mientras está activo"/>
+		<text name="hlmgui_beepVol" text="Volumen"/>
+		<text name="hlmgui_beepVolTT" text="Volumen de la alerta sonora"/>
+		<text name="hlmgui_keys" text="Mostrar asignación de teclas"/>
 		
 		<text name="hlmgui_implementControl" text="Control de implementos"/>
-<text name="hlmgui_raise" text="Levantar implementos"/>
-<text name="hlmgui_plow" text="Girar arado"/>
-<text name="hlmgui_plowFull" text="Giro completo"/>
-<text name="hlmgui_plowCenter" text="Girar en dos pasos"/>
-<text name="hlmgui_plowOff" text="No girar"/>
-<text name="hlmgui_pto" text="Detener TDF y dispositivos hidráulicos"/>
-<text name="hlmgui_ridgeMarker" text="Cambiar marcador de surco"/>
-<text name="hlmgui_emptyBaler" text="Detener descarga automática"/>
+		<text name="hlmgui_raise" text="Levantar implementos"/>
+		<text name="hlmgui_plow" text="Girar arado"/>
+		<text name="hlmgui_plowFull" text="Giro completo"/>
+		<text name="hlmgui_plowCenter" text="Girar en dos pasos"/>
+		<text name="hlmgui_plowOff" text="No girar"/>
+		<text name="hlmgui_pto" text="Detener TDF y dispositivos hidráulicos"/>
+		<text name="hlmgui_ridgeMarker" text="Cambiar marcador de surco"/>
+		<text name="hlmgui_emptyBaler" text="Detener descarga automática"/>
 
-<text name="hlmgui_contourControl" text="Configuración de guía de contorno"/>
-<text name="hlmgui_contourOnOff" text="Habilitar guía de contorno"/>
-<text name="hlmgui_contourFront" text="Habilitar sensor delantero"/>
-<text name="hlmgui_contourWorkedArea" text="Línea de orientación"/>
-<text name="hlmgui_contourFieldBorder" text="Límite del campo"/>
-<text name="hlmgui_contourWorkArea" text="Área trabajada"/>
-<text name="hlmgui_contourSetting" text="Lado del borde del campo"/>
-<text name="hlmgui_contour_On1Pass" text="Activado: Solo un carril"/>
-<text name="hlmgui_contour_OnMPass" text="Activado: Cualquier carril"/>
-<text name="hlmgui_contour_nextRight" text="Primero a la derecha"/>
-<text name="hlmgui_contour_nextLeft" text="Primero a la izquierda"/>
-<text name="hlmgui_contour_alwaysRight" text="Siempre a la derecha"/>
-<text name="hlmgui_contour_alwaysLeft" text="Siempre a la izquierda"/>
-<text name="hlmgui_contourWidthSetting" text="Distancia al borde del campo"/>
-<text name="hlmgui_contour_keepDistance" text="Mantener distancia actual"/>
-<text name="hlmgui_contourWidthChangeSetting" text="Aumentar distancia automáticamente"/>
-<text name="hlmgui_contourWidthSettingInputTitle" text="Distancia manual"/>
-<text name="hlmgui_contour_manualWidth" text="Ajuste manual"/>
-
+		<text name="hlmgui_contourControl" text="Configuración de guía de contorno"/>
+		<text name="hlmgui_contourOnOff" text="Habilitar guía de contorno"/>
+		<text name="hlmgui_contourFront" text="Habilitar sensor delantero"/>
+		<text name="hlmgui_contourWorkedArea" text="Línea de orientación"/>
+		<text name="hlmgui_contourFieldBorder" text="Límite del campo"/>
+		<text name="hlmgui_contourWorkArea" text="Área trabajada"/>
+		<text name="hlmgui_contourSetting" text="Lado del borde del campo"/>
+		<text name="hlmgui_contour_On1Pass" text="Activado: Solo un carril"/>
+		<text name="hlmgui_contour_OnMPass" text="Activado: Cualquier carril"/>
+		<text name="hlmgui_contour_nextRight" text="Primero a la derecha"/>
+		<text name="hlmgui_contour_nextLeft" text="Primero a la izquierda"/>
+		<text name="hlmgui_contour_alwaysRight" text="Siempre a la derecha"/>
+		<text name="hlmgui_contour_alwaysLeft" text="Siempre a la izquierda"/>
+		<text name="hlmgui_contourWidthSetting" text="Distancia al borde del campo"/>
+		<text name="hlmgui_contour_keepDistance" text="Mantener distancia actual"/>
+		<text name="hlmgui_contourWidthChangeSetting" text="Aumentar distancia automáticamente"/>
+		<text name="hlmgui_contourWidthSettingInputTitle" text="Distancia manual"/>
+		<text name="hlmgui_contour_manualWidth" text="Ajuste manual"/>
 		
+				
 		<text name="hlmgui_gpsControl" text="Control GPS"/>
-<text name="hlmgui_gpsSetting" text="Detener dirección GPS"/>
-<text name="hlmgui_gpsType" text="Mod GPS utilizado"/>
-<text name="hlmgui_gps_auto" text="detectar automáticamente"/>
-<text name="hlmgui_gps_gs" text="solo Guidance Steering"/>
-<text name="hlmgui_gps_vca" text="solo VCA"/>
-<text name="hlmgui_gps_vcaL" text="solo VCA: Giro automático a la izquierda"/>
-<text name="hlmgui_gps_vcaR" text="solo VCA: Giro automático a la derecha"/>
-<text name="hlmgui_gps_ev" text="solo Enhanced Vehicle (EV)"/>
-<text name="hlmgui_gps_ev_auto" text="solo EV: Giro automático"/>
-<text name="hlmgui_gps_vanilla" text="solo GPS estándar"/>
-<text name="hlmgui_gpsAutoTriggerSetting" text="Automatización en cabecera"/>
-<text name="hlmgui_gpsAutoTriggerSubTitle" text="Dimensiones actuales del vehículo: Longitud total: %2.2f m, Ancho total: %2.2f m, Radio de giro: %2.2f m"/>
-<text name="hlmgui_gpsAutoTriggerOffsetSetting" text="Activador para automático"/>
-<text name="hlmgui_gpsAutoTriggerOffsetWidth" text="Ancho de cabecera"/>
+		<text name="hlmgui_gpsSetting" text="Detener dirección GPS"/>
+		<text name="hlmgui_gpsAlwaysOn" text="Activar siempre en modo campo"/>
+		<text name="hlmgui_gpsType" text="Mod GPS utilizado"/>
+		<text name="hlmgui_gps_auto" text="detectar automáticamente"/>
+		<text name="hlmgui_gps_gs" text="solo Guidance Steering"/>
+		<text name="hlmgui_gps_vca" text="solo VCA"/>
+		<text name="hlmgui_gps_vcaL" text="solo VCA: Giro automático a la izquierda"/>
+		<text name="hlmgui_gps_vcaR" text="solo VCA: Giro automático a la derecha"/>
+		<text name="hlmgui_gps_ev" text="solo Enhanced Vehicle (EV)"/>
+		<text name="hlmgui_gps_ev_auto" text="solo EV: Giro automático"/>
+		<text name="hlmgui_gps_vanilla" text="solo GPS estándar"/>
+		<text name="hlmgui_gpsAutoTriggerSetting" text="Automatización en cabecera"/>
+		<text name="hlmgui_gpsAutoTriggerSubTitle" text="Dimensiones actuales del vehículo: Longitud total: %2.2f m, Ancho total: %2.2f m, Radio de giro: %2.2f m"/>
+		<text name="hlmgui_gpsAutoTriggerOffsetSetting" text="Activador para automático"/>
+		<text name="hlmgui_gpsAutoTriggerOffsetWidth" text="Ancho de cabecera"/>
 
-		
 		<text name="hlmgui_vcaDirSwitch" text="VCA: Cambiar dirección de giro automáticamente"/>
-<text name="hlmgui_autoResume" text="Modo campo automático"/>
-
-<text name="hlmgui_vehicleControl" text="Control del vehículo"/>
-<text name="hlmgui_diffLock" text="Desbloquear diferenciales"/>	
-<text name="hlmgui_crabSteering" text="Activar dirección en cangrejo"/>
-<text name="hlmgui_csDirect" text="directo"/>
-<text name="hlmgui_csTwoStep" text="a través de normal"/>
-
-<text name="hlmgui_debug" text="Configuración de depuración"/>
-<text name="hlmgui_debugTitle" text="Hacer visibles los nodos del vehículo (global)"/>
-<text name="hlmgui_debugFlagTitle" text="Hacer visibles los nodos de activación"/>
-
+		<text name="hlmgui_autoResume" text="Modo campo automático"/>
 		
+		<text name="hlmgui_vehicleControl" text="Control del vehículo"/>
+		<text name="hlmgui_diffLock" text="Desbloquear diferenciales"/>	
+		<text name="hlmgui_crabSteering" text="Activar dirección en cangrejo"/>
+		<text name="hlmgui_csDirect" text="directo"/>
+		<text name="hlmgui_csTwoStep" text="a través de normal"/>
+		
+		<text name="hlmgui_debug" text="Configuración de depuración"/>
+		<text name="hlmgui_debugTitle" text="Hacer visibles los nodos del vehículo (global)"/>
+		<text name="hlmgui_debugFlagTitle" text="Hacer visibles los nodos de activación"/>
+						
 		<text name="hlmgui_speedControlTT" text="En la cabecera, la configuración del control de crucero puede cambiarse a un valor ajustable y luego restablecerse."/>
-<text name="hlmgui_speedControlModTT" text="Si está disponible, el mod 'SpeedControl' puede utilizarse para ajustar el control de crucero."/>
-<text name="hlmgui_speedSettingTT" text="Configuración deseada del control de crucero en la cabecera."/>
-<text name="hlmgui_speedControlModSettingTT" text="Usar control de crucero 1, 2 o 3 en la cabecera."/>
-<text name="hlmgui_alarmTT" text="Cuando el modo cabecera está activado, se emite un tono de advertencia periódico."/>
-<text name="hlmgui_inputbindingsTT" text="Las asignaciones de teclas activas se muestran en el menú F1."/>
-<text name="hlmgui_raiseTT" text="En la cabecera, los implementos bajados pueden levantarse y luego volver a bajarse. Ajustable opcionalmente para todos, solo los implementos delanteros o solo los traseros."/>
-<text name="hlmgui_plowTT" text="Después de levantarse, los arados pueden girarse. Ya sea completamente, o primero solo hasta el centro y luego completamente mientras se baja. Nota: En este último caso, el tiempo es crucial. Se recomienda detenerse brevemente al final de la cabecera para girar y bajar el arado."/>
-<text name="hlmgui_ptoTT" text="En la cabecera, los implementos activados pueden apagarse y luego encenderse nuevamente. Ajustable opcionalmente para todos, solo los implementos delanteros o solo los traseros."/>
-
-<text name="hlmgui_contourOnOffTT" text="Activa el control a lo largo del borde del campo, ya sea solo para un carril o hasta que se desactive manualmente. Esta función solo está activa en modo campo; en modo cabecera permanece en espera. Con la guía de contorno activada, se recomienda no superar una velocidad de trabajo de 10 km/h."/>
-<text name="hlmgui_contourSettingTT" text="Determina en qué lado se debe seguir el borde del campo. Opcionalmente, el lado puede cambiarse con cada cambio al modo cabecera o mantenerse fijo."/>
-<text name="hlmgui_contourWidthSettingTT" text="La distancia al borde del campo puede mantenerse o fijarse."/>
-<text name="hlmgui_contourWidthChangeSettingTT" text="Si se desea, la distancia al borde del campo puede ampliarse en un ancho de vehículo cada vez que se cambia al modo cabecera."/>
-<text name="hlmgui_contourWidthSettingInputTT" text="Distancia al borde del campo"/>
-
+		<text name="hlmgui_speedControlModTT" text="Si está disponible, el mod 'SpeedControl' puede utilizarse para ajustar el control de crucero."/>
+		<text name="hlmgui_speedSettingTT" text="Configuración deseada del control de crucero en la cabecera."/>
+		<text name="hlmgui_speedControlModSettingTT" text="Usar control de crucero 1, 2 o 3 en la cabecera."/>
+		<text name="hlmgui_alarmTT" text="Cuando el modo cabecera está activado, se emite un tono de advertencia periódico."/>
+		<text name="hlmgui_inputbindingsTT" text="Las asignaciones de teclas activas se muestran en el menú F1."/>
+		<text name="hlmgui_raiseTT" text="En la cabecera, los implementos bajados pueden levantarse y luego volver a bajarse. Ajustable opcionalmente para todos, solo los implementos delanteros o solo los traseros."/>
+		<text name="hlmgui_plowTT" text="Después de levantarse, los arados pueden girarse. Ya sea completamente, o primero solo hasta el centro y luego completamente mientras se baja. Nota: En este último caso, el tiempo es crucial. Se recomienda detenerse brevemente al final de la cabecera para girar y bajar el arado."/>
+		<text name="hlmgui_ptoTT" text="En la cabecera, los implementos activados pueden apagarse y luego encenderse nuevamente. Ajustable opcionalmente para todos, solo los implementos delanteros o solo los traseros."/>
 		
-		<text name="hlmgui_ridgeMarkerTT" text="Mientras se levanta, el marcador de cresta puede cambiarse al lado opuesto."/>
-		
-<text name="hlmgui_emptyBalersSettingTT" text="Detiene la descarga automática de empacadoras en la cabecera del campo."/>
+		<text name="hlmgui_contourOnOffTT" text="Activa el control a lo largo del borde del campo, ya sea solo para un carril o hasta que se desactive manualmente. Esta función solo está activa en modo campo; en modo cabecera permanece en espera. Con la guía de contorno activada, se recomienda no superar una velocidad de trabajo de 10 km/h."/>
+		<text name="hlmgui_contourSettingTT" text="Determina en qué lado se debe seguir el borde del campo. Opcionalmente, el lado puede cambiarse con cada cambio al modo cabecera o mantenerse fijo."/>
+		<text name="hlmgui_contourWidthSettingTT" text="La distancia al borde del campo puede mantenerse o fijarse."/>
+		<text name="hlmgui_contourWidthChangeSettingTT" text="Si se desea, la distancia al borde del campo puede ampliarse en un ancho de vehículo cada vez que se cambia al modo cabecera."/>
+		<text name="hlmgui_contourWidthSettingInputTT" text="Distancia al borde del campo"/>
 
-<text name="hlmgui_gpsTT" text="El seguimiento por GPS se pausa en la cabecera del campo y luego se reanuda."/>
-<text name="hlmgui_gpsTypeTT" text="La función puede limitarse a Guidance Steering o VCA, o pausar automáticamente el sistema activo en ese momento."/>
-<text name="hlmgui_gpsAutoTriggerTT" text="En conjunto con Guidance Steering, la gestión de la cabecera del campo puede activarse automáticamente al llegar a la cabecera."/>
-<text name="hlmgui_gpsAutoTriggerOffsetTT" text="Por defecto, la gestión de la cabecera se activa cuando la parte delantera del vehículo llega a la cabecera. Esto se puede cambiar a la parte trasera del vehículo. Importante: ¡Esta función solo se puede cambiar si la guía de trayectoria de GS no está activa!"/>
-<text name="hlmgui_gpsAutoTriggerOffsetWidthTT" text="Distancia al borde del campo desde la cual debe activarse el modo de cabecera."/>
-<text name="hlmgui_diffLockTT" text="En la cabecera, los bloqueos diferenciales activos se liberan y luego se vuelven a activar."/>
-<text name="hlmgui_csTT" text="Cuando se alcanza la cabecera, la dirección en cangrejo activa puede cambiarse. Ya sea directamente, o primero en posición normal o de retroceso, y luego cambiar completamente al final de la cabecera."/>
-<text name="hlmgui_VCADirSwitchTT" text="Habilita o deshabilita el cambio automático de dirección de giro. Útil cuando VCA tiene diferentes números para saltar líneas izquierda/derecha."/>
-<text name="hlmgui_gpsAutoResumeTT" text="Cambia de nuevo al modo de campo tan pronto como el vehículo haya cambiado de dirección en 180°."/>
-<text name="hlmgui_debugTT" text="Muestra un marcador en los nodos delantero y trasero del vehículo."/>
-<text name="hlmgui_debugFlagTT" text="Muestra dos banderas que marcan el disparador de destino (verde) y el disparador del vehículo (rojo) en la configuración 'primero adelante, luego atrás' en el modo de cabecera."/>
-
+		<text name="hlmgui_ridgeMarkerTT" text="Mientras se levanta, el marcador de cresta puede cambiarse al lado opuesto."/>		
+		<text name="hlmgui_emptyBalersSettingTT" text="Detiene la descarga automática de empacadoras en la cabecera del campo."/>
+		<text name="hlmgui_gpsTT" text="El seguimiento por GPS se pausa en la cabecera del campo y luego se reanuda."/>
+		<text name="hlmgui_gpsTypeTT" text="La función puede limitarse a Guidance Steering o VCA, o pausar automáticamente el sistema activo en ese momento."/>
+		<text name="hlmgui_gpsAutoTriggerTT" text="En conjunto con Guidance Steering, la gestión de la cabecera del campo puede activarse automáticamente al llegar a la cabecera."/>
+		<text name="hlmgui_gpsAutoTriggerOffsetTT" text="Por defecto, la gestión de la cabecera se activa cuando la parte delantera del vehículo llega a la cabecera. Esto se puede cambiar a la parte trasera del vehículo. Importante: ¡Esta función solo se puede cambiar si la guía de trayectoria de GS no está activa!"/>
+		<text name="hlmgui_gpsAutoTriggerOffsetWidthTT" text="Distancia al borde del campo desde la cual debe activarse el modo de cabecera."/>
+		<text name="hlmgui_diffLockTT" text="En la cabecera, los bloqueos diferenciales activos se liberan y luego se vuelven a activar."/>
+		<text name="hlmgui_csTT" text="Cuando se alcanza la cabecera, la dirección en cangrejo activa puede cambiarse. Ya sea directamente, o primero en posición normal o de retroceso, y luego cambiar completamente al final de la cabecera."/>
+		<text name="hlmgui_VCADirSwitchTT" text="Habilita o deshabilita el cambio automático de dirección de giro. Útil cuando VCA tiene diferentes números para saltar líneas izquierda/derecha."/>
+		<text name="hlmgui_gpsAutoResumeTT" text="Cambia de nuevo al modo de campo tan pronto como el vehículo haya cambiado de dirección en 180°."/>
+		<text name="hlmgui_debugTT" text="Muestra un marcador en los nodos delantero y trasero del vehículo."/>
+		<text name="hlmgui_debugFlagTT" text="Muestra dos banderas que marcan el disparador de destino (verde) y el disparador del vehículo (rojo) en la configuración 'primero adelante, luego atrás' en el modo de cabecera."/>
 	</texts>
 </l10n>

@@ -79,6 +79,7 @@
 		
 		<text name="hlmgui_gpsControl" text="GPS control"/>
 		<text name="hlmgui_gpsSetting" text="Stop GPS steering"/>
+		<text name="hlmgui_gpsAlwaysOn" text="Always enable in field mode"/>
 		<text name="hlmgui_gpsType" text="Used GPS-Mod"/>
 		<text name="hlmgui_gps_auto" text="detect automatically"/>
 		<text name="hlmgui_gps_gs" text="only Guidance Steering"/>

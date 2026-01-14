@@ -79,6 +79,7 @@
 		
 		<text name="hlmgui_gpsControl" text="GPS управление"/>
 		<text name="hlmgui_gpsSetting" text="Остановить руление GPS"/>
+		<text name="hlmgui_gpsAlwaysOn" text="Всегда активировать в полевом режиме"/>
 		<text name="hlmgui_gpsType" text="Использование мода GPS"/>
 		<text name="hlmgui_gps_auto" text="определять автоматически"/>
 		<text name="hlmgui_gps_gs" text="только Guidance Steering"/>
