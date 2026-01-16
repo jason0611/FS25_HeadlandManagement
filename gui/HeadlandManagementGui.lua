@@ -184,7 +184,7 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_contour_OnMPass")
 	})
 	local contourOnOffSetting = 1
-	if self.spec.contour ~= 0 then
+	if self.spec.contour ~= 0 and not self.spec.isNexat then
 		if self.spec.contourMultiMode then 
 			contourOnOffSetting = 3
 		else
@@ -192,6 +192,7 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 		end
 	end	
 	self.contourOnOffSetting:setState(contourOnOffSetting)
+	self.contourOnOffSetting:setDisabled(self.spec.isNexat)
 	self.contourFrontTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_contourFront"))
 	self.contourFrontSetting.onClickCallback = HeadlandManagementGui.logicalCheck
 	self.contourFrontSetting:setTexts({
