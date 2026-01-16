@@ -1418,10 +1418,10 @@ local function getHeading(self)
 	
 	local x1, y1, z1 = localToWorld(self.rootNode, 0, 0, 0)
 	local x2, y2, z2 
-	if not isNexat then
-		x2, y2, z2 = localToWorld(self.rootNode, 0, 0, 1)
-	else
+	if isNexat and self.getIsUnfolded ~= nil and self:getIsUnfolded() then
 		x2, y2, z2 = localToWorld(self.rootNode, -1, 0, 0)
+	else
+		x2, y2, z2 = localToWorld(self.rootNode, 0, 0, 1)
 	end
 	local dx, dz = x2 - x1, z2 - z1
 	local heading = math.floor(180 - (180 / math.pi) * math.atan2(dx, dz))
