@@ -400,6 +400,8 @@ function HeadlandManagement:onLoad(savegame)
 	spec.action = {}				-- switches for process chain
 	spec.action[0] =false
 	
+	spec.isNexat = false			-- if vehicle is Nexat, changes to headland automatic are necessary
+	
 	spec.useSpeedControl = true		-- change working speed on headland
 	
 	spec.useHLMTriggerF = false 	-- use vehicle's front node as trigger
@@ -713,6 +715,12 @@ function HeadlandManagement:onPostLoad(savegame)
 	
 	dbgprint("modEVFound is "..tostring(spec.modEVFound).."("..tostring(modEVFound).."/"..tostring(modEVEnabled)..")")
 
+	-- Detect if vehicle is Nexat
+	if self["spec_pdlc_nexatPack.moduleAttachAssist"] ~= nil then 
+		spec.isNexat = true
+		dbgprint("onPostLoad : Nexat vehicle detected: "..tostring(self:getFullName()), 1)
+	end
+	
 	-- HLM configured?
 	dbgprint("onPostLoad : Spec exists (before reload): "..tostring(spec.exists), 2)
 	--spec.exists = self.configurations["headlandManagement"] ~= nil and self.configurations["headlandManagement"] > 1
@@ -1898,8 +1906,7 @@ end
 function HeadlandManagement:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSelection, isSelected)
 	local spec = self.spec_HeadlandManagement
 
-	if not spec.contourSetActive and spec.contour ~= 0 and spec.exists and not spec.isActive then
-		
+	if not spec.contourSetActive and spec.contour ~= 0 and spec.exists and not spec.isActive then	
 		spec.contourPr, spec.contourPi1, spec.contourPi2, spec.contourPi3, spec.contourPf1, spec.contourPf2, spec.contourPf3, spec.contourPo1, spec.contourPo2, spec.contourPo3 = getContourPoints(self)
 		local xi1, yi1, zi1 = unpack(spec.contourPi1) -- inside measurement (on field): inside limit
 		local xi2, yi2, zi2 = unpack(spec.contourPi2) -- inside measurement (on field): distance point
