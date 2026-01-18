@@ -411,6 +411,7 @@ function HeadlandManagement:onLoad(savegame)
 	spec.headlandB = false 			-- back node over headland?
 	spec.lastHeadlandF = false		-- was front node already over headland?
 	spec.lastHeadlandB = false		-- was back node already over headland?
+	spec.triggerAngle = 22.5		-- minimum turn angle before headland automatic switches back to field mode
 	
 	spec.useRaiseImplementF = true	-- raise front implements in headland mode
 	spec.useRaiseImplementB = true	-- raise back implements in headland mode
@@ -1574,11 +1575,15 @@ function HeadlandManagement:onUpdate(dt)
 	local override = false
 	
 	if spec.turnHeading ~= nil then 
-		local heading = (spec.turnHeading - 180) % 360
+		local heading = (spec.turnHeading - 180) % 360 -- reconstruct original heading when starting turn
 		local bearing = (spec.heading - heading) % 360
 		-- Prevent distance growing to infinite and prevent resuming too early because of not right-angular field borders
-		if bearing > 22.5 and bearing <= 135 then override = true end
-		if bearing > 225 and bearing < 337.5 then override = true end
+		local startAngle = spec.triggerAngle / 2
+		local triggerAngle = spec.triggerAngle
+		--if bearing > 22.5 and bearing <= 135 then override = true end
+		--if bearing > 225 and bearing < 337.5 then override = true end
+		if bearing <= 180 - triggerAngle then override = true end
+		if bearing >= 180 + triggerAngle then override = true end
 		dbgrender("heading: "..tostring(heading), 15, 3)
 		dbgrender("bearing: "..tostring(bearing), 16, 3)
 		distance = distance / math.cos(bearing * (2 * math.pi / 360))
