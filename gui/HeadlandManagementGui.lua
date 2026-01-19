@@ -476,6 +476,11 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	self.gpsResumeSetting:setState(not resumeSettingDisabled and self.spec.autoResume and 2 or 1)
 	self.gpsResumeSetting:setDisabled(resumeSettingDisabled)
 	
+	self.gpsResumeAngleTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gpsAutoTriggerOffsetWidth"))
+	self.gpsResumeAngleInput:setText(tostring(self.spec.triggerAngle))
+	self.gpsResumeAngleInput.onEnterPressedCallback = HeadlandManagementGui.onResumeAngleInput
+	self.gpsResumeAngleInput:setDisabled((triggerSetting ~= 2 or self.spec.useEVTrigger) and self.spec.autoResume and not resumeSettingDisabled)
+	
 	-- Vehicle control
 	self.vehicleControl:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_vehicleControl"))
 	
@@ -632,10 +637,17 @@ function HeadlandManagementGui:onWidthInput()
 	dbgprint("onWidthInput : spec.headlandDistance: "..tostring(self.spec.headlandDistance), 2)
 end
 
+function HeadlandManagementGui:onResumeAngleInput()
+	dbgprint("onResumeAngleInput : "..self.gpsResumeAngleInput:getText())
+	local inputValue = tonumber(self.gpsResumeAngleInput:getText())
+	if inputValue ~= nil then self.spec.triggerAngle = inputValue end
+	dbgprint("onResumeAngleInput : spec.triggerAngle: "..tostring(self.spec.triggerAngle), 2)
+end
+
 function HeadlandManagementGui:onContourWidthInput()
 	dbgprint("onContourWidthInput : "..self.contourWidthSettingInput:getText())
 	local inputValue = tonumber(self.contourWidthSettingInput:getText())
-	if inputValue ~= nil then self.spec.contourWidthManualInput = inputValue end
+	if inputValue ~= nil and inputValue > 0 and inputValue < 90 then self.spec.contourWidthManualInput = inputValue end
 	dbgprint("onContourWidthInput : spec.contourWidthManualInput: "..tostring(self.spec.contourWidthManualInput), 2)
 end
 

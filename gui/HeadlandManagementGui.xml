@@ -201,6 +201,13 @@
 						<Text profile="fs25_multiTextOptionTooltip" name="ignore" id="gpsResumeTT"/>
 					</BinaryOption>	
 				</GuiElement>
+				<GuiElement profile="fs25_multiTextOptionContainer">
+					<Text profile="multiTextOptionSettingsTitle" id="gpsResumeAngleTitle"/>
+					<TextInput profile="fs25_settingsTextInput" position="-30px +0px" id="gpsResumeAngleInput" imeKeyboardType="normal">
+						<Text   profile="fs25_multiTextOptionTooltip" position="670px +0px" id="gpsResumeAngleTT"/>
+						<Bitmap profile="fs25_textInputBg" position="-10px +0px"/>
+					</TextInput>
+				</GuiElement>
 	
 			<!-- SpeedControl -->
 				<Text profile="fs25_settingsSectionHeader" id="speedControl"/>
