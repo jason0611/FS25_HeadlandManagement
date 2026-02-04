@@ -121,7 +121,6 @@ function HeadlandManagement.inj_onLoadFinished(self, superfunc, savegame)
 		local filePath = Utils.getDirectory(savegame.xmlFile.filename)
 		local fileName = "headlandManagementFix.xml"
 		if fileExists(filePath..fileName) then
-			print("CheckPoint found!")
 			superfunc(self, savegame)
 		end
 	end
@@ -136,7 +135,6 @@ function HeadlandManagement.app_saveToXMLFile(self, xmlFile, ...)
 		checkpointFile:setBool("headlandManagement.patch_1_15", true)
 		checkpointFile:save(false, false)
 		checkpointFile:delete()
-		print("CheckPoint set!")
 	end
 end
 AttacherJoints.saveToXMLFile = Utils.appendedFunction(AttacherJoints.saveToXMLFile, HeadlandManagement.app_saveToXMLFile)
