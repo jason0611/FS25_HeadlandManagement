@@ -95,23 +95,51 @@ HeadlandManagement.kbECC = false
 
 -- fix event-calls to have always the same seqence
 function HeadlandManagement.raiseConfigurationItemEvent(object, superfunc, eventName)
+
 	local configNameSorted = {}
-    for configName, configId in pairs(object.configurations) do
+	   for configName, configId in pairs(object.configurations) do
 		table.insert(configNameSorted, configName)
 	end
+	
 	local function sort(a, b)
 		return a>b
 	end
 	table.sort(configNameSorted, sort)
+	
 	for index, configName in ipairs(configNameSorted) do
-		local configId = object.configurations[configName]
-        local configItem = ConfigurationUtil.getConfigItemByConfigId(object.configFileName, configName, configId)
-        if configItem ~= nil and configItem[eventName] ~= nil then
-            configItem[eventName](configItem, object, configId)
-        end
-    end
+	local configId = object.configurations[configName]
+		  local configItem = ConfigurationUtil.getConfigItemByConfigId(object.configFileName, configName, configId)
+		  if configItem ~= nil and configItem[eventName] ~= nil then
+			  configItem[eventName](configItem, object, configId)
+		  end
+	end
 end
-ConfigurationUtil.raiseConfigurationItemEvent = Utils.overwrittenFunction(ConfigurationUtil.raiseConfigurationItemEvent, HeadlandManagement.raiseConfigurationItemEvent)
+--ConfigurationUtil.raiseConfigurationItemEvent = Utils.overwrittenFunction(ConfigurationUtil.raiseConfigurationItemEvent, HeadlandManagement.raiseConfigurationItemEvent)
+
+function HeadlandManagement.inj_onLoadFinished(self, superfunc, savegame)
+	if savegame ~= nil and savegame.xmlFile ~= nil and savegame.xmlFile.filename ~= nil then
+		local filePath = Utils.getDirectory(savegame.xmlFile.filename)
+		local fileName = "headlandManagementFix.xml"
+		if fileExists(filePath..fileName) then
+			print("CheckPoint found!")
+			superfunc(self, savegame)
+		end
+	end
+end
+AttacherJoints.onLoadFinished = Utils.overwrittenFunction(AttacherJoints.onLoadFinished, HeadlandManagement.inj_onLoadFinished)
+
+function HeadlandManagement.app_saveToXMLFile(self, xmlFile, ...)
+	local filePath = Utils.getDirectory(xmlFile.filename)
+	local fileName = "headlandManagementFix.xml"
+	if not fileExists(filePath..fileName) then
+		local checkpointFile = XMLFile.create("CHECKPOINT", filePath..fileName, "headlandManagement")
+		checkpointFile:setBool("headlandManagement.patch_1_15", true)
+		checkpointFile:save(false, false)
+		checkpointFile:delete()
+		print("CheckPoint set!")
+	end
+end
+AttacherJoints.saveToXMLFile = Utils.appendedFunction(AttacherJoints.saveToXMLFile, HeadlandManagement.app_saveToXMLFile)
 
 --create configuration
 function HeadlandManagement.getConfigurationsFromXML(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvironment, isMod, storeItem)
