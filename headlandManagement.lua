@@ -120,7 +120,7 @@ function HeadlandManagement.inj_onLoadFinished(self, superfunc, savegame)
 	if savegame ~= nil and savegame.xmlFile ~= nil and savegame.xmlFile.filename ~= nil then
 		local filePath = Utils.getDirectory(savegame.xmlFile.filename)
 		local fileName = "headlandManagementFix.xml"
-		if fileExists(filePath..fileName) then
+		if not HeadlandManagement.alreadyUsed or fileExists(filePath..fileName) then
 			superfunc(self, savegame)
 		end
 	end
@@ -756,6 +756,13 @@ function HeadlandManagement:onPostLoad(savegame)
 		dbgprint("onPostLoad : loading saved data", 2)
 		local xmlFile = savegame.xmlFile
 		local key = savegame.key .."."..HeadlandManagement.MOD_NAME..".HeadlandManagement"
+
+		-- check if HLM is already used before and so possibly needs the configuration-fix		
+		if HeadlandManagement.alreadyUsed == nil then
+			HeadlandManagement.alreadyUsed = xmlFile:getValue(key..".configured") ~= nil
+			dbgprint("onPostLoad : HLM was used before, config-fix is possibly necessary: "..tostring(HeadlandManagement.alreadyUsed), 1)
+		end
+		
 		spec.exists = xmlFile:getValue(key..".configured", spec.exists)
 		if spec.exists then
 			spec.isOn = xmlFile:getValue(key..".isOn", spec.isOn)
