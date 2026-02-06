@@ -122,6 +122,8 @@ function HeadlandManagement.inj_onLoadFinished(self, superfunc, savegame)
 		local fileName = "headlandManagementFix.xml"
 		if not HeadlandManagement.alreadyUsed or fileExists(filePath..fileName) then
 			superfunc(self, savegame)
+		else
+			Logging.info("Headland Management: Configuration update applied, implements will be detached once")
 		end
 	end
 end
