@@ -120,7 +120,7 @@ function HeadlandManagement.inj_onLoadFinished(self, superfunc, savegame)
 	if savegame ~= nil and savegame.xmlFile ~= nil and savegame.xmlFile.filename ~= nil then
 		local filePath = Utils.getDirectory(savegame.xmlFile.filename)
 		local fileName = "headlandManagementFix.xml"
-		if not HeadlandManagement.alreadyUsed or fileExists(filePath..fileName) then
+		if filePath == "/" or not HeadlandManagement.alreadyUsed or fileExists(filePath..fileName) then
 			superfunc(self, savegame)
 		else
 			Logging.info("Headland Management: Configuration update applied, implements will be detached once")
@@ -132,10 +132,10 @@ AttacherJoints.onLoadFinished = Utils.overwrittenFunction(AttacherJoints.onLoadF
 function HeadlandManagement.app_saveToXMLFile(self, xmlFile, ...)
 	local filePath = Utils.getDirectory(xmlFile.filename)
 	local fileName = "headlandManagementFix.xml"
-	if not fileExists(filePath..fileName) then
+	if filePath ~= "/" and not fileExists(filePath..fileName) then
 		local checkpointFile = XMLFile.create("CHECKPOINT", filePath..fileName, "headlandManagement")
 		checkpointFile:setBool("headlandManagement.patch_1_15", true)
-		checkpointFile:save(false, false)
+		checkpointFile:save(true, false)
 		checkpointFile:delete()
 	end
 end
