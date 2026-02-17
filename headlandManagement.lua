@@ -93,25 +93,30 @@ HeadlandManagement.kbECC = false
 
 -- Overwritten functions
 
--- fix event-calls to have always the same seqence
-function HeadlandManagement.raiseConfigurationItemEvent(object, superfunc, eventName)
-	local configNameSorted = {}
-    for configName, configId in pairs(object.configurations) do
-		table.insert(configNameSorted, configName)
+function HeadlandManagement.inj_onLoadFinished(self, superfunc, savegame)
+	if savegame ~= nil and savegame.xmlFile ~= nil and savegame.xmlFile.filename ~= nil then
+		local filePath = Utils.getDirectory(savegame.xmlFile.filename)
+		local fileName = "headlandManagementFix.xml"
+		if filePath == "/" or not HeadlandManagement.alreadyUsed or fileExists(filePath..fileName) then
+			superfunc(self, savegame)
+		else
+			Logging.info("Headland Management: Configuration update applied, implements will be detached once")
+		end
 	end
-	local function sort(a, b)
-		return a>b
-	end
-	table.sort(configNameSorted, sort)
-	for index, configName in ipairs(configNameSorted) do
-		local configId = object.configurations[configName]
-        local configItem = ConfigurationUtil.getConfigItemByConfigId(object.configFileName, configName, configId)
-        if configItem ~= nil and configItem[eventName] ~= nil then
-            configItem[eventName](configItem, object, configId)
-        end
-    end
 end
-ConfigurationUtil.raiseConfigurationItemEvent = Utils.overwrittenFunction(ConfigurationUtil.raiseConfigurationItemEvent, HeadlandManagement.raiseConfigurationItemEvent)
+AttacherJoints.onLoadFinished = Utils.overwrittenFunction(AttacherJoints.onLoadFinished, HeadlandManagement.inj_onLoadFinished)
+
+function HeadlandManagement.app_saveToXMLFile(self, xmlFile, ...)
+	local filePath = Utils.getDirectory(xmlFile.filename)
+	local fileName = "headlandManagementFix.xml"
+	if filePath ~= "/" and not fileExists(filePath..fileName) then
+		local checkpointFile = XMLFile.create("CHECKPOINT", filePath..fileName, "headlandManagement")
+		checkpointFile:setBool("headlandManagement.patch_1_15", true)
+		checkpointFile:save(true, false)
+		checkpointFile:delete()
+	end
+end
+AttacherJoints.saveToXMLFile = Utils.appendedFunction(AttacherJoints.saveToXMLFile, HeadlandManagement.app_saveToXMLFile)
 
 --create configuration
 function HeadlandManagement.getConfigurationsFromXML(self, superfunc, xmlFile, baseXMLName, baseDir, customEnvironment, isMod, storeItem)
@@ -400,6 +405,8 @@ function HeadlandManagement:onLoad(savegame)
 	spec.action = {}				-- switches for process chain
 	spec.action[0] =false
 	
+	spec.isNexat = false			-- if vehicle is Nexat, changes to headland automatic are necessary
+	
 	spec.useSpeedControl = true		-- change working speed on headland
 	
 	spec.useHLMTriggerF = false 	-- use vehicle's front node as trigger
@@ -409,6 +416,7 @@ function HeadlandManagement:onLoad(savegame)
 	spec.headlandB = false 			-- back node over headland?
 	spec.lastHeadlandF = false		-- was front node already over headland?
 	spec.lastHeadlandB = false		-- was back node already over headland?
+	spec.triggerAngle = 22.5		-- minimum turn angle before headland automatic switches back to field mode
 	
 	spec.useRaiseImplementF = true	-- raise front implements in headland mode
 	spec.useRaiseImplementB = true	-- raise back implements in headland mode
@@ -713,6 +721,12 @@ function HeadlandManagement:onPostLoad(savegame)
 	
 	dbgprint("modEVFound is "..tostring(spec.modEVFound).."("..tostring(modEVFound).."/"..tostring(modEVEnabled)..")")
 
+	-- Detect if vehicle is Nexat
+	if self["spec_pdlc_nexatPack.moduleAttachAssist"] ~= nil then 
+		spec.isNexat = true
+		dbgprint("onPostLoad : Nexat vehicle detected: "..tostring(self:getFullName()), 1)
+	end
+	
 	-- HLM configured?
 	dbgprint("onPostLoad : Spec exists (before reload): "..tostring(spec.exists), 2)
 	--spec.exists = self.configurations["headlandManagement"] ~= nil and self.configurations["headlandManagement"] > 1
@@ -721,6 +735,13 @@ function HeadlandManagement:onPostLoad(savegame)
 		dbgprint("onPostLoad : loading saved data", 2)
 		local xmlFile = savegame.xmlFile
 		local key = savegame.key .."."..HeadlandManagement.MOD_NAME..".HeadlandManagement"
+
+		-- check if HLM is already used before and so possibly needs the configuration-fix		
+		if HeadlandManagement.alreadyUsed == nil then
+			HeadlandManagement.alreadyUsed = xmlFile:getValue(key..".configured") ~= nil
+			dbgprint("onPostLoad : HLM was used before, config-fix is possibly necessary: "..tostring(HeadlandManagement.alreadyUsed), 1)
+		end
+		
 		spec.exists = xmlFile:getValue(key..".configured", spec.exists)
 		if spec.exists then
 			spec.isOn = xmlFile:getValue(key..".isOn", spec.isOn)
@@ -1405,8 +1426,16 @@ function HeadlandManagement:onPreDetachImplement(implement)
 end
 
 local function getHeading(self)
+	local spec = self.spec_HeadlandManagement
+	local isNexat =  spec ~= nil and spec.isNexat
+	
 	local x1, y1, z1 = localToWorld(self.rootNode, 0, 0, 0)
-	local x2, y2, z2 = localToWorld(self.rootNode, 0, 0, 1)
+	local x2, y2, z2 
+	if isNexat and self.getIsUnfolded ~= nil and self:getIsUnfolded() then
+		x2, y2, z2 = localToWorld(self.rootNode, -1, 0, 0)
+	else
+		x2, y2, z2 = localToWorld(self.rootNode, 0, 0, 1)
+	end
 	local dx, dz = x2 - x1, z2 - z1
 	local heading = math.floor(180 - (180 / math.pi) * math.atan2(dx, dz))
 	return heading, dx, dz
@@ -1504,12 +1533,12 @@ function HeadlandManagement.onUpdateResearch(self)
 	dbgrender("lastOnHeadlandB: "..tostring(spec.lastHeadlandB), 9, 3)
 	
 	dbgrender("fieldNumF: "..tostring(spec.fieldNumF), 11, 3)
-	dbgrender("fieldNumB: "..tostring(spec.fieldNumB), 13, 3)
+	dbgrender("fieldNumB: "..tostring(spec.fieldNumB), 12, 3)
 
-	dbgrender("direction: "..tostring(math.floor(spec.heading)), 15, 3)
+	dbgrender("direction: "..tostring(math.floor(spec.heading)), 13, 3)
 	
-	dbgrender("isActive: "..tostring(spec.isActive), 17, 3)
-	dbgrender("actStep: "..tostring(spec.actStep), 18, 3)
+	dbgrender("isActive: "..tostring(spec.isActive), 18, 3)
+	dbgrender("actStep: "..tostring(spec.actStep), 19, 3)
 	
 	dbgrender("contour: "..tostring(spec.contour), 24, 3)
 	dbgrender("contourSetActive: "..tostring(spec.contourSetActive), 25, 3)
@@ -1558,11 +1587,16 @@ function HeadlandManagement:onUpdate(dt)
 	local override = false
 	
 	if spec.turnHeading ~= nil then 
-		local heading = (spec.turnHeading + 180) % 360
+		local heading = (spec.turnHeading - 180) % 360 -- reconstruct original heading when starting turn
 		local bearing = (spec.heading - heading) % 360
 		-- Prevent distance growing to infinite and prevent resuming too early because of not right-angular field borders
-		if bearing > 22.5 and bearing <= 135 then override = true end
-		if bearing > 225 and bearing < 337.5 then override = true end
+		local startAngle = spec.triggerAngle / 2
+		local triggerAngle = spec.triggerAngle
+		--if bearing > 22.5 and bearing <= 135 then override = true end
+		--if bearing > 225 and bearing < 337.5 then override = true end
+		if bearing <= 180 - triggerAngle then override = true end
+		if bearing >= 180 + triggerAngle then override = true end
+		dbgrender("heading: "..tostring(heading), 15, 3)
 		dbgrender("bearing: "..tostring(bearing), 16, 3)
 		distance = distance / math.cos(bearing * (2 * math.pi / 360))
 		if distance < 0 then distance = distance + 3 end -- correction value to smoothen field edge
@@ -1580,7 +1614,7 @@ function HeadlandManagement:onUpdate(dt)
 		spec.headlandF = override or getDensityAtWorldPos(g_currentMission.terrainDetailId, tfx, 0, tfz) == 0
 		if not spec.headlandF then spec.fieldNumF = getFieldNum(spec.frontNode, tfx, tfz) end -- Update fieldNumF only, if trigger is on field
 		if HeadlandManagement.debug then
-			DebugUtil.drawDebugLine(nx, ny, nz, tfx, 0, tfz, 1, 0, 0, nil, true)
+			DebugUtil.drawDebugLine(nx, ny + 0.001, nz, tfx, ny + 0.001, tfz, 1, 0, 0, nil, true)
 		end
 		if spec.headlandF ~= oldValue then dbgprint("headlandF: Changed to "..tostring(spec.headlandF), 3) end
 	else
@@ -1597,7 +1631,7 @@ function HeadlandManagement:onUpdate(dt)
 		spec.headlandB = override or getDensityAtWorldPos(g_currentMission.terrainDetailId, tbx, 0, tbz) == 0
 		if not spec.headlandB then spec.fieldNumB = getFieldNum(spec.backNode, tbx, tbz) end -- Update fieldNumB only, if trigger is on field
 		if HeadlandManagement.debug then
-			DebugUtil.drawDebugLine(nx, ny, nz, tbx, 0, tbz, 0, 1, 0, nil, true)
+			DebugUtil.drawDebugLine(nx, ny + 0.001, nz, tbx, ny + 0.001, tbz, 0, 1, 0, nil, true)
 		end
 		if spec.headlandB ~= oldValue then dbgprint("headlandB: Changed to "..tostring(spec.headlandB), 3) end
 	else
@@ -1625,8 +1659,11 @@ function HeadlandManagement:onUpdate(dt)
 	end
 	
 	-- activate headland mode when reaching headland in auto-mode
+	local nexatOverride = spec.isNexat and (spec.useHLMTriggerF or spec.useHLMTriggerB)
+	
+	-- front node
 	if not HeadlandManagement.isDedi and self:getIsActive() and spec.exists and self == g_currentMission.hud.controlledVehicle and not spec.isActive and not spec.useEVTrigger
-		and spec.useHLMTriggerF and not spec.autoOverride
+		and (spec.useHLMTriggerF or nexatOverride) and not spec.autoOverride --and not isNexat
 		and spec.headlandF and not spec.lastHeadlandF 
 	then
 		spec.triggerContourStateChange = true
@@ -1635,17 +1672,30 @@ function HeadlandManagement:onUpdate(dt)
 		spec.lastFieldNumF = spec.fieldNumF
 		dbgprint("onUpdate : Headland mode activated by front trigger (auto-mode) on Field "..tostring(spec.lastFieldNumF), 2)
 	end
+	-- back node
 	if not HeadlandManagement.isDedi and self:getIsActive() and spec.exists and self == g_currentMission.hud.controlledVehicle and not spec.isActive and not spec.useEVTrigger
-		and spec.useHLMTriggerB and not spec.autoOverride
+		and (spec.useHLMTriggerB or nexatOverride) and not spec.autoOverride --and not isNexat
 		and spec.headlandB and not spec.lastHeadlandB 
 	then
-		
 		spec.triggerContourStateChange = true
 		spec.isActive = true
 		spec.lastHeadlandB = true
 		spec.lastFieldNumB = spec.fieldNumB
 		dbgprint("onUpdate : Headland mode activated by back trigger (auto-mode) on Field "..tostring(spec.lastFieldNumB), 2)
 	end
+	-- nexat: both nodes
+--	if not HeadlandManagement.isDedi and self:getIsActive() and spec.exists and self == g_currentMission.hud.controlledVehicle and not spec.isActive and not spec.useEVTrigger
+--		and spec.isNexat and (spec.useHLMTriggerF or spec.useHLMTriggerB) and not spec.autoOverride
+--		and (spec.headlandF and not spec.lastHeadlandF) or (spec.headlandB and not spec.lastHeadlandB)
+--	then
+--		spec.triggerContourStateChange = true
+--		spec.isActive = true
+--		spec.lastHeadlandF = true
+--		spec.lastFieldNumF = spec.fieldNumF
+--		spec.lastHeadlandB = true
+--		spec.lastFieldNumB = spec.fieldNumB
+--		dbgprint("onUpdate : Headland mode activated by nexat trigger (auto-mode) on Field "..tostring(spec.lastFieldNumB), 2)
+--	end
 	
 	-- activate headland management at headland in auto-mode triggered by Guidance Steering
 	if not HeadlandManagement.isDedi and self:getIsActive() and spec.exists and self == g_currentMission.hud.controlledVehicle and spec.modGuidanceSteeringFound and spec.useGuidanceSteeringTrigger and not spec.useEVTrigger then
@@ -1815,8 +1865,9 @@ function HeadlandManagement:onUpdate(dt)
 	end
 	
 	-- auto resume on trigger: activate field mode when leaving headland in auto-mode
+	-- front node
 	if not HeadlandManagement.isDedi and self:getIsActive() and spec.exists and self == g_currentMission.hud.controlledVehicle and spec.isActive and spec.actStep == HeadlandManagement.MAXSTEP and not spec.useEVTrigger
-		and spec.useHLMTriggerF and spec.autoResumeOnTrigger 
+		and spec.useHLMTriggerF and spec.autoResumeOnTrigger and not spec.isNexat 
 		and not spec.headlandF and spec.lastHeadlandF and not spec.autoOverride 
 		and isOnField(self.rootNode) and (spec.fieldNumF == getFieldNum(self.rootNode)) --spec.lastFieldNumF)
 	then
@@ -1825,8 +1876,9 @@ function HeadlandManagement:onUpdate(dt)
 		spec.turnHeading = nil
 		dbgprint("onUpdate : Field mode activated by front trigger (auto-resume)", 2)
 	end
+	-- back node
 	if not HeadlandManagement.isDedi and self:getIsActive() and spec.exists and self == g_currentMission.hud.controlledVehicle and spec.isActive and spec.actStep == HeadlandManagement.MAXSTEP
-		and spec.useHLMTriggerB and spec.autoResumeOnTrigger 
+		and spec.useHLMTriggerB and spec.autoResumeOnTrigger and not spec.isNexat 
 		and not spec.headlandB and spec.lastHeadlandB and not spec.autoOverride
 		and isOnField(self.rootNode) and (spec.fieldNumB == getFieldNum(self.rootNode)) --spec.lastFieldNumB)
 	then
@@ -1835,6 +1887,19 @@ function HeadlandManagement:onUpdate(dt)
 		spec.turnHeading = nil
 		--spec.evOverride = false
 		dbgprint("onUpdate : Field mode activated by back trigger (auto-resume)", 2)
+	end
+	--nexat: both nodes
+	if not HeadlandManagement.isDedi and self:getIsActive() and spec.exists and self == g_currentMission.hud.controlledVehicle and spec.isActive and spec.actStep == HeadlandManagement.MAXSTEP
+		and nexatOverride and spec.autoResumeOnTrigger and not spec.autoOverride
+		and not spec.headlandF and not spec.headlandB
+		and isOnField(self.rootNode) and spec.fieldNumF == getFieldNum(self.rootNode) and spec.fieldNumB == getFieldNum(self.rootNode)	
+	then
+		spec.actStep = -spec.actStep
+		spec.lastHeadlandF = false
+		spec.lastHeadlandB = false 
+		spec.turnHeading = nil
+		--spec.evOverride = false
+		dbgprint("onUpdate : Field mode activated by nexat trigger (auto-resume)", 2)
 	end
 	
 	-- reset lastHeadland if no automatic field mode is active
@@ -1898,8 +1963,7 @@ end
 function HeadlandManagement:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSelection, isSelected)
 	local spec = self.spec_HeadlandManagement
 
-	if not spec.contourSetActive and spec.contour ~= 0 and spec.exists and not spec.isActive then
-		
+	if not spec.contourSetActive and spec.contour ~= 0 and spec.exists and not spec.isActive then	
 		spec.contourPr, spec.contourPi1, spec.contourPi2, spec.contourPi3, spec.contourPf1, spec.contourPf2, spec.contourPf3, spec.contourPo1, spec.contourPo2, spec.contourPo3 = getContourPoints(self)
 		local xi1, yi1, zi1 = unpack(spec.contourPi1) -- inside measurement (on field): inside limit
 		local xi2, yi2, zi2 = unpack(spec.contourPi2) -- inside measurement (on field): distance point

@@ -184,7 +184,7 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 		g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_contour_OnMPass")
 	})
 	local contourOnOffSetting = 1
-	if self.spec.contour ~= 0 then
+	if self.spec.contour ~= 0 and not self.spec.isNexat then
 		if self.spec.contourMultiMode then 
 			contourOnOffSetting = 3
 		else
@@ -192,6 +192,7 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 		end
 	end	
 	self.contourOnOffSetting:setState(contourOnOffSetting)
+	self.contourOnOffSetting:setDisabled(self.spec.isNexat)
 	self.contourFrontTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_contourFront"))
 	self.contourFrontSetting.onClickCallback = HeadlandManagementGui.logicalCheck
 	self.contourFrontSetting:setTexts({
@@ -245,8 +246,9 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	if self.spec.contourWidth == math.floor(self.spec.vehicleWidth * 0.5) + math.floor(self.spec.vehicleWidth) * 3 then widthMode = 6 end
 	self.contourWidthSetting:setState(widthMode)
 	
+	self.contourWidthManualInput = self.spec.contourWidthManualInput 
 	self.contourWidthSettingInputTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_contourWidthSettingInputTitle"))
-	self.contourWidthSettingInput:setText(tostring(self.spec.contourWidthManualInput))
+	self.contourWidthSettingInput:setText(tostring(self.contourWidthManualInput))
 	self.contourWidthSettingInput:setDisabled(widthMode ~= 7)
 	self.contourWidthSettingInput.onEnterPressedCallback = HeadlandManagementGui.onContourWidthInput
 	
@@ -459,10 +461,11 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 		offsetSetting = 2
 	end
 	self.gpsAutoTriggerOffsetSetting:setState(offsetSetting)
-	self.gpsAutoTriggerOffsetSetting:setDisabled(triggerSetting == 1 or (triggerSetting == 3 and self.gpsEnabled) or (triggerSetting == 3 and not self.spec.modGuidanceSteeringFound) or triggerSetting == 4 or self.spec.useEVTrigger)
+	self.gpsAutoTriggerOffsetSetting:setDisabled(self.spec.isNexat or triggerSetting == 1 or (triggerSetting == 3 and self.gpsEnabled) or (triggerSetting == 3 and not self.spec.modGuidanceSteeringFound) or triggerSetting == 4 or self.spec.useEVTrigger)
 	
+	self.headlandDistance = self.spec.headlandDistance
 	self.gpsAutoTriggerOffsetWidthTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gpsAutoTriggerOffsetWidth"))
-	self.gpsAutoTriggerOffsetWidthInput:setText(tostring(self.spec.headlandDistance))
+	self.gpsAutoTriggerOffsetWidthInput:setText(tostring(self.headlandDistance))
 	self.gpsAutoTriggerOffsetWidthInput.onEnterPressedCallback = HeadlandManagementGui.onWidthInput
 	self.gpsAutoTriggerOffsetWidthInput:setDisabled(triggerSetting ~= 2 or self.spec.useEVTrigger)
 	
@@ -474,6 +477,12 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 	local resumeSettingDisabled = (not self.spec.modGuidanceSteeringFound and triggerSetting == 3) or triggerSetting == 4 or self.spec.useEVTrigger
 	self.gpsResumeSetting:setState(not resumeSettingDisabled and self.spec.autoResume and 2 or 1)
 	self.gpsResumeSetting:setDisabled(resumeSettingDisabled)
+	
+	self.triggerAngle = self.spec.triggerAngle
+	self.gpsResumeAngleTitle:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_gpsAutoTriggerOffsetWidth"))
+	self.gpsResumeAngleInput:setText(tostring(self.triggerAngle))
+	self.gpsResumeAngleInput.onEnterPressedCallback = HeadlandManagementGui.onResumeAngleInput
+	self.gpsResumeAngleInput:setDisabled((triggerSetting ~= 2 or self.spec.useEVTrigger) and self.spec.autoResume and not resumeSettingDisabled)
 	
 	-- Vehicle control
 	self.vehicleControl:setText(g_i18n.modEnvironments[HeadlandManagement.MOD_NAME]:getText("hlmgui_vehicleControl"))
@@ -627,15 +636,22 @@ end
 function HeadlandManagementGui:onWidthInput()
 	dbgprint("onWidthInput : "..self.gpsAutoTriggerOffsetWidthInput:getText())
 	local inputValue = tonumber(self.gpsAutoTriggerOffsetWidthInput:getText())
-	if inputValue ~= nil then self.spec.headlandDistance = inputValue end
-	dbgprint("onWidthInput : spec.headlandDistance: "..tostring(self.spec.headlandDistance), 2)
+	if inputValue ~= nil then self.headlandDistance = inputValue end
+	dbgprint("onWidthInput : self.headlandDistance: "..tostring(self.headlandDistance), 2)
+end
+
+function HeadlandManagementGui:onResumeAngleInput()
+	dbgprint("onResumeAngleInput : "..self.gpsResumeAngleInput:getText())
+	local inputValue = tonumber(self.gpsResumeAngleInput:getText())
+	if inputValue ~= nil then self.triggerAngle = inputValue end
+	dbgprint("onResumeAngleInput : self.triggerAngle: "..tostring(self.triggerAngle), 2)
 end
 
 function HeadlandManagementGui:onContourWidthInput()
 	dbgprint("onContourWidthInput : "..self.contourWidthSettingInput:getText())
 	local inputValue = tonumber(self.contourWidthSettingInput:getText())
-	if inputValue ~= nil then self.spec.contourWidthManualInput = inputValue end
-	dbgprint("onContourWidthInput : spec.contourWidthManualInput: "..tostring(self.spec.contourWidthManualInput), 2)
+	if inputValue ~= nil and inputValue > 0 and inputValue < 90 then self.contourWidthManualInput = inputValue end
+	dbgprint("onContourWidthInput : self.contourWidthManualInput: "..tostring(self.contourWidthManualInput), 2)
 end
 
 -- close gui and send new values to callback
@@ -698,6 +714,7 @@ function HeadlandManagementGui:onClickOk()
 	
 	self.spec.contourFrontActive = self.contourFrontSetting:getState() == 2
 	self.spec.contourWorkedArea = self.contourWorkedAreaSetting:getState() == 2
+	self.spec.contourWidthManualInput = self.contourWidthManualInput
 	
 	local widthMode = self.contourWidthSetting:getState()
 	if widthMode == 2 then 
@@ -735,7 +752,7 @@ function HeadlandManagementGui:onClickOk()
 		self.spec.contourWidthMeasurement = true
 		self.spec.contourTrack = 0
 		self.spec.contourWidthManualMode = false
-	end		
+	end
 	self.spec.contourWidthAdaption = self.contourWidthChangeSetting:getState() == 2
 	-- gps
 	self.spec.useGPS = self.gpsOnOffSetting:getState() == 2
@@ -798,6 +815,8 @@ function HeadlandManagementGui:onClickOk()
 	self.spec.gpsAlwaysOn = self.gpsAlwaysOn:getState() == 2
 	
 	-- headland automatic
+	self.spec.headlandDistance = self.headlandDistance
+	self.spec.triggerAngle = self.triggerAngle
 	local triggerSetting = self.gpsAutoTriggerSetting:getState()
 	local offsetSetting = self.gpsAutoTriggerOffsetSetting:getState()
 	if triggerSetting == 1 then
