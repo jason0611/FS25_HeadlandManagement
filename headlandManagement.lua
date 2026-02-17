@@ -93,29 +93,6 @@ HeadlandManagement.kbECC = false
 
 -- Overwritten functions
 
--- fix event-calls to have always the same seqence
-function HeadlandManagement.raiseConfigurationItemEvent(object, superfunc, eventName)
-
-	local configNameSorted = {}
-	   for configName, configId in pairs(object.configurations) do
-		table.insert(configNameSorted, configName)
-	end
-	
-	local function sort(a, b)
-		return a>b
-	end
-	table.sort(configNameSorted, sort)
-	
-	for index, configName in ipairs(configNameSorted) do
-	local configId = object.configurations[configName]
-		  local configItem = ConfigurationUtil.getConfigItemByConfigId(object.configFileName, configName, configId)
-		  if configItem ~= nil and configItem[eventName] ~= nil then
-			  configItem[eventName](configItem, object, configId)
-		  end
-	end
-end
---ConfigurationUtil.raiseConfigurationItemEvent = Utils.overwrittenFunction(ConfigurationUtil.raiseConfigurationItemEvent, HeadlandManagement.raiseConfigurationItemEvent)
-
 function HeadlandManagement.inj_onLoadFinished(self, superfunc, savegame)
 	if savegame ~= nil and savegame.xmlFile ~= nil and savegame.xmlFile.filename ~= nil then
 		local filePath = Utils.getDirectory(savegame.xmlFile.filename)
