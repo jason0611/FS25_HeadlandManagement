@@ -93,7 +93,8 @@
 			<text name="hlmgui_gpsAutoTriggerSetting" text="Automatico a fine campo"/>
 			<text name="hlmgui_gpsAutoTriggerSubTitle" text="Current vehicle dimensions: Overall length: %2.2f m, Overall width: %2.2f m, Turning radius: %2.2f m"/>
 			<text name="hlmgui_gpsAutoTriggerOffsetSetting" text="Trigger per automatico"/>
-			<text name="hlmgui_gpsAutoTriggerOffsetWidth" text="Headland width"/>
+			<text name="hlmgui_gpsAutoTriggerOffsetWidth" text="Larghezza di manovra"/>
+			<text name="hlmgui_gpsAutoTriggerAngle" text="Angolo di sensibilità del grilletto"/>
 		
 			<text name= "hlmgui_vcaDirSwitch" text="VCA: Cambia automaticamente la direzione di svolta"/>
 			<text name= "hlmgui_autoResume" text="Automatic field mode"/>

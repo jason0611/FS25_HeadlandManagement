@@ -94,6 +94,7 @@
 		<text name="hlmgui_gpsAutoTriggerSubTitle" text="Aktuální rozměry vozu: Celková délka: %2.2f m, Celková šířka: %2.2f m, Poloměr otáčení: %2.2f m"/>
 		<text name="hlmgui_gpsAutoTriggerOffsetSetting" text="Bod pro automatické spuštění"/>
 		<text name="hlmgui_gpsAutoTriggerOffsetWidth" text="Šířka souvrati"/>
+		<text name="hlmgui_gpsAutoTriggerAngle" text="Úhel citlivosti spouště"/>
 		
 		<text name= "hlmgui_vcaDirSwitch" text="VCA automatické přepínání směru"/>
 		<text name= "hlmgui_autoResume" text="Automatický režim návratu"/>

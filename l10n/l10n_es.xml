@@ -96,6 +96,7 @@
 		<text name="hlmgui_gpsAutoTriggerSubTitle" text="Dimensiones actuales del vehículo: Longitud total: %2.2f m, Ancho total: %2.2f m, Radio de giro: %2.2f m"/>
 		<text name="hlmgui_gpsAutoTriggerOffsetSetting" text="Activador para automático"/>
 		<text name="hlmgui_gpsAutoTriggerOffsetWidth" text="Ancho de cabecera"/>
+		<text name="hlmgui_gpsAutoTriggerAngle" text="Ángulo de sensibilidad del gatillo"/>
 
 		<text name="hlmgui_vcaDirSwitch" text="VCA: Cambiar dirección de giro automáticamente"/>
 		<text name="hlmgui_autoResume" text="Modo campo automático"/>
