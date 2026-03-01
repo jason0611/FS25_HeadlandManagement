@@ -484,6 +484,8 @@ function HeadlandManagementGui.setData(self, vehicleName, spec, gpsEnabled, debu
 		self.gpsVariant = 15
 	end
 	self.gpsSetting:setState(gpsSetting)
+	dbgprint("setData: gpsVariant = "..tostring(self.gpsVariant), 1)
+	dbgprint("setData: gpsSetting = "..tostring(gpsSetting), 1)
 	
 	local gpsDisabled
 	if not self.spec.modGuidanceSteeringFound and not self.spec.modVCAFound and not self.spec.modEVFound and not self.spec.modCPFound and not self.spec.vanillaGPSEnabled then
@@ -941,7 +943,7 @@ function HeadlandManagementGui:onClickOk()
 		if gpsSetting > 1 and gpsSetting < 5 then
 			self.spec.gpsSetting = gpsSetting + 1 
 		elseif gpsSetting > 4 then
-			self.spec.gpsSetting = self.spec.gpsSetting + 3
+			self.spec.gpsSetting = gpsSetting + 3
 		end
 	end
 	
@@ -953,7 +955,7 @@ function HeadlandManagementGui:onClickOk()
 	
 	if self.gpsVariant == 12 then 
 		if gpsSetting > 2 then 
-			self.spec.gpsSetting = self.spec.gpsSetting + 5
+			self.spec.gpsSetting = gpsSetting + 5
 		else
 			self.spec.gpsSetting = gpsSetting 
 		end
@@ -971,13 +973,16 @@ function HeadlandManagementGui:onClickOk()
 		if gpsSettings < 6 then
 			self.spec.gpsSetting = gpsSetting 
 		else 
-			self.spec.gpsSetting = self.spec.gpsSetting + 2
+			self.spec.gpsSetting = gpsSetting + 2
 		end
 	end
 	
 	if self.gpsVariant == 15 then 
 		self.spec.gpsSetting = gpsSetting 
 	end
+	
+	dbgprint("clickOk: gpsVariant = "..tostring(self.gpsVariant), 2)
+	dbgprint("clickOk: gpsSetting = "..tostring(self.spec.gpsSetting), 2)
 	
 	self.spec.gpsAlwaysOn = self.gpsAlwaysOn:getState() == 2
 	
