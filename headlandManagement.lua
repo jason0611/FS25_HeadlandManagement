@@ -113,7 +113,7 @@ function HeadlandManagement.app_saveToXMLFile(self, xmlFile, ...)
 	if filePath ~= "/" and not fileExists(filePath..fileName) then
 		local checkpointFile = XMLFile.create("CHECKPOINT", filePath..fileName, "headlandManagement")
 		checkpointFile:setBool("headlandManagement.patch_1_15", true)
-		checkpointFile:save(true, false)
+		checkpointFile:save(false, false)
 		checkpointFile:delete()
 	end
 end
