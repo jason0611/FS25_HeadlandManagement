@@ -90,6 +90,7 @@ HeadlandManagement.kbGS = true
 HeadlandManagement.kbSC = true
 HeadlandManagement.kbEV = false
 HeadlandManagement.kbECC = false
+HeadlandManagement.kbCP = false
 
 -- Overwritten functions
 
@@ -718,8 +719,10 @@ function HeadlandManagement:onPostLoad(savegame)
 	
 	-- Check if Mod EV exists
 	spec.modEVFound = FS25_EnhancedVehicle ~= nil and FS25_EnhancedVehicle.FS25_EnhancedVehicle ~= nil and FS25_EnhancedVehicle.FS25_EnhancedVehicle.onActionCall ~= nil and not HeadlandManagement.kbEV
-	
 	dbgprint("modEVFound is "..tostring(spec.modEVFound).."("..tostring(modEVFound).."/"..tostring(modEVEnabled)..")")
+	
+	-- Check if Mod CoursePlayGPS exists
+	spec.modCPFound = self.spec_cpGpsExtension ~= nil and not HeadlandManagement.kbCP
 
 	-- Detect if vehicle is Nexat
 	if self["spec_pdlc_nexatPack.moduleAttachAssist"] ~= nil then 
@@ -2694,6 +2697,7 @@ end
 function HeadlandManagement.stopGPS(self, enable)
 	local spec = self.spec_HeadlandManagement
 	local specAI = self.spec_aiAutomaticSteering
+	local specCP = self.spec_cpGpsExtension
 	dbgprint("stopGPS : "..tostring(enable))
 
 -- gpsSettings:
@@ -2704,7 +2708,8 @@ function HeadlandManagement.stopGPS(self, enable)
 -- 5 	: VCA automatic turn right
 -- 6 	: EV standard
 -- 7 	: EV turn
--- 0/8 	: AIAutomaticsteering (Vanilla GPS)
+-- 8	: CoursePlayGPS
+-- 0/9 	: AIAutomaticsteering (Vanilla GPS)
 
 -- Part 1: Detect used mod
 	if spec.gpsSetting == 1 then
@@ -2736,8 +2741,13 @@ function HeadlandManagement.stopGPS(self, enable)
 		end
 	end
 	
-	if spec.gpsSetting == 1 and specAI ~= nil and specAI.steeringEnabled then
+	if spec.gpsSetting == 1 and spec.modCPFound and specCP.GpsActive == 1 then
 		spec.gpsSetting = 8
+		dbgprint("stopGPS : CPGPS is active")
+	end
+	
+	if spec.gpsSetting == 1 and specAI ~= nil and specAI.steeringEnabled then
+		spec.gpsSetting = 9
 		dbgprint("stopGPS : AI is active")
 	end
 	
@@ -2844,12 +2854,38 @@ function HeadlandManagement.stopGPS(self, enable)
 		end
 	end
 	
+-- Part 5: CoursePlayGPSExtension
+	if specCP ~= nil and spec.gpsSetting == 8 then
+		if enable then
+			local gpsEnabled = specCP.GpsActive == 1
+			if gpsEnabled then
+				spec.gpsSetting = 8
+				spec.CPStatus = true
+				dbgprint("stopGPS : CCGPS off")
+				self:SteeringOnOff(0)
+			else
+				spec.CPStatus = false
+			end
+		else 
+			local gpsEnabled = spec.CPStatus or spec.gpsAlwaysOn
+			if gpsEnabled then
+				spec.gpsSetting = 8
+				dbgprint("stopGPS : CCGPS on")
+				self:SteeringOnOff(1)
+			end
+			if spec.wasGPSAutomatic then
+				spec.gpsSetting = 1
+				spec.wasGPSAutomatic = false
+			end
+		end
+	end
+	
 -- Part 5: aiAutimaticSteering (Vanilla GPS)
-	if specAI ~= nil and spec.gpsSetting == 8 then
+	if specAI ~= nil and spec.gpsSetting == 9 then
 		if enable then
 			local gpsEnabled = specAI.steeringEnabled
 			if gpsEnabled then
-				spec.gpsSetting = 8
+				spec.gpsSetting = 9
 				spec.AIStatus = true
 				dbgprint("stopGPS : Vanilla-GPS off")
 				self:setAIAutomaticSteeringEnabled(false)
@@ -2859,7 +2895,7 @@ function HeadlandManagement.stopGPS(self, enable)
 		else 
 			local gpsEnabled = spec.AIStatus or spec.gpsAlwaysOn
 			if gpsEnabled then
-				spec.gpsSetting = 8
+				spec.gpsSetting = 9
 				dbgprint("stopGPS : Vanilla-GPS on")
 				self:setAIAutomaticSteeringEnabled(true)
 			end

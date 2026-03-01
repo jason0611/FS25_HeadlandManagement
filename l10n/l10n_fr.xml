@@ -88,7 +88,8 @@
 		<text name="hlmgui_gps_vcaR" text="VCA seulement : Retournement automatique à droite"/>
 		<text name="hlmgui_gps_ev" text="Enhanced Vehicle (EV) seulement"/>
 		<text name="hlmgui_gps_ev_auto" text="EV seulement : Retournement automatique"/>
-		<text name="hlmgui_gps_vanilla" text="only vanilla GPS"/>
+		<text name="hlmgui_gps_cpGps" text="GPS Courseplay uniquement"/>
+		<text name="hlmgui_gps_vanilla" text="GPS standard uniquement"/>
 		<text name="hlmgui_gpsAutoTriggerSetting" text="Fourrière automatique"/>
 		<text name="hlmgui_gpsAutoTriggerSubTitle" text="Current vehicle dimensions: Overall length: %2.2f m, Overall width: %2.2f m, Turning radius: %2.2f m"/>
 		<text name="hlmgui_gpsAutoTriggerOffsetSetting" text="Déclencheur automatique"/>
@@ -117,7 +118,6 @@
 		<text name="hlmgui_raiseTT" text="En bout de champ, les outils portés abaissés peuvent être relevés puis redescendus. Réglable au choix pour tous les outils, uniquement pour l'avant ou uniquement pour l'arrière."/>
 		<text name="hlmgui_plowTT" text="Avec le relevage, les charrues peuvent être retournées. Soit directement, soit d'abord seulement vers le centre et seulement complètement lors de l'abaissement."/>
 		<text name="hlmgui_ridgeMarkerTT" text="Le relevage permet de commuter le traceur sur le côté opposé."/>
-		
 		
 		<text name="hlmgui_emptyBalersSettingTT" text="Arrêt du déchargement automatique en bout de champ pour les presses à balles"/>
 		

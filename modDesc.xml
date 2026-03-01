@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="105">
 	<author>Glowins Modschmiede</author>
-	<version>3.0.2.0</version>
+	<version>3.A.2.1</version>
 	<contributors>Agrarplay und LU Wohnzimmer, Funjetor</contributors >
 
 	<title>
@@ -69,6 +69,9 @@ Change Log V3.0.2.0:
 - Headland management is now compatible with Nexat
 - Temporary correction of configuration handling is no longer necessary and has therefore been removed. ATTENTION: When updating to this version, all attached devices will be disconnected once when the game is started!
 
+Change Log V3.0.3.0:
+- Compatibility with CousePlay GPS Extension
+
 GitHub link: https://github.com/jason0611/FS25_HeadlandManagement
 Further ideas or requests are welcome there
 ]]>
@@ -132,6 +135,9 @@ Change Log V3.0.2.0:
 - Vorgewendeautomatik ist nun kompatibel mit Nexat
 - Vorübergehende Korrektur des Konfigurations-Handlings ist überflüssig geworden und wurde daher wieder ausgebaut. ACHTUNG: Beim Update auf diese Version werden alle angehängten Geräte einmalig beim Spielstart abgekuppelt!
 
+Change Log V3.0.3.0:
+- Kompatibel mit CousePlay GPS Erweiterung
+
 GitHub-Link: https://github.com/jason0611/FS25_HeadlandManagement
 Weitere Ideen oder Wünsche werden dort gerne entgegengenommen
 ]]>
@@ -191,6 +197,9 @@ Change Log V3.0.1.0:
 Change Log V3.0.2.0 :
 - La fonction automatique en bout de champ est désormais compatible avec Nexat
 - La correction temporaire de la gestion de la configuration n'est plus nécessaire et a donc été supprimée. ATTENTION : lors de la mise à jour vers cette version, tous les appareils attelés seront dételés une seule fois au démarrage du jeu !
+
+Change Log V3.0.3.0:
+- Kompatibel mit CousePlay GPS Erweiterung
 
 Lien GitHub : https://github.com/jason0611/FS25_HeadlandManagement
 D'autres idées ou souhaits y sont les bienvenus, veuillez écrire en allemand ou en anglais
