@@ -199,7 +199,7 @@ Change Log V3.0.2.0 :
 - La correction temporaire de la gestion de la configuration n'est plus nécessaire et a donc été supprimée. ATTENTION : lors de la mise à jour vers cette version, tous les appareils attelés seront dételés une seule fois au démarrage du jeu !
 
 Change Log V3.0.3.0:
-- Kompatibel mit CousePlay GPS Erweiterung
+- Compatible avec l'extension GPS CousePlay
 
 Lien GitHub : https://github.com/jason0611/FS25_HeadlandManagement
 D'autres idées ou souhaits y sont les bienvenus, veuillez écrire en allemand ou en anglais
