@@ -91,6 +91,7 @@
 		<text name="hlmgui_gps_vcaR" text="solo VCA: Giro automático a la derecha"/>
 		<text name="hlmgui_gps_ev" text="solo Enhanced Vehicle (EV)"/>
 		<text name="hlmgui_gps_ev_auto" text="solo EV: Giro automático"/>
+		<text name="hlmgui_gps_cpGps" text="solo GPS CoursePlay"/>
 		<text name="hlmgui_gps_vanilla" text="solo GPS estándar"/>
 		<text name="hlmgui_gpsAutoTriggerSetting" text="Automatización en cabecera"/>
 		<text name="hlmgui_gpsAutoTriggerSubTitle" text="Dimensiones actuales del vehículo: Longitud total: %2.2f m, Ancho total: %2.2f m, Radio de giro: %2.2f m"/>

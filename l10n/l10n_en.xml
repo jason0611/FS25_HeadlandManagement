@@ -88,6 +88,7 @@
 		<text name="hlmgui_gps_vcaR" text="only VCA: Automatic turn right"/>
 		<text name="hlmgui_gps_ev" text="only Enhanced Vehicle (EV)"/>
 		<text name="hlmgui_gps_ev_auto" text="only EV: Automatic turn"/>
+		<text name="hlmgui_gps_cpGps" text="only CoursePlay GPS"/>
 		<text name="hlmgui_gps_vanilla" text="only vanilla GPS"/>
 		<text name="hlmgui_gpsAutoTriggerSetting" text="Headland automatic"/>
 		<text name="hlmgui_gpsAutoTriggerSubTitle" text="Current vehicle dimensions: Overall length: %2.2f m, Overall width: %2.2f m, Turning radius: %2.2f m"/>
