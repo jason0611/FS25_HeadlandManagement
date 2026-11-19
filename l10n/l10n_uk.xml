@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+	<texts>
+		<text name="input_HLM_TOGGLESTATE" text="Режим поворотної смуги / Польовий режим"/>	
+		<text name="input_HLM_SWITCHON" text="Режим поворотної смуги" />
+		<text name="input_HLM_SWITCHOFF" text="Польовий режим" />	
+		<text name="input_HLM_SHOWGUI" text="Поворотна смуга: Налаштування" />
+		<text name="input_HLM_MAINSWITCH" text="HLM: Увімкнути/Вимкнути"/>
+		<text name="input_HLM_TOGGLEAUTO" text="HLM: Переключити авторежим поворотної смуги"/>
+		<text name="input_HLM_AUTOON" text="HLM: Увімкнути авторежим поворотної смуги"/>
+		<text name="input_HLM_AUTOOFF" text="HLM: Вимкнути авторежим поворотної смуги"/>
+		
+		<text name="text_HLM_isActive" text="Режим поворотної смуги активний"/>
+		<text name="text_HLM_configuration" text="Керування поворотною смугою (HLM)"/>
+		<text name="text_HLM_installed" text="Керування поворотною смугою встановлено"/>
+		<text name="text_HLM_notInstalled" text="Керування поворотною смугою не встановлено"/>
+		<text name="text_HLM_installed_short" text="Встановлено"/>
+		<text name="text_HLM_notInstalled_short" text="Не встановлено"/>
+		<text name="text_HLM_implementTypeLoaded" text="Конфігурацію завантажено для типу знаряддя"/>
+		<text name="text_HLM_implementTypeSaved" text="Конфігурацію збережено для типу знаряддя"/>
+
+		<text name="text_HLM_type_Plow" text="Плуг"/>
+		<text name="text_HLM_type_Cultivator" text="Культиватор"/>
+		<text name="text_HLM_type_Roller" text="Каток"/>
+		<text name="text_HLM_type_Sowingmachine" text="Сівалка"/>
+		<text name="text_HLM_type_Mulcher" text="Мульчер"/>
+		<text name="text_HLM_type_Combine" text="Комбайн"/>
+		<text name="text_HLM_type_Foragewagon" text="Причіп-підбирач"/>
+		<text name="text_HLM_type_Baler" text="Прес-підбирач"/>
+		
+		<text name="hlmgui_title" text="Керування поворотною смугою (HLM): Налаштування для "/>
+		<text name="hlmgui_on" text="увм"/>
+		<text name="hlmgui_off" text="вим"/>
+		<text name="hlmgui_both" text="спереду та ззаду"/>
+		<text name="hlmgui_seq" text="спочатку спереду, потім ззаду"/>
+		<text name="hlmgui_front" text="спереду"/>
+		<text name="hlmgui_back" text="ззаду"/>
+		<text name="hlmgui_default" text="за замовчуванням"/>
+		
+		<text name="hlmgui_speedControl" text="Налаштування контролю швидкості"/>
+		<text name="hlmgui_speedControlMod" text="Використовувати мод Speed Control/Extended Cruise Control"/>
+		<text name="hlmgui_speedSetting" text="Робоча швидкість на поворотній смузі"/>
+		<text name="hlmgui_speedControlModSetting" text="Рівень Speed-Control на поворотній смузі"/>
+	
+		<text name="hlmgui_alarmControl" text="Загальні налаштування"/>
+		<text name="hlmgui_beep" text="Звуковий сигнал під час роботи"/>
+		<text name="hlmgui_beepVol" text="Гучність"/>
+		<text name="hlmgui_beepVolTT" text="Гучність звукового попередження" />
+		<text name="hlmgui_keys" text="Показувати призначення клавіш" />
+		
+		<text name="hlmgui_implementControl" text="Керування обладнанням"/>
+		<text name="hlmgui_raise" text="Піднімати обладнання"/>
+		<text name="hlmgui_plow" text="Перевертати плуг"/>
+		<text name="hlmgui_plowFull" text="Повний поворот"/>
+		<text name="hlmgui_plowCenter" text="Поворот у два етапи"/>
+		<text name="hlmgui_plowOff" text="Не перевертати"/>
+		<text name="hlmgui_pto" text="Зупиняти ВВП та гідравліку"/>
+		<text name="hlmgui_ridgeMarker" text="Змінювати маркер загінки"/>
+		<text name="hlmgui_emptyBaler" text="Зупиняти автоматичне розвантаження"/>
+		
+		<text name="hlmgui_contourControl" text="Налаштування ведення по контуру"/>
+		<text name="hlmgui_contourOnOff" text="Увімкнути ведення по контуру"/>
+		<text name="hlmgui_contourFront" text="Увімкнути передній датчик"/>
+		<text name="hlmgui_contourWorkedArea" text="Лінія орієнтації"/>
+		<text name="hlmgui_contourFieldBorder" text="Межа поля"/>
+		<text name="hlmgui_contourWorkArea" text="Оброблена площа"/>
+		<text name="hlmgui_contourSetting" text="Сторона межі поля"/>
+		<text name="hlmgui_contour_On1Pass" text="увм: Тільки один прохід"/>
+		<text name="hlmgui_contour_OnMPass" text="увм: Будь-який прохід"/>
+		<text name="hlmgui_contour_nextRight" text="спочатку праворуч"/>
+		<text name="hlmgui_contour_nextLeft" text="спочатку ліворуч"/>
+		<text name="hlmgui_contour_alwaysRight" text="завжди праворуч"/>
+		<text name="hlmgui_contour_alwaysLeft" text="завжди ліворуч"/>
+		<text name="hlmgui_contourWidthSetting" text="Відстань до межі поля"/>
+		<text name="hlmgui_contour_keepDistance" text="Зберігати поточну відстань"/>
+		<text name="hlmgui_contourWidthChangeSetting" text="Збільшувати відстань автоматично" />
+		<text name="hlmgui_contourWidthSettingInputTitle" text="Ручна відстань"/>
+		<text name="hlmgui_contour_manualWidth" text="Ручне налаштування"/>
+		
+		<text name="hlmgui_gpsControl" text="Керування GPS"/>
+		<text name="hlmgui_gpsSetting" text="Зупиняти ведення по GPS"/>
+		<text name="hlmgui_gpsAlwaysOn" text="Завжди вмикати в польовому режимі"/>
+		<text name="hlmgui_gpsType" text="Використовуваний GPS-мод"/>
+		<text name="hlmgui_gps_auto" text="визначати автоматично"/>
+		<text name="hlmgui_gps_gs" text="тільки Guidance Steering"/>
+		<text name="hlmgui_gps_vca" text="тільки VCA"/>
+		<text name="hlmgui_gps_vcaL" text="тільки VCA: Авторозворот ліворуч"/>
+		<text name="hlmgui_gps_vcaR" text="тільки VCA: Авторозворот праворуч"/>
+		<text name="hlmgui_gps_ev" text="тільки Enhanced Vehicle (EV)"/>
+		<text name="hlmgui_gps_ev_auto" text="тільки EV: Авторозворот"/>
+		<text name="hlmgui_gps_cpGps" text="тільки CoursePlay GPS"/>
+		<text name="hlmgui_gps_vanilla" text="тільки ванільний GPS"/>
+		<text name="hlmgui_gpsAutoTriggerSetting" text="Автоматика поворотної смуги"/>
+		<text name="hlmgui_gpsAutoTriggerSubTitle" text="Поточні габарити ТЗ: Загальна довжина: %2.2f м, Загальна ширина: %2.2f м, Радіус повороту: %2.2f м"/>
+		<text name="hlmgui_gpsAutoTriggerOffsetSetting" text="Тригер автоматичного спрацьовування"/>
+		<text name="hlmgui_gpsAutoTriggerOffsetWidth" text="Ширина поворотної смуги"/>
+		<text name="hlmgui_gpsAutoTriggerAngle" text="Кут чутливості тригера"/>
+		
+		<text name= "hlmgui_vcaDirSwitch" text="VCA: Автоматично перемикати напрямок повороту"/>
+		<text name= "hlmgui_autoResume" text="Автоматичний польовий режим"/>
+		
+		<text name="hlmgui_vehicleControl" text="Керування транспортним засобом"/>
+		<text name="hlmgui_diffLock" text="Розблокувати диференціали"/>	
+		<text name="hlmgui_crabSteering" text="Перемикати крабовий хід"/>
+		<text name="hlmgui_csDirect" text="напряму"/>
+		<text name="hlmgui_csTwoStep" text="через звичайний"/>
+		
+		<text name="hlmgui_debug" text="Налаштування налагодження (Debug)"/>
+		<text name="hlmgui_debugTitle" text="Показувати вузли ТЗ (глобально)"/>
+		<text name="hlmgui_debugFlagTitle" text="Показувати вузли тригерів"/>
+		
+		<text name="hlmgui_speedControlTT" text="На поворотній смузі значення круїз-контролю можна змінити на налаштоване, а після виїзду повертати назад."/>
+		<text name="hlmgui_speedControlModTT" text="За наявності мода 'SpeedControl', він буде використовуватися для регулювання круїз-контролю."/>
+		<text name="hlmgui_speedSettingTT" text="Бажана швидкість круїз-контролю на поворотній смузі."/>
+		<text name="hlmgui_speedControlModSettingTT" text="Використовувати 1, 2 або 3 рівень Speed-Control на поворотній смузі."/>
+		<text name="hlmgui_alarmTT" text="Коли активний режим поворотної смуги, лунатиме регулярний попереджувальний сигнал."/>
+		<text name="hlmgui_inputbindingsTT" text="Активне призначення клавіш відображатиметься в меню F1."/>
+		<text name="hlmgui_raiseTT" text="На поворотній смузі опущені знаряддя можуть підніматися, а потім знову опускатися. Опціонально налаштовується для всього обладнання, тільки для переднього або тільки для заднього."/>
+		<text name="hlmgui_plowTT" text="Після підйому плуги можуть перевертатися. Або повністю, або спочатку до центру, а потім повністю під час опускання. Примітка: У другому випадку важливий правильний таймінг. Рекомендується ненадовго зупинятися в кінці поворотної смуги для повороту та опускання плуга."/>
+		<text name="hlmgui_ptoTT" text="На поворотній смузі увімкнені знаряддя можна вимикати, а потім знову вмикати. Опціонально для всього обладнання, тільки для переднього або тільки для заднього."/>
+
+		<text name="hlmgui_contourOnOffTT" text="Активує ведення уздовж межі поля — або для одного проходу, або поки функцію не буде вимкнено. Функція працює лише в польовому режимі (у режимі поворотної смуги перебуває в режимі очікування). При активному веденні по контуру не рекомендується перевищувати робочу швидкість 10 км/год."/>
+		<text name="hlmgui_contourSettingTT" text="Визначає, з якого боку слідувати межі поля. Сторона може перемикатися при кожному виїзді на поворотну смугу або залишатися фіксованою."/>
+		<text name="hlmgui_contourWidthSettingTT" text="Відстань до краю поля можна зберігати поточною або зафіксувати."/>
+		<text name="hlmgui_contourWidthChangeSettingTT" text="За бажанням відстань до краю поля можна розширювати на одну ширину ТЗ при кожному переході в режим поворотної смуги."/>
+		<text name="hlmgui_contourWidthSettingInputTT" text="Відстань до межі поля"/>
+		
+		<text name="hlmgui_ridgeMarkerTT" text="Під час підйому маркер загінки може перемикатися на протилежний бік."/>
+		
+		<text name="hlmgui_emptyBalersSettingTT" text="Зупиняє автоматичне вивантаження тюків на поворотній смузі."/>
+		
+		<text name="hlmgui_gpsTT" text="Ведення по GPS призупиняється на поворотній смузі та відновлюється після неї."/>
+		<text name="hlmgui_gpsTypeTT" text="Функцію можна обмежити лише для Guidance Steering або VCA, або налаштувати автоматичну паузу для поточної активної системи."/>
+		<text name="hlmgui_gpsAutoTriggerTT" text="У зв'язці з Guidance Steering керування поворотною смугою може вмикатися автоматично при досягненні краю поля."/>
+		<text name="hlmgui_gpsAutoTriggerOffsetTT" text="За замовчуванням система спрацьовує, коли передня частина ТЗ досягає поворотної смуги. Це можна переключити на задню частину ТЗ. Важливо: Цю функцію можна змінювати лише тоді, коли ведення по колії в GS не активне!"/>
+		<text name="hlmgui_gpsAutoTriggerOffsetWidthTT" text="Відстань до краю поля, починаючи з якої активується режим поворотної смуги."/>
+		<text name="hlmgui_diffLockTT" text="На поворотній смузі активні блокування диференціалів вимикаються, а потім вмикаються знову."/>
+		<text name="hlmgui_csTT" text="При досягненні поворотної смуги активний крабовий хід може перемикатися. Або одразу, або спочатку в звичайне/реверсивне положення, а в кінці поворотної смуги — повністю."/>
+		<text name="hlmgui_VCADirSwitchTT" text="Вмикає або вимикає автоматичну зміну напрямку повороту. Корисно, коли у VCA налаштовано різну кількість пропущених колій ліворуч/праворуч."/>
+		<text name="hlmgui_gpsAutoResumeTT" text="Повертається в польовий режим, як тільки транспортний засіб змінить курс на 180°."/>
+		<text name="hlmgui_debugTT" text="Відображає маркер на передньому та задньому вузлах транспортного засобу." />
+		<text name="hlmgui_debugFlagTT" text="Відображає прапорці для позначення тригера призначення (зелений) та тригера ТЗ (червоний) у режимі 'спочатку спереду, потім ззаду'." />
+	</texts>
+</l10n>
